@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:mega",
+    "port": "COM8",
+    "sketch": "ESC_with_potentiometer.ino",
+    "configuration": "cpu=atmega2560"
+}
