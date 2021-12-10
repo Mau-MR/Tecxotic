@@ -50,7 +50,7 @@ async def echo(websocket,path):
 if __name__ == "__main__":
     try:
         print("Running...")
-        start_server = websockets.serve(echo, "10.49.182.166", 55000)
+        start_server = websockets.serve(echo, "10.49.182.214", 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
 
