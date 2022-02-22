@@ -1,8 +1,12 @@
 import asyncio
+import cv2
 import websockets
 import json
 from ConnectionPixhawk import *
 from PID import PID
+from ManualControl import *
+import Agent1
+vid = cv2.VideoCapture(0)
 roll_pid = PID(0, 0, 0, setpoint=0)
 roll_pid.output_limits = (-1000,1000)
 pitch_pid = PID(0, 0, 0, setpoint=0)
@@ -16,10 +20,13 @@ indicator_pixhawk = False
 master = None
 
 master = None
-def Control(roll, pitch, yaw, throttle, connect_pixhawk):
+def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm):
     global master, indicator_pixhawk
     if master != None:
         master = ConnectDisconnectPixhawk(connect_pixhawk)
+        Arm_Disarm(master, arm_disarm)
+        Move(master, roll, pitch, yaw, throttle, 0)
+
         if (indicator_pixhawk == False):
             indicator_pixhawk = True
     else:
@@ -33,8 +40,9 @@ def UtilityControl(agent1, agent2, agent3,pid_values):
     yaw_pid.tunings = (pid_values['yaw_p'], pid_values['yaw_i'], pid_values['yaw_d'])
     throttle_pid.tunings = (pid_values['throttle_p'], pid_values['throttle_i'], pid_values['throttle_d'])
     if agent1:
-        value_roll = 3
-        output_roll = roll_pid(value_roll)
+        roll_diff, _ = Agent1.run(vid)
+        #value_roll = 3
+        output_roll = roll_pid(roll_diff)
         value_pitch = 5
         output_pitch = pitch_pid(value_pitch)
         value_yaw = 9
@@ -53,7 +61,7 @@ async def echo(websocket,path):
         async for commands in websocket:
             #print (commands)
             commands = json.loads(commands)
-            Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'])
+            Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'], commands['arm_disarm'])
             UtilityControl(commands['agent1'],commands['agent2'],commands['agent3'],commands['pid'])
             send = {
                 "message_received":True,
