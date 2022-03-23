@@ -40,15 +40,20 @@ def main1(IP,PORT, CAM):
 
 
 t1 = None
+server_started = False
 def run():
-    global initialized_cameras, t1
-    t1 = Process(target=main1, args=('192.168.50.22', 9001, 1,))
-    t1.start()
+    global server_started, t1
+    if server_started == False:
+        t1 = Process(target=main1, args=('192.168.50.22', 9001, 1,))
+        t1.start()
+        server_started = True
     
 def restart():
-    print(f"trying to restart...")
+    global server_started
+    print(f"Restarting camera server...")
     t = psutil.Process(t1.pid)
     t.terminate()
+    server_started = False
     run()   
     
     
