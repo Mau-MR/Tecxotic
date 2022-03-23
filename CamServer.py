@@ -1,5 +1,4 @@
 from time import sleep
-from tracemalloc import stop
 import cv2
 import  pyshine as ps #  pip3 install pyshine==0.0.9
 from copy import deepcopy
@@ -10,8 +9,8 @@ import psutil
 HTML="""
 <html>
 <body>
-<center><img src="http://192.168.50.22:9000/stream.mjpg" autoplay playsinline></center>
-<center><img src="http://192.168.50.22:9001/stream.mjpg" autoplay playsinline></center>
+<center><img src="http://10.49.182.166:9000/stream.mjpg" autoplay playsinline></center>
+<center><img src="http://10.49.182.166:9001/stream.mjpg" autoplay playsinline></center>
 </body>
 </html>
 """
@@ -43,11 +42,15 @@ t1 = None
 server_started = False
 def run():
     global server_started, t1
-    if server_started == False:
-        t1 = Process(target=main1, args=('192.168.50.22', 9001, 1,))
-        t1.start()
-        server_started = True
-    
+    try:
+        if server_started == False:
+            t1 = Process(target=main1, args=('10.49.182.166', 9001, 1,))
+            t1.start()
+            print("Wait 7 seconds...")
+            sleep(7)
+            server_started = True
+    except:
+        pass
 def restart():
     global server_started
     print(f"Restarting camera server...")
@@ -58,6 +61,7 @@ def restart():
     
     
 if __name__=='__main__':
+    from time import sleep
     run()
     sleep(15)
     restart()
