@@ -1,13 +1,17 @@
+from time import sleep
+from tracemalloc import stop
 import cv2
 import  pyshine as ps #  pip3 install pyshine==0.0.9
 from copy import deepcopy
 from multiprocessing import Process
 from threading import Thread
+import sys
+import psutil
 HTML="""
 <html>
 <body>
-<center><img src="http://192.168.50.22:9000/stream.mjpg" width='1280' height='960' autoplay playsinline></center>
-<center><img src="http://192.168.50.22:9001/stream.mjpg" width='1280' height='960' autoplay playsinline></center>
+<center><img src="http://192.168.50.22:9000/stream.mjpg" autoplay playsinline></center>
+<center><img src="http://192.168.50.22:9001/stream.mjpg" autoplay playsinline></center>
 </body>
 </html>
 """
@@ -18,9 +22,10 @@ def main1(IP,PORT, CAM):
     address = (IP,PORT) # Enter your IP address
     StreamProps.set_Mode(StreamProps,'cv2')
     capture = cv2.VideoCapture(CAM,cv2.CAP_DSHOW)
-    capture.set(cv2.CAP_PROP_BUFFERSIZE,4)
-    capture.set(cv2.CAP_PROP_FRAME_WIDTH,1280)
-    capture.set(cv2.CAP_PROP_FRAME_HEIGHT,960)
+    
+    capture.set(cv2.CAP_PROP_BUFFERSIZE,1)
+    capture.set(cv2.CAP_PROP_FRAME_WIDTH,720)
+    capture.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
     capture.set(cv2.CAP_PROP_FPS,30)
     StreamProps.set_Capture(StreamProps,capture)
     StreamProps.set_Quality(StreamProps,90)
@@ -34,17 +39,20 @@ def main1(IP,PORT, CAM):
     #     print("==================ERROR: ",e)
 
 
-
+t1 = None
+def run():
+    global initialized_cameras, t1
+    t1 = Process(target=main1, args=('192.168.50.22', 9001, 1,))
+    t1.start()
+    
+def restart():
+    print(f"trying to restart...")
+    t = psutil.Process(t1.pid)
+    t.terminate()
+    run()   
     
     
 if __name__=='__main__':
-    t1 = Process(target=main1, args=('192.168.50.22', 9000, 0,))
-    t1.start()
-    t2 = Process(target=main1, args=('192.168.50.22', 9001, 1,))
-    t2.start()
-    t2 = Process(target=main1, args=('192.168.50.22', 9002, 2,))
-    t2.start()
-
-
-    # main(capture)
-    # showWebcam(capture)
+    run()
+    sleep(15)
+    restart()

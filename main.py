@@ -40,7 +40,7 @@ def UtilityControl(agent1, agent2, agent3,pid_values):
     yaw_pid.tunings = (pid_values['yaw_p'], pid_values['yaw_i'], pid_values['yaw_d'])
     throttle_pid.tunings = (pid_values['throttle_p'], pid_values['throttle_i'], pid_values['throttle_d'])
     if agent1:
-        roll_diff, _ = Agent1.run(vid)
+        roll_diff, y_diff, target_square = Agent1.run(vid)
         #value_roll = 3
         output_roll = roll_pid(roll_diff)
         value_pitch = 5
