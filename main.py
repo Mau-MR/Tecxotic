@@ -6,6 +6,7 @@ from ConnectionPixhawk import *
 from PID import PID
 from ManualControl import *
 import Agent1
+import CamServer
 vid = cv2.VideoCapture(0)
 roll_pid = PID(0, 0, 0, setpoint=0)
 roll_pid.output_limits = (-1000,1000)
@@ -52,7 +53,8 @@ def UtilityControl(agent1, agent2, agent3,pid_values):
         print(f"{output_roll}   {output_pitch}   {output_yaw}   {output_throttle}")
 
 
-
+def CameraControl():
+    CamServer.run()
 client = set()
 async def echo(websocket,path):
     print("Client connected...")
@@ -60,6 +62,7 @@ async def echo(websocket,path):
     try:
         async for commands in websocket:
             #print (commands)
+            CameraControl()
             commands = json.loads(commands)
             Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'], commands['arm_disarm'])
             UtilityControl(commands['agent1'],commands['agent2'],commands['agent3'],commands['pid'])
@@ -81,7 +84,7 @@ async def echo(websocket,path):
 if __name__ == "__main__":
     try:
         print("Running...")
-        start_server = websockets.serve(echo, "192.168.2.2", 55000)
+        start_server = websockets.serve(echo, "192.168.50.22", 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
 
