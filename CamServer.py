@@ -6,11 +6,12 @@ from multiprocessing import Process
 from threading import Thread
 import sys
 import psutil
+from Constants import *
 HTML="""
 <html>
 <body>
-<center><img src="http://10.49.182.166:9000/stream.mjpg" autoplay playsinline></center>
-<center><img src="http://10.49.182.166:9001/stream.mjpg" autoplay playsinline></center>
+<center><img src="http://"""+IP_ADDRESS+""":"""+str(PORT_CAM1)+"""/stream.mjpg" autoplay playsinline></center>
+<center><img src="http://"""+IP_ADDRESS+""":"""+str(PORT_CAM2)+"""/stream.mjpg" autoplay playsinline></center>
 </body>
 </html>
 """
@@ -44,7 +45,7 @@ def run():
     global server_started, t1
     try:
         if server_started == False:
-            t1 = Process(target=main1, args=('10.49.182.166', 9001, 1,))
+            t1 = Process(target=main1, args=(IP_ADDRESS, PORT_CAM2, 1,))
             t1.start()
             print("Wait 7 seconds...")
             sleep(7)

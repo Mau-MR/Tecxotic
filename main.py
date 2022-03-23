@@ -8,7 +8,7 @@ from ManualControl import *
 import Agent1
 import CamServer
 from time import sleep
-
+from Constants import *
 vid = None
 roll_pid = PID(0, 0, 0, setpoint=0)
 roll_pid.output_limits = (-1000,1000)
@@ -53,8 +53,8 @@ def UtilityControl(agent1, agent2, agent3,pid_values):
         value_throttle = 7
         output_throttle = throttle_pid(value_throttle)
         print(f"{output_roll}   {output_pitch}   {output_yaw}   {output_throttle}")
-
-
+        return  target_square
+    return (-1,-1,-1,-1)
 camera = False
 def CameraControl():
     global vid, camera
@@ -70,10 +70,11 @@ async def echo(websocket,path):
             # print (commands)
             commands = json.loads(commands)
             Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'], commands['arm_disarm'])
-            UtilityControl(commands['agent1'],commands['agent2'],commands['agent3'],commands['pid'])
+            target_square = UtilityControl(commands['agent1'],commands['agent2'],commands['agent3'],commands['pid'])
             send = {
                 "message_received":True,
-                "connection_pixhawk" : indicator_pixhawk
+                "connection_pixhawk" : indicator_pixhawk,
+                "target_square" : (target_square)
             }
             send = str(json.dumps(send))
             #print(bytearray(send,'utf-8'))
@@ -91,9 +92,9 @@ if __name__ == "__main__":
         print("Running...")
         CamServer.run()
         if camera == False:
-            vid = cv2.VideoCapture("http://10.49.182.166:9001/stream.mjpg")
+            vid = cv2.VideoCapture("http://"+IP_ADDRESS+":"+str(PORT_CAM2)+"/stream.mjpg")
             camera = True
-        start_server = websockets.serve(echo, "10.49.182.166", 55000)
+        start_server = websockets.serve(echo, IP_ADDRESS, PORT)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
 
