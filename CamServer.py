@@ -10,8 +10,8 @@ from Constants import *
 HTML="""
 <html>
 <body>
-<center><img src="http://"""+IP_ADDRESS+""":"""+str(PORT_CAM1)+"""/stream.mjpg" autoplay playsinline></center>
-<center><img src="http://"""+IP_ADDRESS+""":"""+str(PORT_CAM2)+"""/stream.mjpg" autoplay playsinline></center>
+<center><img src="http://"""+IP_ADDRESS+""":"""+str(PORT_CAM1)+"""/stream.mjpg" autoplay playsinline ></center>
+<center><img src="http://"""+IP_ADDRESS+""":"""+str(PORT_CAM2)+"""/stream.mjpg" autoplay playsinline ></center>
 </body>
 </html>
 """
@@ -24,8 +24,8 @@ def main1(IP,PORT, CAM):
     capture = cv2.VideoCapture(CAM,cv2.CAP_DSHOW)
     
     capture.set(cv2.CAP_PROP_BUFFERSIZE,1)
-    capture.set(cv2.CAP_PROP_FRAME_WIDTH,720)
-    capture.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
+    capture.set(cv2.CAP_PROP_FRAME_WIDTH,320)
+    capture.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
     capture.set(cv2.CAP_PROP_FPS,30)
     StreamProps.set_Capture(StreamProps,capture)
     StreamProps.set_Quality(StreamProps,90)
@@ -47,8 +47,6 @@ def run():
         if server_started == False:
             t1 = Process(target=main1, args=(IP_ADDRESS, PORT_CAM2, 1,))
             t1.start()
-            print("Wait 7 seconds...")
-            sleep(7)
             server_started = True
     except:
         pass
