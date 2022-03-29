@@ -29,6 +29,7 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm):
 def UtilityControl(agent1, agent2, agent3):
     if agent1 == True:
         roll, pitch, yaw, throttle, target_square = Agent1Manager.run()
+        Move(master, roll, pitch, yaw, throttle, 0)
         # print(f"{roll}   {pitch}   {yaw}   {throttle}")
         return  target_square
     return (-1,-1,-1,-1)
@@ -45,7 +46,8 @@ async def echo(websocket,path):
         async for commands in websocket:
             # print (commands)
             commands = json.loads(commands)
-            Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'], commands['arm_disarm'])
+            if commands['agent1'] == False or commands['agent2'] == False or commands['agent3'] == False:
+                Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'], commands['arm_disarm'])
             target_square = UtilityControl(commands['agent1'],commands['agent2'],commands['agent3'])
             send = {
                 "message_received":True,
