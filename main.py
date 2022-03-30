@@ -11,13 +11,22 @@ from Constants import *
 
 indicator_pixhawk = False
 master = None
-
-def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm):
-    global master, indicator_pixhawk
+target_square = None
+def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, agent2, agent3):
+    global master, indicator_pixhawk, target_square
+    target_square = (-1,-1,-1,-1)
     if master != None:
         master = ConnectDisconnectPixhawk(connect_pixhawk)
         Arm_Disarm(master, arm_disarm)
-        Move(master, roll, pitch, yaw, throttle, 0)
+        if agent1 == False and agent2 == False and agent3 == False:
+            Move(master, roll, pitch, yaw, throttle, 0)
+        elif agent1 == True and agent2 == False and agent3 == False:
+            roll, pitch, yaw, throttle, target_square = Agent1Manager.run()
+            Move(master, roll, pitch, yaw, throttle, 0)
+        elif agent1 == False and agent2 == True and agent3 == False:
+            pass
+        elif agent1 == False and agent2 == False and agent3 == True:
+            pass
 
         if (indicator_pixhawk == False):
             indicator_pixhawk = True
@@ -25,14 +34,7 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm):
         master = ConnectDisconnectPixhawk(connect_pixhawk)
         indicator_pixhawk = False
     # print(f"roll:{roll} pitch:{pitch} yaw:{yaw} throttle:{throttle} pixhawk:{connect_pixhawk}")
-        
-def UtilityControl(agent1, agent2, agent3):
-    if agent1 == True:
-        roll, pitch, yaw, throttle, target_square = Agent1Manager.run()
-        Move(master, roll, pitch, yaw, throttle, 0)
-        # print(f"{roll}   {pitch}   {yaw}   {throttle}")
-        return  target_square
-    return (-1,-1,-1,-1)
+      
 
 def CameraControl():
     pass
@@ -46,9 +48,8 @@ async def echo(websocket,path):
         async for commands in websocket:
             # print (commands)
             commands = json.loads(commands)
-            if commands['agent1'] == False or commands['agent2'] == False or commands['agent3'] == False:
-                Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'], commands['arm_disarm'])
-            target_square = UtilityControl(commands['agent1'],commands['agent2'],commands['agent3'])
+            
+            Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], commands['connect_pixhawk'], commands['arm_disarm'],commands['agent1'],commands['agent2'],commands['agent3'])
             send = {
                 "message_received":True,
                 "connection_pixhawk" : indicator_pixhawk,
