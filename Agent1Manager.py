@@ -35,6 +35,7 @@ def run():
         output_pitch = pitch_pid(value_pitch)
         value_yaw = 0
         output_yaw = yaw_pid(value_yaw)
+        throttle_diff = 0
         output_throttle = throttle_pid(throttle_diff)
         return output_roll, output_pitch, output_yaw, output_throttle, target_square
     except Exception as e:

@@ -60,7 +60,7 @@ def connectVideo():
         capture_connected = False
     while capture_connected == False:
         try:
-            cap = cv2.VideoCapture("http://"+IP_ADDRESS+":"+str(PORT_CAM2)+"/stream.mjpg")
+            cap = cv2.VideoCapture("http://"+IP_ADDRESS+":"+str(PORT_CAM1)+"/stream.mjpg")
             capture_connected = True
         except Exception as e:
             print("Error in Agent1.py: "+str(e))
@@ -81,7 +81,7 @@ def run(mode=""):
         mask = cv2.inRange(hsv, range_low, range_high)
         # kernel = np.ones((7,7), np.uint8)
         # mask = cv2.erode(mask, kernel)    
-        cv2.imshow('mask', mask)                    #mask view
+        #cv2.imshow('mask', mask)                    #mask view
         target_info = getTargetInfo(mask, frame, size_value, percentage_value)
         target_input = target_info[0:2]
         target_square = target_info[2:]
@@ -97,10 +97,10 @@ def run(mode=""):
         if mode == "test":
             cv2.putText(frame, "x: "+str(x_diff), (30,30), cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255), 1, cv2.LINE_AA )
             cv2.putText(frame, "y: "+str(y_diff), (300,30), cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255), 1, cv2.LINE_AA )
-            cv2.imshow('target', frame)
+            #cv2.imshow('target', frame)
             return  frame, x_diff, y_diff, target_square
         else:
-            cv2.imshow('target', frame)
+            #cv2.imshow('target', frame)
             return  x_diff, y_diff, target_square
     except Exception as e:
         print("Error in Agent1.py"+str(e))

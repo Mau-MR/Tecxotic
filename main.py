@@ -22,7 +22,7 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, age
             Move(master, roll, pitch, yaw, throttle, 0)
         elif agent1 == True and agent2 == False and agent3 == False:
             roll, pitch, yaw, throttle, target_square = Agent1Manager.run()
-            Move(master, roll, pitch, yaw, throttle, 0)
+            Move(master, int(roll), int(pitch), int(yaw), int(throttle), 0)
         elif agent1 == False and agent2 == True and agent3 == False:
             pass
         elif agent1 == False and agent2 == False and agent3 == True:
@@ -53,7 +53,7 @@ async def echo(websocket,path):
             send = {
                 "message_received":True,
                 "connection_pixhawk" : indicator_pixhawk,
-                "target_square" : (target_square)
+                "target_square" : target_square
             }
             send = str(json.dumps(send))
             #print(bytearray(send,'utf-8'))
