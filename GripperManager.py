@@ -1,9 +1,7 @@
-"""
 import Jetson.GPIO as GPIO
 gripper_pin = 11
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(gripper_pin, GPIO.OUT)
-"""
 
 prevCommand = False  # Holds the state of the previous command
 gripperState = False  # Holds the actual state of the grippers
@@ -22,3 +20,11 @@ def gripperManager(isActivated: bool) -> bool:
         print(gripperState)
     prevCommand = isActivated  # updating for the next iteration
     return gripperState
+
+def clearPort():
+    """
+    Sets the pin to its default estate
+    @return: void
+    """
+    print("Clearing gpio port")
+    GPIO.cleanup()

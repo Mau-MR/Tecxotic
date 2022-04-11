@@ -8,7 +8,7 @@ import Agent1Manager
 import CamServer
 from time import sleep
 from Constants import *
-from GripperManager import gripperManager
+from GripperManager import gripperManager, clearPort
 
 indicator_pixhawk = False
 master = None
@@ -70,6 +70,7 @@ async def echo(websocket, path):
         print("ERROR in main.py: " + str(e))
     finally:
         client.remove(websocket)
+        clearPort()
 
 
 if __name__ == "__main__":
@@ -82,7 +83,7 @@ if __name__ == "__main__":
 
 
     except KeyboardInterrupt:
-        pass
+        clearPort()
     except Exception as e:
         print(e)
 
