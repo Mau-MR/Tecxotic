@@ -1,13 +1,13 @@
-import asyncio
-import cv2
+from flask import Flask, render_template
 import websockets
+import asyncio
+import photomosaic
+import threading
 import json
+
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
-import CamServer
-from time import sleep
-from Constants import *
 from GripperManager import gripperManager, clearPort
 
 indicator_pixhawk = False
@@ -15,6 +15,7 @@ master = None
 target_square = None
 
 
+# Submarine control
 def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, agent2, agent3):
     global master, indicator_pixhawk, target_square
     target_square = (-1, -1, -1, -1)
@@ -42,10 +43,7 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, age
 def CameraControl():
     pass
 
-
 client = set()
-
-
 async def echo(websocket, path):
     print("Client connected...")
     client.add(websocket)
@@ -73,18 +71,34 @@ async def echo(websocket, path):
         clearPort()
 
 
-if __name__ == "__main__":
+# Configuration of Flask_Socketio
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+app.config['CORS_HEADERS'] = 'Content-Type'
+name_space = '/tecxotic'  # espacio de nombres
+event_name = 'mensaje de devolución de llamada'  # Objeto receptor de mensaje
+client_query = []
+
+
+@app.route('/photomosaic')
+def photomosaicfunc():
+    photomosaic.main()
+    return 'Done!'
+
+@app.route('/')
+def renderIndex():
+    return render_template('index.html')
+
+
+if __name__ == '__main__':
     try:
         print("Running...")
         # CamServer.run()
-        start_server = websockets.serve(echo, IP_ADDRESS, PORT)
+        threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False)).start()
+        start_server = websockets.serve(echo, '0.0.0.0', 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
-
-
     except KeyboardInterrupt:
         clearPort()
     except Exception as e:
         print(e)
-
-    # GIT PUSH TESTING

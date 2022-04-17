@@ -1,7 +1,10 @@
-import Jetson.GPIO as GPIO
-gripper_pin = 11
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(gripper_pin, GPIO.OUT)
+try:
+    import Jetson.GPIO as GPIO
+    gripper_pin = 11
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(gripper_pin, GPIO.OUT)
+except Exception:
+    print("Not running on jetson, gripper functionality will throw error")
 
 prevCommand = False  # Holds the state of the previous command
 gripperState = False  # Holds the actual state of the grippers
