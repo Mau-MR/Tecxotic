@@ -12,10 +12,15 @@ import time
 import pickle #to storage values and reuse them
 import shutil
     
-cap = cv2.VideoCapture(1,  cv2.CAP_DSHOW) #camera number
+cap = cv2.VideoCapture(0,  cv2.CAP_DSHOW) #camera number
 
-directory = r"C:\Users\anton\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Universidad TEC21\TECXOTIC\Software\Photomosaic\photos"
-mainDirectory = r"C:\Users\anton\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Universidad TEC21\TECXOTIC\Software\Photomosaic"
+#directory = r"C:\Users\anton\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Universidad TEC21\TECXOTIC\Software\Photomosaic\photos"
+#mainDirectory = r"C:\Users\anton\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Universidad TEC21\TECXOTIC\Software\Photomosaic"
+
+directory = r"\photos"
+#mainDirectory = "../photos/"
+backwards = r".."
+
 ext = "jpg"
 images={}
 currPhoto = 0 #index of the current photo
@@ -55,7 +60,14 @@ def resizeAndStack():
     stack2=cv2.hconcat([images[4],images[5],images[6],images[7]])
     stack3=cv2.vconcat([stack1,stack2])
 
-    os.chdir(mainDirectory)
+    #os.chdir(mainDirectory)
+
+    ###########
+    os.chdir(backwards)
+    ##########
+
+
+
     cv2.imwrite('photomosaic.jpg',stack3)
     cv2.waitKey(0)
     cv2.destroyAllWindows
@@ -75,9 +87,6 @@ def main():
         currPhoto = 0
         print('First time running the program')
     #####################################
-    
-    os.chdir(directory) #photos directory
-    print("currPhoto before update: ", currPhoto)
 
     ##############
     if currPhoto>=8:
@@ -85,10 +94,10 @@ def main():
         
     takePhoto(currPhoto)
     currPhoto += 1
-    ############
 
-    print("currPhoto after update: ", currPhoto)
-    os.chdir(mainDirectory) #main directory
+    ###########
+    os.chdir(backwards)
+    ##########
 
     ###### PICKLING currPhoto ######
     outfile = open (pickleFile, 'wb')
@@ -102,13 +111,9 @@ def main():
     else:
         currPhoto = 0
         
-        os.chdir(directory)
+        os.chdir(os.getcwd() + directory)
         resizeAndStack()
-        
-        #######
-        os.chdir(mainDirectory)
-        #######
-                
+
         ################# DELETE ALL THE PHOTOS INSIDE "photos" #######################################################
         '''os.chdir(directory)
         
@@ -117,10 +122,9 @@ def main():
         ###############################################################################################################
 
         ################ DELETE THE PHOTOS DIRECTORY WITH IT'S FILES, THEN CREATING IT AGAIN EMPTY ####################
-        shutil.rmtree(directory)
-        os.mkdir(directory)
+        shutil.rmtree(os.getcwd() + directory) 
+        os.mkdir(os.getcwd() + directory)
         ###############################################################################################################
-        #os.chdir(mainDirectory)
     cap.release()
-#main()
+main()
 
