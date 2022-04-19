@@ -1,0 +1,104 @@
+if(PS4Controller.left_y > 0.1){
+    throttle_control = commands_instance.throttle - parseInt((-PS4Controller.left_y * 450) + NEUTRAL_THROTTLE)
+    if(throttle_control > limit_control){
+        commands_instance.throttle -= limit_control
+    }
+    else if ( commands_instance.throttle < MIN_VEL){
+        commands_instance.throttle = MIN_VEL
+    }else{
+        commands_instance.throttle = parseInt((-PS4Controller.left_y * 450) + NEUTRAL_THROTTLE)
+    }
+}
+else if(PS4Controller.left_y < -0.1){
+    throttle_control =  parseInt((-PS4Controller.left_y * 450) + NEUTRAL_THROTTLE) -  commands_instance.throttle
+    if(throttle_control > limit_control){
+        commands_instance.throttle += limit_control
+    }
+    else if ( commands_instance.throttle > MAX_VEL){
+        commands_instance.throttle = MAX_VEL
+    }else{
+        commands_instance.throttle = parseInt((-PS4Controller.left_y * 450) + NEUTRAL_THROTTLE)
+    }
+   
+}
+else{
+    commands_instance.throttle = NEUTRAL_THROTTLE;
+}
+
+if(PS4Controller.left_x > 0.1){
+    roll_control =  parseInt((PS4Controller.left_x * 450) + NEUTRAL) -  commands_instance.roll
+    if(roll_control > limit_control){
+        commands_instance.roll += limit_control
+    }
+    else if ( commands_instance.roll > MAX_VEL){
+        commands_instance.roll = MAX_VEL
+    }else{
+        commands_instance.roll = parseInt((PS4Controller.left_x * 450) + NEUTRAL)
+    }
+}
+else if(PS4Controller.left_x < -0.1){
+    roll_control = commands_instance.roll - parseInt((PS4Controller.left_x * 450) + NEUTRAL)
+    if(roll_control > limit_control){
+        commands_instance.roll -= limit_control
+    }
+    else if ( commands_instance.roll < MIN_VEL){
+        commands_instance.roll = MIN_VEL
+    }else{
+        commands_instance.roll = parseInt((PS4Controller.left_x * 450) + NEUTRAL)
+    }
+}
+else{
+    commands_instance.roll = NEUTRAL;
+}
+
+if(PS4Controller.right_y > 0.1){
+    pitch_control = commands_instance.pitch - parseInt((-PS4Controller.right_y * 450) + NEUTRAL)
+    if(pitch_control > limit_control){
+        commands_instance.pitch -= limit_control
+    }
+    else if ( commands_instance.pitch < MIN_VEL){
+        commands_instance.pitch = MIN_VEL
+    }else{
+        commands_instance.pitch = parseInt((-PS4Controller.right_y * 450) + NEUTRAL)
+    }
+}
+else if(PS4Controller.right_y < -0.1){
+    pitch_control =  parseInt((-PS4Controller.right_y * 450) + NEUTRAL) -  commands_instance.pitch
+    if(pitch_control > limit_control){
+        commands_instance.pitch += limit_control
+    }
+    else if ( commands_instance.pitch > MAX_VEL){
+        commands_instance.pitch = MAX_VEL
+    }else{
+        commands_instance.pitch = parseInt((-PS4Controller.right_y * 450) + NEUTRAL)
+    }
+}
+else{
+    commands_instance.pitch = NEUTRAL;
+}
+
+if(PS4Controller.right_x > 0.1){
+    yaw_control =  parseInt((PS4Controller.right_x * 450) + NEUTRAL) -  commands_instance.yaw
+    if(yaw_control > limit_control){
+        commands_instance.yaw += limit_control
+    }
+    else if ( commands_instance.yaw > MAX_VEL){
+        commands_instance.yaw = MAX_VEL
+    }else{
+        commands_instance.yaw = parseInt((PS4Controller.right_x * 450) + NEUTRAL)
+    }
+}
+else if(PS4Controller.right_x < -0.1){
+    yaw_control = commands_instance.yaw - parseInt((PS4Controller.right_x * 450) + NEUTRAL)
+    if(yaw_control > limit_control){
+        commands_instance.yaw -= limit_control
+    }
+    else if ( commands_instance.yaw < MIN_VEL){
+        commands_instance.yaw = MIN_VEL
+    }else{
+        commands_instance.yaw = parseInt((PS4Controller.right_x * 450) + NEUTRAL)
+    }
+}
+else{
+    commands_instance.yaw = NEUTRAL;
+}
