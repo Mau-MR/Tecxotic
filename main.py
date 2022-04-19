@@ -43,7 +43,10 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, age
 def CameraControl():
     pass
 
+
 client = set()
+
+
 async def echo(websocket, path):
     print("Client connected...")
     client.add(websocket)
@@ -84,10 +87,6 @@ client_query = []
 def photomosaicfunc():
     photomosaic.main()
     return 'Done!'
-
-@app.route('/')
-def renderIndex():
-    return render_template('index.html')
 
 
 if __name__ == '__main__':
