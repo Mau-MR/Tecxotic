@@ -48,9 +48,7 @@ def run():
     try:
         if server_started == False:
             t1 = Process(target=main1, args=(IP_ADDRESS, PORT_CAM1, 0,))
-            t2 = Process(target=main1, args=(IP_ADDRESS, PORT_CAM2, 1))
             t1.start()
-            t2.start()
             server_started = True
     except:
         pass
