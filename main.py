@@ -1,14 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask
+from routes.CamServer import camServer
+
 import websockets
 import asyncio
-import photomosaic
-import threading
+from threading import Thread
 import json
 
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
 from GripperManager import gripperManager, clearPort
+
+app = Flask(__name__)
+app.register_blueprint(camServer)
 
 indicator_pixhawk = False
 master = None
@@ -74,12 +78,8 @@ async def echo(websocket, path):
         clearPort()
 
 
-# Configuration of Flask_Socketio
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
 app.config['CORS_HEADERS'] = 'Content-Type'
 name_space = '/tecxotic'  # espacio de nombres
-event_name = 'mensaje de devolución de llamada'  # Objeto receptor de mensaje
 client_query = []
 
 
@@ -92,8 +92,9 @@ def photomosaicfunc():
 if __name__ == '__main__':
     try:
         print("Running...")
-        # CamServer.run()
-        threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False)).start()
+        # Running the server that delivers video and the task, each request runs on diferent thread
+        Thread(target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
+        # Running the websocket server that manage the manual control of the ROV
         start_server = websockets.serve(echo, '0.0.0.0', 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
