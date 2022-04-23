@@ -1,14 +1,26 @@
-import {FPS_video, video_address} from '../Constants.js'
+import {FPS_video, flask_address} from '../Constants.js'
 
 // Code for rendering the video from the server
-const canvas = document.getElementById('view_main_camera');
-const context = canvas.getContext('2d');
+const camera1 = document.getElementById('view_camera1');
+const context1 = camera1.getContext('2d');
 //Setting the image
-const img = new Image();
-img.src = video_address;
-img.onload = () => {
+const image1 = new Image();
+image1.src = flask_address + '/video1';
+image1.onload = () => {
     //Updating the frames every FPS_video
     setInterval(() => {
-        context.drawImage(img, 0, 0);
+        context1.drawImage(image1, 0, 0);
+    }, FPS_video)
+};
+// Code for rendering the video from the server
+const camera2 = document.getElementById('view_camera2');
+const context2 = camera2.getContext('2d');
+//Setting the image
+const image2 = new Image();
+image2.src = flask_address+'/video2';
+image2.onload = () => {
+    //Updating the frames every FPS_video
+    setInterval(() => {
+        context2.drawImage(image2, 0, 0);
     }, FPS_video)
 };

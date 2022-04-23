@@ -8,10 +8,15 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 cap.set(cv2.CAP_PROP_FPS, 30)
 
+cap2 = cv2.VideoCapture(1)
+cap2.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+cap2.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
+cap2.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
+cap2.set(cv2.CAP_PROP_FPS, 30)
 
-def generate():
+def generate(capture):
     while True:
-        ret, frame = cap.read()
+        ret, frame = capture.read()
         if ret:
             (flag, encodedImage) = cv2.imencode(".jpg", frame)
             if not flag:
@@ -20,18 +25,18 @@ def generate():
                    bytearray(encodedImage) + b'\r\n')
 
 
-@camServer.route("/test")
-def test():
-    return 'Everything works as expected'
 
-
-@camServer.route("/video_feed")
-def video_feed():
-    return Response(generate(),
+@camServer.route("/video1")
+def video1(id):
+    return Response(generate(cap),
+                    mimetype="multipart/x-mixed-replace; boundary=frame")
+@camServer.route("/video2")
+def video2(id):
+    return Response(generate(cap2),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
 def release_video():
     # Releasing video
-    cap.release()
+    cap2.release()
 
