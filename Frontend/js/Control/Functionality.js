@@ -69,16 +69,26 @@ function PixhawkFunctionality(){
 }
 
 
-function GripperFunctionality(){
+function openGriper(){
     const {cross} = controller.buttons
     if(cross)
-        commands_instance.gripper = true
+        commands_instance.openGripper = true
     else
-        commands_instance.gripper = false
+        commands_instance.openGripper = false
+}
+
+function  closeGripper(){
+    const {circle} = controller.buttons
+    if(circle)
+        commands_instance.closeGripper = true
+    else
+        commands_instance.closeGripper = false
+
 }
 
 export function ControlFunctionality(){
     JoystickFunctionality()
     PixhawkFunctionality()
-    GripperFunctionality()
+    closeGripper()
+    openGriper()
 }

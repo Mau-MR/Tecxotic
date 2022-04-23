@@ -12,7 +12,8 @@ class ControllerValues{
         this.agent2 = false
         this.agent3 = false
 
-        this.gripper = false
+        this.openGripper = false
+        this.closeGripper = false
     }
 }
 export const commands_instance = new ControllerValues();
