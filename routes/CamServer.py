@@ -27,11 +27,11 @@ def generate(capture):
 
 
 @camServer.route("/video1")
-def video1(id):
+def video1():
     return Response(generate(cap),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 @camServer.route("/video2")
-def video2(id):
+def video2():
     return Response(generate(cap2),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 
