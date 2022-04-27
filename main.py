@@ -1,5 +1,6 @@
 from flask import Flask
 from routes.CamServer import camServer
+from routes.Biomass import biomass
 
 import websockets
 import asyncio
@@ -13,6 +14,7 @@ from GripperManager import gripperManager, clearPort
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
+app.register_blueprint(biomass)
 
 indicator_pixhawk = False
 master = None
