@@ -9,7 +9,7 @@ import json
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
-from GripperManager import gripperManager, clearPort
+from GripperManager import openGripper,closeGripper, clearPort
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
@@ -65,7 +65,8 @@ async def echo(websocket, path):
                 "message_received": True,
                 "connection_pixhawk": indicator_pixhawk,
                 "target_square": target_square,
-                "gripper_state": gripperManager(commands['gripper'])
+                "open_gripper": openGripper(commands['openGripper']),
+                "close_gripper": closeGripper(commands['closeGripper'])
             }
             send = str(json.dumps(send))
             await websocket.send(bytearray(send, 'utf-8'))
