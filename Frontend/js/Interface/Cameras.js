@@ -24,3 +24,22 @@ image2.onload = () => {
         context2.drawImage(image2, 0, 0);
     }, FPS_video)
 };
+
+const mainCanvas = document.getElementById('view_main_camera')
+const mainContext = mainCanvas.getContext('2d');
+let mainCameraRenderProcessID;
+//Kills the render of the previous context and runs the new one
+const contextHandler = (img) =>{
+    if(mainCameraRenderProcessID !== undefined) clearInterval(mainCameraRenderProcessID); //Killing  the previous process
+   mainCameraRenderProcessID = setInterval(()=>{ //Running the new one with  the assigned img
+       mainContext.drawImage(img,0,0)
+   },FPS_video)
+}
+//Code for swithching the main Camera
+camera1.addEventListener('click',()=>{
+    contextHandler(image1)
+})
+//Code for swithching the main Camera
+camera2.addEventListener('click',()=>{
+    contextHandler(image2)
+})
