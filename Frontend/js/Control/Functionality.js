@@ -83,7 +83,22 @@ function  closeGripper(){
         commands_instance.closeGripper = true
     else
         commands_instance.closeGripper = false
+}
 
+function runMotor(){
+    const {square} = controller.buttons
+    if(square)
+        commands_instance.runMotor = true
+    else
+        commands_instance.runMotor = false
+}
+
+function stopMotor(){
+    const {triangle} = controller.buttons
+    if(triangle)
+        commands_instance.stopMotor = true
+    else
+        commands_instance.stopMotor = false
 }
 
 export function ControlFunctionality(){
@@ -91,4 +106,6 @@ export function ControlFunctionality(){
     PixhawkFunctionality()
     closeGripper()
     openGriper()
+    runMotor()
+    stopMotor()
 }
