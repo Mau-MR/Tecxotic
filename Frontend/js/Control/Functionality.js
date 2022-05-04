@@ -71,34 +71,22 @@ function PixhawkFunctionality(){
 
 function openGriper(){
     const {cross} = controller.buttons
-    if(cross)
-        commands_instance.openGripper = true
-    else
-        commands_instance.openGripper = false
+    commands_instance.openGripper = cross;
 }
 
 function  closeGripper(){
     const {circle} = controller.buttons
-    if(circle)
-        commands_instance.closeGripper = true
-    else
-        commands_instance.closeGripper = false
+    commands_instance.closeGripper = circle;
 }
 
 function runMotor(){
     const {square} = controller.buttons
-    if(square)
-        commands_instance.runMotor = true
-    else
-        commands_instance.runMotor = false
+    commands_instance.runMotor = square;
 }
 
 function stopMotor(){
     const {triangle} = controller.buttons
-    if(triangle)
-        commands_instance.stopMotor = true
-    else
-        commands_instance.stopMotor = false
+    commands_instance.stopMotor = triangle;
 }
 
 export function ControlFunctionality(){
