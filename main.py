@@ -97,6 +97,7 @@ def photomosaicfunc():
 if __name__ == '__main__':
     try:
         print("Running...")
+        calibrateIMU()
         # Running the server that delivers video and the task, each request runs on diferent thread
         Thread(target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
         # Running the websocket server that manage the manual control of the ROV
