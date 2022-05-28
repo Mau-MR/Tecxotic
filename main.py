@@ -11,7 +11,7 @@ import json
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
-from GripperManager import openGripper,closeGripper, clearPort
+from GripperManager import openGripper,closeGripper, clearPort, stopMotor, runMotor
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
@@ -65,12 +65,14 @@ async def echo(websocket, path):
             Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'],
                     commands['connect_pixhawk'], commands['arm_disarm'], commands['agent1'], commands['agent2'],
                     commands['agent3'])
+            openGripper(commands['openGripper'])
+            closeGripper(commands['closeGripper'])
+            runMotor(commands['runMotor'])
+            stopMotor(commands['stopMotor'])
             send = {
                 "message_received": True,
                 "connection_pixhawk": indicator_pixhawk,
                 "target_square": target_square,
-                "open_gripper": openGripper(commands['openGripper']),
-                "close_gripper": closeGripper(commands['closeGripper'])
             }
             send = str(json.dumps(send))
             await websocket.send(bytearray(send, 'utf-8'))
@@ -87,11 +89,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 name_space = '/tecxotic'  # espacio de nombres
 client_query = []
 
-
-@app.route('/photomosaic')
-def photomosaicfunc():
-    photomosaic.main()
-    return 'Done!'
 
 
 if __name__ == '__main__':

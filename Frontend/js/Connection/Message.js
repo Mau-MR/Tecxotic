@@ -14,6 +14,8 @@ class ControllerValues{
 
         this.openGripper = false
         this.closeGripper = false
+        this.runMotor = false
+        this.stopMotor = false
     }
 }
 export const commands_instance = new ControllerValues();
