@@ -88,11 +88,6 @@ name_space = '/tecxotic'  # espacio de nombres
 client_query = []
 
 
-@app.route('/photomosaic')
-def photomosaicfunc():
-    photomosaic.main()
-    return 'Done!'
-
 
 if __name__ == '__main__':
     try:
