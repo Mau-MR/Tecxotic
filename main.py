@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_file, request
 from routes.CamServer import camServer
 from routes.Biomass import biomass
 from routes.FishLength import fishLength
@@ -12,6 +12,19 @@ from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
 from GripperManager import openGripper,closeGripper, clearPort, stopMotor, runMotor
+
+
+#Photomosaic utilities----------
+import os
+import Photomosaic
+import Floatgrid
+import cv2
+currPhoto = 0
+cap = cv2.VideoCapture(0)
+mainDir = os.getcwd()
+photosDir = mainDir + "\photos" #windows
+#photosDir = mainDir + "/photos" #macos
+#--------------
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
@@ -85,9 +98,41 @@ async def echo(websocket, path):
         clearPort()
 
 
-app.config['CORS_HEADERS'] = 'Content-Type'
-name_space = '/tecxotic'  # espacio de nombres
-client_query = []
+@app.route('/photomosaic_takePhoto')#Take photo one by one
+def photomosaic_photo():
+    global currPhoto
+    currPhoto +=1
+    if currPhoto > 8:
+        currPhoto = 1
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
+    os.chdir(photosDir)
+    Photomosaic.takePhoto(currPhoto, cap)
+    os.chdir(mainDir)
+    return send_file("photos\photo" + str(currPhoto) + ".jpg", mimetype='image/jpg')
+
+
+@app.route('/photomosaic_changePhoto',methods=['POST'])#take and change a photo with the number of the photo
+def photomosaic_change():
+    json_dict = request.get_json()
+    currentPhoto = json_dict["currentPhoto"]
+    os.chdir(photosDir)
+    Photomosaic.takePhoto(currentPhoto, cap)
+    os.chdir(mainDir)
+    return send_file("photos\photo" + str(currentPhoto) + ".jpg", mimetype='image/jpg')
+
+
+
+@app.route('/floatgrid',methods = ['POST'])#Task 3.1
+def floatgrid():
+    json_dict = request.get_json()
+    speed = float(json_dict["grid_speed"])
+    angle =  float(json_dict["grid_angle"])
+    time =  float(json_dict["grid_time"])
+    x = int(json_dict["grid_x"])
+    y = int(json_dict["grid_y"])
+    Floatgrid.main(speed, angle, time,x,y)
+    return send_file('floatgrid.jpg', mimetype='image/jpg') 
 
 
 
@@ -100,7 +145,12 @@ if __name__ == '__main__':
         start_server = websockets.serve(echo, '0.0.0.0', 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
+        app.run(debug = True, host='0.0.0.0', port="3000") 
     except KeyboardInterrupt:
         clearPort()
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
     except Exception as e:
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
         print(e)
