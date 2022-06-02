@@ -1,0 +1,20 @@
+@mixin styles-li {
+    height: 4rem;
+    width: 4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    @include styles-li;
+    i {
+        justify-content: center;
+        color: $icon-color;
+        font-size: 3rem;
+    }
+}

@@ -1,0 +1,24 @@
+.camera {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: static;
+    background-color: red;
+    width: 80%;
+    flex-direction: column;
+}
+
+.camera__one {
+    background-color: blueviolet;
+    width: 70%;
+    height: 45%;
+    margin: 1rem;
+}
+
+.camera__two {
+    background-color: blueviolet;
+    width: 70%;
+    height: 45%;
+    margin: 1rem;
+}
