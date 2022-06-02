@@ -3,7 +3,7 @@ body {
     //position: relative;
     // overflow: hidden;
     display: flex;
-    gap: 2rem;
+    justify-content: space-between;
     background: #1A2980;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #26D0CE, #1A2980);

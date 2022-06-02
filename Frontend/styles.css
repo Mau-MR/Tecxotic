@@ -39,7 +39,6 @@ li i {
   height: 100vh;
   position: static;
   background-color: red;
-  width: 80%;
   flex-direction: column;
 }
 
@@ -154,7 +153,7 @@ div[data-view-active=false] {
 body {
   background-color: #2A9399;
   display: flex;
-  gap: 2rem;
+  justify-content: space-between;
   background: #1A2980;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #26D0CE, #1A2980);
