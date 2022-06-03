@@ -37,14 +37,26 @@ li i {
   width: 20px;
   height: 150px;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 20rem;
+  width: 3rem;
+  justify-content: space-between;
 }
 
 .slider-wrapper input {
-  width: 150px;
-  height: 20px;
+  width: 15rem;
+  height: 2rem;
   margin: 0;
-  transform-origin: 75px 75px;
+  margin-left: 0.5rem;
+  transform-origin: 7.5rem 7.5rem;
   transform: rotate(-90deg);
+}
+
+.slider-wrapper output {
+  font-size: 2.5rem;
+  color: aliceblue;
+  text-align: center;
 }
 
 .camera {

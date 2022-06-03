@@ -34,7 +34,8 @@
                 </li>
             </div>
             <div class="slider-wrapper">
-                <input type="range" min="0" max="10" value="7" step="1">
+                <input type="range" min="0" max="10" value="10" step="1" oninput="this.nextElementSibling.value = this.value">
+                <output>0</output>
             </div>
             <div class="view">
                 <li>
