@@ -28,7 +28,7 @@ let webSocketConnection = (web_socket) => {
   web_socket.onopen = () => {
     console.log("Connection stablished...")
     web_socket.send(JSON.stringify(commands_instance));
-    rov_status.style.backgroundColor = "#00FF00"
+    rov_status.style.color = "#00FF00"
   }; 
 
   web_socket.onmessage = (event) => {
@@ -48,23 +48,23 @@ let webSocketConnection = (web_socket) => {
     web_socket.send(JSON.stringify(commands_instance))
   }
   web_socket.onclose = () => {
-    rov_status.style.backgroundColor = "#FF0000"
+    rov_status.style.color = "#FF0000"
   };
   web_socket.onerror = (error) => {
     alert(`[error] ${error.message}`);
   };
-  rov_status.style.backgroundColor = "#FF0000"
+  rov_status.style.color = "#FF0000"
 }
 
 let pixhawkStatus = (status) => {
   if(status){
-    pixhawk_status.style.backgroundColor = "#00FF00"
+    pixhawk_status.style.color = "#00FF00"
   }
   else{
-    pixhawk_status.style.backgroundColor = "#FF0000"
+    pixhawk_status.style.color = "#FF0000"
   }
 }
-pixhawk_status.style.backgroundColor = "#FF0000"
+pixhawk_status.style.color = "#FF0000"
 
 
 

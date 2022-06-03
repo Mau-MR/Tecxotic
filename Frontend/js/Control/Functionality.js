@@ -8,7 +8,7 @@ let pixhawk_on = false, pixhawk_pressed = false;
 let arm_disarm_on, arm_disarm_pressed;
 
 let arm_disarm_status = document.getElementById("arm_disarm_status")
-arm_disarm_status.style.backgroundColor = "#FF0000"
+arm_disarm_status.style.color= "#FF0000"
 
 const calculatePotency = (joystick) =>{
    return parseInt((joystick * RANGE) + NEUTRAL)
@@ -60,11 +60,11 @@ function PixhawkFunctionality(){
         arm_disarm_pressed = false;
     }
     if(arm_disarm_on){
-        arm_disarm_status.style.backgroundColor = "#00FF00"
+        arm_disarm_status.style.color = "#00FF00"
         commands_instance.arm_disarm = true
     }else{
         commands_instance.arm_disarm = false
-        arm_disarm_status.style.backgroundColor = "#FF0000"
+        arm_disarm_status.style.color = "#FF0000"
     }
 }
 

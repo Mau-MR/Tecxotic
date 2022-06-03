@@ -12,7 +12,6 @@
     <title>TecXotic</title>
     <!-- add icon link -->
     <link rel="icon" href="ico/tecxotic-logo.ico" image/x-icon">
-    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
 </head>
 
 <body>
@@ -22,16 +21,16 @@
             <!--Idicators-->
             <div class="indicator">
                 <li>
-                    <i class="fa-solid fa-wifi"></i>
+                    <i class="fa-solid fa-wifi" id="rov_status"></i>
                 </li>
                 <li>
-                    <i class="fa-solid fa-microchip"></i>
+                    <i class="fa-solid fa-microchip" id="control_status"></i>
                 </li>
                 <li>
-                    <i class="fa-solid fa-gamepad"></i>
+                    <i class="fa-solid fa-gamepad" id="pixhawk_status"></i>
                 </li>
                 <li>
-                    <i class="fa-solid fa-flag-checkered"></i>
+                    <i class="fa-solid fa-flag-checkered" id="arm_disarm_status"></i>
                 </li>
             </div>
 
@@ -101,13 +100,38 @@
             </div>
 
             <div class="rov">
-                ROV 3D
+                <canvas id="ROV3D"></canvas>
             </div>
 
         </section>
     </aside>
+
+    <!---------------------------------------SCRIPTS--------------------------------------->
+    <!--------Frontend-------->
     <script type="text/javascript" src="js/nav_details.js"></script>
     <script type="text/javascript" src="js/sketch.js"></script>
+     <!-------Libraries------->
+    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
+
+
+
+    <!-- <script src="three/build/three.js"></script> -->
+
+    <!-- <script type="module" src="three/build/three.module.js"> </script> -->
+    <!-- <script type="module" src="three/examples/jsm/loaders/MTLLoader.js"></script> -->
+    <!-- <script type="module" src="three/examples/jsm/loaders/OBJLoader.js"></script> -->
+    <!-- <script type="module">
+        import * as THREE from "three/assets/build/three.module.js";
+    </script> -->
+
+    <script type="module" src="js/Connection/Connection.js"></script>
+    <script type="module" src="js/Control/Control.js"></script>
+    <!--
+    <script type="module" src="js/Interface.js"></script>
+    -->
+    <script type="module" src="js/Interface/Cameras.js"></script>
+    <script type="module" src="js/Interface/ROVModel.js"></script>
+
 </body>
 
 </html>
