@@ -1,7 +1,6 @@
 from flask import Flask
 from routes.CamServer import camServer
 from routes.Biomass import biomass
-from routes.FishLength import fishLength
 
 import websockets
 import asyncio
@@ -16,7 +15,6 @@ from GripperManager import openGripper,closeGripper, clearPort, stopMotor, runMo
 app = Flask(__name__)
 app.register_blueprint(camServer)
 app.register_blueprint(biomass)
-app.register_blueprint(fishLength)
 
 indicator_pixhawk = False
 master = None
