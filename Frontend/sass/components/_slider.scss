@@ -11,23 +11,23 @@
     }
 }
 
-.slider-wrapper {
+.slider__wrapper {
     display: flex;
     flex-direction: column;
     height: 20rem;
     width: 3rem;
     justify-content: space-between;
-}
-.slider-wrapper input {
-  width: 15rem;
-  height: 2rem;
-  margin: 0;
-  margin-left: 0.5rem;
-  transform-origin: 7.5rem 7.5rem;
-  transform: rotate(-90deg);
-}  
-.slider-wrapper output {
-    font-size: 2.5rem;
-    color: aliceblue;
-    text-align: center; 
+    input {
+        width: 15rem;
+        height: 2rem;
+        margin: 0;
+        margin-left: 0.5rem;
+        transform-origin: 7.5rem 7.5rem;
+        transform: rotate(-90deg);
+      }  
+      output {
+        font-size: 2.5rem;
+        color: aliceblue;
+        text-align: center; 
+    }
 }
