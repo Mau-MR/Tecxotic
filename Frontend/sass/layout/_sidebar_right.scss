@@ -14,16 +14,19 @@
     align-items: center;
     li {
         margin: 0.2rem 0 0.2rem 0;
-        background-color: $icon-nav;
+        //background-color: $icon-nav;
         border-radius: 0.5rem;
     }
     li:hover {
         background-color: $icon-hover;
     }
     li.active {
-        background-color: $icon-nav-toggle;
-        -webkit-transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        background-color: $icon-color;
+        -webkit-transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        i {
+            color: $icon-nav-toggle;
+        }
     }
 }
 

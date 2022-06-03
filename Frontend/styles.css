@@ -5,8 +5,6 @@ html {
 }
 
 .glass {
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(0, 0, 0, 0.2);
@@ -28,7 +26,7 @@ li {
 }
 li i {
   justify-content: center;
-  color: #ffffff;
+  color: aliceblue;
   font-size: 3rem;
 }
 
@@ -143,16 +141,18 @@ li i {
 }
 .rightside__task li {
   margin: 0.2rem 0 0.2rem 0;
-  background-color: rgba(255, 255, 255, 0.2941176471);
   border-radius: 0.5rem;
 }
 .rightside__task li:hover {
-  background-color: #4ca5a5;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .rightside__task li.active {
-  background-color: rgba(0, 221, 255, 0.3843137255);
-  -webkit-transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background-color: aliceblue;
+  -webkit-transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.rightside__task li.active i {
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .rightside__detail {
