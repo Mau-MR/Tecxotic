@@ -13,8 +13,7 @@
     display: flex;
     align-items: center;
     li {
-        margin: 0.2rem 0 0.2rem 0;
-        //background-color: $icon-nav;
+        margin: 0.4rem 0 0.4rem 0;
         border-radius: 0.5rem;
     }
     li:hover {
@@ -31,9 +30,14 @@
 }
 
 .rightside__detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     margin: $margin;
     border-radius: 0.5rem;
     padding: 1.5rem;
+    padding-bottom: 0;
     width: 100%;
     .task_one,
     .task_two,
@@ -42,7 +46,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 40rem;
+        width: 100%;
+        height: 70vh;
         color: white;
         background-color: red;
     }
