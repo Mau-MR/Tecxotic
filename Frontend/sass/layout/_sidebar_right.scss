@@ -7,7 +7,7 @@
 .rightside__task {
     width: 6rem;
     display: flex;
-    margin: 0.4rem;
+    margin: $margin 0 $margin $margin;;
     border-radius: 0.5rem;
     flex-direction: column;
     display: flex;
@@ -28,7 +28,7 @@
 }
 
 .rightside__detail {
-    margin: 0.4rem 0.4rem 0.4rem 0;
+    margin: $margin;
     border-radius: 0.5rem;
     padding: 1.5rem;
     width: 100%;
