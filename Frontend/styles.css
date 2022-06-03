@@ -5,14 +5,12 @@ html {
 }
 
 .glass {
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 10px;
-  z-index: 2;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 2px solid rgba(0, 0, 0, 0.2);
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
 }
 
 li {
@@ -28,8 +26,35 @@ li {
 }
 li i {
   justify-content: center;
-  color: #ffffff;
+  color: aliceblue;
   font-size: 3rem;
+}
+
+.slider-wrapper {
+  display: inline-block;
+  width: 20px;
+  height: 150px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 20rem;
+  width: 3rem;
+  justify-content: space-between;
+}
+
+.slider-wrapper input {
+  width: 15rem;
+  height: 2rem;
+  margin: 0;
+  margin-left: 0.5rem;
+  transform-origin: 7.5rem 7.5rem;
+  transform: rotate(-90deg);
+}
+
+.slider-wrapper output {
+  font-size: 2.5rem;
+  color: aliceblue;
+  text-align: center;
 }
 
 .camera {
@@ -44,15 +69,15 @@ li i {
 
 .camera__one {
   background-color: blueviolet;
-  width: 70%;
-  height: 45%;
+  width: 80rem;
+  height: 60rem;
   margin: 1rem;
 }
 
 .camera__two {
   background-color: blueviolet;
-  width: 70%;
-  height: 45%;
+  width: 80rem;
+  height: 60rem;
   margin: 1rem;
 }
 
@@ -69,13 +94,13 @@ li i {
 }
 
 .leftside {
-  height: 80vh;
+  height: 100vh;
   width: 7rem;
   display: flex;
 }
 
 .leftside__panel {
-  margin: 0.4rem 0.4rem 0.4rem 0.4rem;
+  margin: 0.8rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -108,7 +133,7 @@ li i {
 .rightside__task {
   width: 6rem;
   display: flex;
-  margin: 0.4rem;
+  margin: 0.8rem 0 0.8rem 0.8rem;
   border-radius: 0.5rem;
   flex-direction: column;
   display: flex;
@@ -116,20 +141,22 @@ li i {
 }
 .rightside__task li {
   margin: 0.2rem 0 0.2rem 0;
-  background-color: #113b3b;
   border-radius: 0.5rem;
 }
 .rightside__task li:hover {
-  background-color: #4ca5a5;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .rightside__task li.active {
-  background-color: #60adb8;
-  -webkit-transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background-color: aliceblue;
+  -webkit-transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.rightside__task li.active i {
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .rightside__detail {
-  margin: 0.4rem 0.4rem 0.4rem 0;
+  margin: 0.8rem;
   border-radius: 0.5rem;
   padding: 1.5rem;
   width: 100%;
@@ -154,12 +181,7 @@ body {
   background-color: #2A9399;
   display: flex;
   justify-content: space-between;
-  background: #1A2980;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #26D0CE, #1A2980);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #26D0CE, #1A2980);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(#6682b8, #2473ce);
 }
 
 * {
