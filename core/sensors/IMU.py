@@ -2,12 +2,8 @@
 # https://medium.com/@niru5/hands-on-with-rpi-and-mpu9250-part-3-232378fa6dbc
 # https://www.luisllamas.es/medir-la-inclinacion-imu-arduino-filtro-complementario/
 
-import os
-import sys
 import time
 import smbus
-import numpy as np
-import zmq
 
 from imusensor.MPU9250 import MPU9250
 from imusensor.filters import kalman
@@ -26,8 +22,6 @@ kalman_filter.roll = imu.roll
 kalman_filter.pitch = imu.pitch
 kalman_filter.yaw = imu.yaw
 
-print_count = 0
-sensor_count = 0
 currTime = time.time()
 kal_currTime = time.time()
 imu.readSensor()
