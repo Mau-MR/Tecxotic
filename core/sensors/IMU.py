@@ -10,11 +10,14 @@ from imusensor.filters import kalman
 
 # initializing publisher
 kalman_filter = kalman.Kalman()
-
 address = 0x68
 bus = smbus.SMBus(0)
 imu = MPU9250.MPU9250(bus, address)
 imu.begin()
+imu.caliberateAccelerometer()
+print ("Acceleration calib successful")
+imu.caliberateMag()
+print ("Mag calib successful")
 
 imu.readSensor()
 imu.computeOrientation()
@@ -25,8 +28,11 @@ kalman_filter.yaw = imu.yaw
 currTime = time.time()
 kal_currTime = time.time()
 imu.readSensor()
+kal_currTime = time.time()
 
-def calibrateIMU()
+def calibrateIMU():
+    global kal_currTime
+
     imu.readSensor()
     imu.computeOrientation()
 
@@ -37,24 +43,10 @@ def calibrateIMU()
     kalman_filter.computeAndUpdateRollPitchYaw(imu.AccelVals[0], imu.AccelVals[1], imu.AccelVals[2], imu.GyroVals[0], imu.GyroVals[1], imu.GyroVals[2],\
                                                 imu.MagVals[0], imu.MagVals[1], imu.MagVals[2], kal_dt)
 
-    if print_count == 5:
-        print ("roll: {0} ; pitch : {1} ; yaw : {2}".format(imu.roll, imu.pitch, imu.yaw))
-        print("Kalmanroll:{0} KalmanPitch:{1} KalmanYaw:{2} ".format(kalman_filter.roll, kalman_filter.pitch, kalman_filter.yaw))
+    calibkalman = {
+        'roll': kalman_filter.roll,
+        'pitch': kalman_filter.pitch,
+        'yaw': kalman_filter.yaw,
+    }
 
-        calibnormal = {
-                    'roll': imu.roll,
-                    'pitch': imu.pitch,
-                    'yaw': imu.yaw,
-            }
-        calibkalman = {
-                    'roll': kalman_filter.roll,
-                    'pitch': kalman_filter.pitch,
-                    'yaw': kalman_filter.yaw,
-            }
-        
-        print(calibnormal)
-        print_count = 0
-
-    print_count = print_count + 1
-    sensor_count = sensor_count + 1
-    time.sleep(0.001)
+    return calibkalman
