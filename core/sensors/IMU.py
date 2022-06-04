@@ -15,9 +15,9 @@ bus = smbus.SMBus(0)
 imu = MPU9250.MPU9250(bus, address)
 imu.begin()
 imu.caliberateAccelerometer()
-print ("Acceleration calib successful")
+print("Acceleration calib successful")
 imu.caliberateMag()
-print ("Mag calib successful")
+print("Mag calib successful")
 
 imu.readSensor()
 imu.computeOrientation()
@@ -30,7 +30,8 @@ kal_currTime = time.time()
 imu.readSensor()
 kal_currTime = time.time()
 
-def calibrateIMU():
+
+def read_IMU():
     global kal_currTime
 
     imu.readSensor()
@@ -40,8 +41,9 @@ def calibrateIMU():
     kal_dt = kal_newTime - kal_currTime
     kal_currTime = kal_newTime
 
-    kalman_filter.computeAndUpdateRollPitchYaw(imu.AccelVals[0], imu.AccelVals[1], imu.AccelVals[2], imu.GyroVals[0], imu.GyroVals[1], imu.GyroVals[2],\
-                                                imu.MagVals[0], imu.MagVals[1], imu.MagVals[2], kal_dt)
+    kalman_filter.computeAndUpdateRollPitchYaw(imu.AccelVals[0], imu.AccelVals[1], imu.AccelVals[2], imu.GyroVals[0],
+                                               imu.GyroVals[1], imu.GyroVals[2],
+                                               imu.MagVals[0], imu.MagVals[1], imu.MagVals[2], kal_dt)
 
     calibkalman = {
         'roll': kalman_filter.roll,
