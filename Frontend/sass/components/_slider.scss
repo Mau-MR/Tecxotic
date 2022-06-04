@@ -14,12 +14,13 @@
 .slider__wrapper {
     display: flex;
     flex-direction: column;
+    
     height: 20rem;
-    width: 3rem;
+    width: 100%;
     justify-content: space-between;
     input {
         width: 15rem;
-        height: 2rem;
+        height: 28%;
         margin: 0;
         margin-left: 0.5rem;
         transform-origin: 7.5rem 7.5rem;
