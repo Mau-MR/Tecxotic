@@ -177,12 +177,14 @@ li i {
 .rightside__detail .task_four {
   display: flex;
   justify-content: center;
+  position: relative;
   align-items: center;
   width: 100%;
   height: 70vh;
   color: white;
   background-color: red;
 }
+
 
 div[data-view-active=false] {
   display: none !important;
