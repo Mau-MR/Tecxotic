@@ -54,7 +54,7 @@
 
     <main class="camera">
         <!-- Cameras -->
-        <img src="http://localhost:8080/video1" id="caradelmau">
+        <!-- <img src="https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg" id="caradelmau"> -->
         <canvas class="camera__one">
 
         </canvas>
@@ -74,7 +74,7 @@
                 <i class="fa-solid fa-image"></i>
             </li>
             <li class="nav-tab" data-view-name="task_three">
-                <i class="fa-solid fa-sliders"></i>
+                <i class="fa-solid fa-sliders" ></i>
             </li>
             <li class="nav-tab" data-view-name="task_four">
                 <i class="fa-solid fa-pen-ruler"></i>
@@ -83,16 +83,19 @@
 
         <section class="rightside__detail glass">
             <!--Board details-->
-            <div class="task_one" data-view-active="true">
-                <h1>TASK 1</h1>
-                <button class="task__button"><span>Texto del boton aqui </span></button>
+            <div class="task_one" data-view-active="true"  id="prueba">
+                <button id = "screenshot">Take Photo</button>
+                <button id = "calculate">Calculate</button>
+                <button id = "reset">Reset</button>
+                <button id = "correct">Save Measurement</button>
+                <p id="measurement-text">Waiting for measurement...</p>
             </div>
 
             <div class="task_two" data-view-active="false">
                 <h1>TASK 2</h1>
             </div>
 
-            <div class="task_three" data-view-active="false" id="prueba">
+            <div class="task_three" data-view-active="false">
                 <h1>TASK 3</h1>
             </div>
 
