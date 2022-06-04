@@ -1,5 +1,9 @@
 from flask import Flask
+# Video server
 from routes.CamServer import camServer
+# Sensors
+from core.sensors.IMU import read_IMU
+from core.sensors.preassure_sensor import read_altitude
 
 import websockets
 import asyncio
@@ -9,7 +13,7 @@ import json
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
-from GripperManager import openGripper,closeGripper, clearPort, stopMotor, runMotor
+from GripperManager import openGripper, closeGripper, clearPort, stopMotor, runMotor
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
@@ -44,10 +48,6 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, age
     # print(f"roll:{roll} pitch:{pitch} yaw:{yaw} throttle:{throttle} pixhawk:{connect_pixhawk}")
 
 
-def CameraControl():
-    pass
-
-
 client = set()
 
 
@@ -56,7 +56,6 @@ async def echo(websocket, path):
     client.add(websocket)
     try:
         async for commands in websocket:
-            # print (commands)
             commands = json.loads(commands)
             Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'],
                     commands['connect_pixhawk'], commands['arm_disarm'], commands['agent1'], commands['agent2'],
@@ -69,6 +68,8 @@ async def echo(websocket, path):
                 "message_received": True,
                 "connection_pixhawk": indicator_pixhawk,
                 "target_square": target_square,
+                "altitude": read_altitude(),
+                "IMU": read_IMU()
             }
             send = str(json.dumps(send))
             await websocket.send(bytearray(send, 'utf-8'))
@@ -85,13 +86,13 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 name_space = '/tecxotic'  # espacio de nombres
 client_query = []
 
-
-
 if __name__ == '__main__':
     try:
         print("Running...")
+        calibrateIMU()
         # Running the server that delivers video and the task, each request runs on diferent thread
-        Thread(target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
+        Thread(
+            target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
         # Running the websocket server that manage the manual control of the ROV
         start_server = websockets.serve(echo, '0.0.0.0', 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
