@@ -14,10 +14,12 @@ address = 0x68
 bus = smbus.SMBus(0)
 imu = MPU9250.MPU9250(bus, address)
 imu.begin()
+"""
 imu.caliberateAccelerometer()
 print("Acceleration calib successful")
 imu.caliberateMag()
 print("Mag calib successful")
+"""
 
 imu.readSensor()
 imu.computeOrientation()
