@@ -3,7 +3,7 @@ from flask import Flask
 from routes.CamServer import camServer
 # Sensors
 from core.sensors.IMU import read_IMU
-from core.sensors.preassure_sensor import read_altitude
+# from core.sensors.preassure_sensor import read_altitude
 
 import websockets
 import asyncio
@@ -68,7 +68,6 @@ async def echo(websocket, path):
                 "message_received": True,
                 "connection_pixhawk": indicator_pixhawk,
                 "target_square": target_square,
-                "altitude": read_altitude(),
                 "IMU": read_IMU()
             }
             send = str(json.dumps(send))
