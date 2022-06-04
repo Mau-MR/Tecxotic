@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+html {
+  font-size: 62.5%;
+  /* =10px */
+}
+
+.glass {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+li {
+  height: 4rem;
+  width: 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li i {
+  justify-content: center;
+  color: aliceblue;
+  font-size: 3rem;
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 25rem;
+  align-items: center;
+}
+.slider i {
+  color: aliceblue;
+  font-size: 3rem;
+}
+
+.slider__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 20rem;
+  width: 100%;
+  justify-content: space-between;
+}
+.slider__wrapper input {
+  width: 15rem;
+  height: 28%;
+  margin: 0;
+  margin-left: 0.5rem;
+  transform-origin: 7.5rem 7.5rem;
+  transform: rotate(-90deg);
+}
+.slider__wrapper output {
+  font-size: 2.5rem;
+  color: aliceblue;
+  text-align: center;
+}
+
+.camera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: static;
+  background-color: red;
+  flex-direction: column;
+}
+
+.camera__one {
+  background-color: blueviolet;
+  width: 80rem;
+  height: 60rem;
+  margin: 1rem;
+}
+
+.camera__two {
+  background-color: blueviolet;
+  width: 80rem;
+  height: 60rem;
+  margin: 1rem;
+}
+
+.rov {
+  height: 20vh;
+  width: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: azure;
+}
+
+.leftside {
+  height: 100vh;
+  width: 7rem;
+  display: flex;
+}
+
+.leftside__panel {
+  margin: 0.8rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.indicator {
+  margin: 0.5rem 0;
+  height: auto;
+}
+.indicator li {
+  margin-bottom: 1rem;
+}
+.indicator li:last-child {
+  margin-bottom: 0;
+}
+
+.view {
+  margin: 0.5rem 0;
+}
+
+.rightside {
+  height: 100vh;
+  width: 40rem;
+  display: flex;
+}
+
+.rightside__task {
+  width: 6rem;
+  display: flex;
+  margin: 0.8rem 0 0.8rem 0.8rem;
+  border-radius: 0.5rem;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+.rightside__task li {
+  margin: 0.4rem 0 0.4rem 0;
+  border-radius: 0.5rem;
+}
+.rightside__task li:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.rightside__task li.active {
+  background-color: aliceblue;
+  -webkit-transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.rightside__task li.active i {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.rightside__detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.8rem;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  padding-bottom: 0;
+  width: 100%;
+}
+.rightside__detail .task_one,
+.rightside__detail .task_two,
+.rightside__detail .task_three,
+.rightside__detail .task_four {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+  color: white;
+}
+
+div[data-view-active=false] {
+  display: none !important;
+}
+
+body {
+  display: flex;
+  justify-content: space-between;
+  background: #1A2980;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #26D0CE, #1A2980);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #26D0CE, #1A2980);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Quicksand", sans-serif;
+}
+
+/*# sourceMappingURL=styles.css.map */
