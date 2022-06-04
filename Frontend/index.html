@@ -37,8 +37,8 @@
             <div class="slider">
                 <i class="fa-solid fa-gauge-high"></i>
                 <div class="slider__wrapper">
-                    <input type="range" min="0" max="10" value="10" step="1" oninput="this.nextElementSibling.value = this.value">
-                    <output>0</output>
+                    <input type="range" min="0" max="100" value="100" step="10" oninput="this.nextElementSibling.value = this.value" id="powerLimitSlider">
+                    <output id="powerLimitSlider_value">100</output>
                 </div>
             </div>
             
@@ -114,6 +114,8 @@
     <!--------Frontend-------->
     <script type="text/javascript" src="js/nav_details.js"></script>
     <script type="text/javascript" src="js/sketch.js"></script>
+    <!--------JS utils-------->
+    <script type="text/javascript" src="js/Control/Functionality.js"></script>
      <!-------Libraries------->
     <script type="text/javascript" src="js/libraries/p5.min.js"></script>
 
