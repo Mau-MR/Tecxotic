@@ -14,7 +14,10 @@ const calculatePotency = (joystick) =>{
    return parseInt((joystick * RANGE) + NEUTRAL)
 }
 
+let powerLimit = document.getElementById("powerLimitSlider").value
+powerLimit /= 100 
 function JoystickFunctionality(){
+
     // commands_instance.connect_pixhawk = connect_pixhawk_instruction.UpdateToggle(PS4Controller.share)
     // commands_instance.arm_disarm = arm_disarm_instruction.UpdateToggle(PS4Controller.options)
 
@@ -22,6 +25,12 @@ function JoystickFunctionality(){
     //prevents the movement of the joystick
     let safeZone = 0.1;
     const {lx, ly, rx, ry} = controller.joystick
+    lx *= powerLimit
+    ly *= powerLimit
+
+    rx *= powerLimit
+    ry *= powerLimit
+
 
     //Populating the message that is going to be sended to the back if the joystick was moved
     if(ly > safeZone || ly < -safeZone){
