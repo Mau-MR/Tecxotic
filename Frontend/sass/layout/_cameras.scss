@@ -1,24 +1,34 @@
+
 .camera {
+    height: 100vh;
+    width: 100vw;
+    margin: auto;
+    background-color: rgb(235, 250, 215);
+    
+}
+
+.camera__container {
     display: flex;
+    width: 110rem;
+    height: 100rem;
+    flex-direction: column;
+    background-color: aqua;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    position: static;
-    background-color: red;
- 
-    flex-direction: column;
+
 }
 
 .camera__one {
     background-color: blueviolet;
-    width: 80rem;
-    height: 60rem;
+    width: 105rem;
+    height: 70rem;
     margin: 1rem;
 }
 
 .camera__two {
     background-color: blueviolet;
-    width: 80rem;
-    height: 60rem;
+    width: 36rem;
+    height: 24rem;
     margin: 1rem;
+    margin-top: 0;
 }

@@ -150,9 +150,8 @@ li i {
 }
 .slider__wrapper input {
   width: 15rem;
-  height: 28%;
+  height: 8rem;
   margin: 0;
-  margin-left: 0.5rem;
   transform-origin: 7.5rem 7.5rem;
   transform: rotate(-90deg);
 }
@@ -162,28 +161,52 @@ li i {
   text-align: center;
 }
 
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
 .camera {
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+  background-color: rgb(235, 250, 215);
+}
+
+.camera__container {
   display: flex;
+  width: 110rem;
+  height: 100rem;
+  flex-direction: column;
+  background-color: aqua;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  position: static;
-  background-color: red;
-  flex-direction: column;
 }
 
 .camera__one {
   background-color: blueviolet;
-  width: 80rem;
-  height: 60rem;
+  width: 105rem;
+  height: 70rem;
   margin: 1rem;
 }
 
 .camera__two {
   background-color: blueviolet;
-  width: 80rem;
-  height: 60rem;
+  width: 36rem;
+  height: 24rem;
   margin: 1rem;
+  margin-top: 0;
 }
 
 .rov {
@@ -198,8 +221,10 @@ li i {
 
 .leftside {
   height: 100vh;
-  width: 7rem;
+  width: 10rem;
   display: flex;
+  background-color: red;
+  justify-content: center;
 }
 
 .leftside__panel {
@@ -207,7 +232,7 @@ li i {
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 8.4rem;
   align-items: center;
   justify-content: space-between;
 }
@@ -229,12 +254,13 @@ li i {
 
 .rightside {
   height: 100vh;
-  width: 40rem;
+  width: 46.9rem;
   display: flex;
+  background-color: red;
 }
 
 .rightside__task {
-  width: 6rem;
+  width: 6.5rem;
   display: flex;
   margin: 0.8rem 0 0.8rem 0.8rem;
   border-radius: 0.5rem;
@@ -267,16 +293,15 @@ li i {
   border-radius: 0.5rem;
   padding: 1.5rem;
   padding-bottom: 0;
-  width: 100%;
+  width: 38rem;
 }
 .rightside__detail .task_one,
 .rightside__detail .task_two,
 .rightside__detail .task_three,
 .rightside__detail .task_four {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;
+  width: 38rem;
   height: 70vh;
   color: white;
 }

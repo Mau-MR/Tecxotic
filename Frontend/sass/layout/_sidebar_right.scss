@@ -1,13 +1,16 @@
+$left_side: 6.5rem;
+$right_side: 38rem;
 .rightside {
     height: 100vh;
-    width: 40rem;
+    width: calc($left_side + $right_side + 3*$margin);
     display: flex;
+    background-color: red;
 }
 
 .rightside__task {
-    width: 6rem;
+    width: $left_side;
     display: flex;
-    margin: $margin 0 $margin $margin;;
+    margin: $margin 0 $margin $margin ;
     border-radius: 0.5rem;
     flex-direction: column;
     display: flex;
@@ -38,15 +41,14 @@
     border-radius: 0.5rem;
     padding: 1.5rem;
     padding-bottom: 0;
-    width: 100%;
+    width: $right_side;
     .task_one,
     .task_two,
     .task_three,
     .task_four {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+        flex-direction: column;
+        width: 38rem;
         height: 70vh;
         color: white;
        
