@@ -300,11 +300,19 @@ li i {
 .rightside__detail .task_three,
 .rightside__detail .task_four {
   display: flex;
+<<<<<<< HEAD
   flex-direction: column;
   width: 38rem;
+=======
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  width: 100%;
+>>>>>>> 03b8f40bdfca58144d98e8c0c92ccce647173613
   height: 70vh;
   color: white;
 }
+
 
 div[data-view-active=false] {
   display: none !important;
