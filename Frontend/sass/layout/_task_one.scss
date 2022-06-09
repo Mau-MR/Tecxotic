@@ -1,0 +1,15 @@
+.task-one--capture {
+    height: 29.5rem;
+    width: 47rem;
+    background-color: red;
+}
+.task__wrapper {
+    width: 100%;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    button {
+        width: 100%;
+    }
+}

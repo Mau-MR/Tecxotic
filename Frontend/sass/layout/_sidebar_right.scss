@@ -1,10 +1,9 @@
 $left_side: 6.5rem;
-$right_side: 38rem;
+$right_side: 50rem;
 .rightside {
     height: 100vh;
     width: calc($left_side + $right_side + 3*$margin);
     display: flex;
-    background-color: red;
 }
 
 .rightside__task {
@@ -16,7 +15,7 @@ $right_side: 38rem;
     display: flex;
     align-items: center;
     li {
-        margin: 0.4rem 0 0.4rem 0;
+        margin-top: calc(($left_side - 4rem) /2);
         border-radius: 0.5rem;
     }
     li:hover {
@@ -42,17 +41,6 @@ $right_side: 38rem;
     padding: 1.5rem;
     padding-bottom: 0;
     width: $right_side;
-    .task_one,
-    .task_two,
-    .task_three,
-    .task_four {
-        display: flex;
-        flex-direction: column;
-        width: 38rem;
-        height: 70vh;
-        color: white;
-       
-    }
 }
 
 div[data-view-active="false"] {
