@@ -13,6 +13,31 @@ arm_disarm_status.style.backgroundColor = "#FF0000"
 const calculatePotency = (joystick) =>{
    return parseInt((joystick * RANGE) + NEUTRAL)
 }
+//EventListener to detect pressed keys to control tools
+document.addEventListener('keypress', (event) => {
+    var name = event.key;
+
+    //                0   1   2   3   4
+    const letters = ['y','u','i','o','p',
+    //                5   6   7   8   9
+                     'h','j','k','l',';'] 
+    // letters is a hashmap that return the index of the element pressed if is in the list
+    // these numbers can be then programmed to perfom different actions (these actions need to be programmed in back/arduino)
+    let number = letters.indexOf(name)
+    let commands = { // commands is the data that is going to be send to backend with the corresponding index (actions to perform)
+        'action': number
+    }
+     console.log(commands)
+    fetch('192.168.2.2:8000/actuators',{
+        method: 'POST',
+        body: commands
+    }).then(res => {
+        console.log(res)
+    }).catch( err => {
+        console.log(err)
+    })
+
+  }, false);
 
 function JoystickFunctionality(){
     // commands_instance.connect_pixhawk = connect_pixhawk_instruction.UpdateToggle(PS4Controller.share)
