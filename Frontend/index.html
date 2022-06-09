@@ -1,335 +1,135 @@
-<!--
-    Control made for genral purposes for the team TecXotic 2022
-     - by Aaron Perez Ontiveros 
--->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecXotic Controller</title>
-
-    <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-
+    <!--Font Awesome credential-->
+    <script src="https://kit.fontawesome.com/d076dfc548.js" crossorigin="anonymous"></script>
+    <!--CSS mapped-->
+    <link rel="stylesheet" href="styles.css">
+    <title>TecXotic</title>
+    <!-- add icon link -->
+    <link rel="icon" href="ico/tecxotic-logo.ico" image/x-icon">
 </head>
-<body class="container" style="min-height: 100vh; min-width: 100vw;  max-height: 100vh; max-width: 100vw;">
 
+<body>
+    <aside class="leftside">
+        <!--Left side-->
+        <section class="leftside__panel glass">
+            <!--Idicators-->
+            <div class="indicator">
+                <li>
+                    <i class="fa-solid fa-wifi" id="rov_status"></i>
+                </li>
+                <li>
+                    <i class="fa-solid fa-microchip" id="control_status"></i>
+                </li>
+                <li>
+                    <i class="fa-solid fa-gamepad" id="pixhawk_status"></i>
+                </li>
+                <li>
+                    <i class="fa-solid fa-flag-checkered" id="arm_disarm_status"></i>
+                </li>
+            </div>
 
-    <div class="row" style="min-height: 15vh; max-height: 25vh;">
-        <div class="col">
-            <center> <canvas id= "view_camera1" width="320" height="240" style="width: 50%;  border-style: solid;"></canvas> </center>
-        </div>
-        <div class="col">
-            <center> <canvas id= "view_camera2" width="320" height="240" style="width: 50%; border-style: solid;"></canvas> </center>
-        </div>
-        <div class="col">
-            <center> <canvas id= "view_camera3" width="320" height="240" style="width: 50%; border-style: solid;"></canvas> </center>
-        </div>
-        <div class="col">
-            <center> <canvas id= "view_camera4" width="320" height="240" style="width: 50%; border-style: solid;"></canvas> </center>
-        </div>
-    </div>
-
-    <div class="row" style="min-height: 80vh; max-height: 75vh; padding-top: 10px">
-        <div class="col-2">
-            <div class="row" style="min-height: 50%; max-height:50%; padding-top:40%;">
-                <div class="col" >
-                    <center> <img id="rov_status" src="assets/img/ROV_status.png" style="width: 100%; "> </center>
-                </div>
-                <div class="col" >
-                    <center> <img id="controller_status" src="assets/img/Controller_status.png" style="width: 100%;"> </center>
-                </div>
-                <div class="col" >
-                    <center> <img id="pixhawk_status" src="assets/img/Pixhawk_status.png" style="width: 100%;"> </center>
-                </div>
-                <div class="col" >
-                    <center> <img id="arm_disarm_status" src="assets/img/ArmDisarm_status.png" style="width: 100%;"> </center>
+            <div class="slider">
+                <i class="fa-solid fa-gauge-high"></i>
+                <div class="slider__wrapper">
+                    <input type="range" min="0" max="100" value="100" step="10" oninput="this.nextElementSibling.value = this.value" id="powerLimitSlider">
+                    <output id="powerLimitSlider_value">100</output>
                 </div>
             </div>
-            <div class="row"  style="min-height: 50%; max-height:50%; padding-top:10%;">
-                <div class="col">
-                    <button id = "agent1_button"type="button" class="btn btn-primary" data-bs-dismiss="modal">AI 1</button>
-                </div>
-                <div class="col">
-                    <button id = "agent2_button"type="button" class="btn btn-primary" data-bs-dismiss="modal">AI 2</button>
-                </div>
-                <div class="col">
-                    <button id = "agent3_button"type="button" class="btn btn-primary" data-bs-dismiss="modal">AI 3</button>
-                </div>
+            
+            <div class="view">
+                <li>
+                    <i class="fa-solid fa-photo-film"></i>
+                </li>
             </div>
+
+
+        </section>
+    </aside>
+
+    <!-- Cameras -->
+    <main class="camera">
+<<<<<<< HEAD
+        <!--<img src="http://localhost:8080/video1" id="caradelmau">-->
+        <div class="camera__container">
+            <canvas class="camera__one"></canvas>
+            <canvas class="camera__two"></canvas>
         </div>
-        <div class="col-8">
-        </div>
-        <div class="col-2">
-            <div class="row" >
-                <canvas id="ROV3D" ></canvas>
+=======
+        <!-- Cameras -->
+        <!-- <img src="https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg" id="caradelmau"> -->
+        <canvas class="camera__one">
+
+        </canvas>
+        <canvas class="camera__two">
+
+        </canvas>
+>>>>>>> 03b8f40bdfca58144d98e8c0c92ccce647173613
+    </main>
+
+    <aside class="rightside">
+        <!--Right side-->
+        <section class="rightside__task glass">
+            <!--Board nav-->
+            <li class="nav-tab active" data-view-name="task_one">
+                <i class="fa-solid fa-fish-fins"></i>
+            </li>
+            <li class="nav-tab" data-view-name="task_two">
+                <i class="fa-solid fa-image"></i>
+            </li>
+            <li class="nav-tab" data-view-name="task_three">
+                <i class="fa-solid fa-sliders" ></i>
+            </li>
+            <li class="nav-tab" data-view-name="task_four">
+                <i class="fa-solid fa-pen-ruler"></i>
+            </li>
+        </section>
+
+        <section class="rightside__detail glass">
+            <!--Board details-->
+            <div class="task_one" data-view-active="true"  id="prueba">
+                <button id = "screenshot">Take Photo</button>
+                <button id = "calculate">Calculate</button>
+                <button id = "reset">Reset</button>
+                <button id = "correct">Save Measurement</button>
+                <p id="measurement-text">Waiting for measurement...</p>
             </div>
-            <div class="row" >
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMenu">
-                    ArP menu
-                </button>
-                <button type="button" id="AI1_button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAI1">
-                    AI 1 Config
-                </button>
+
+            <div class="task_two" data-view-active="false">
+                <h1>TASK 2</h1>
             </div>
-        </div>
-    </div>
 
-
-    <!-- Modal Menu-->
-    <div class="modal fade" id="modalMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ArP Menu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <label for="inputIPAccess" style="font-weight: bold;">Enter IP Address</label>
-                    <div id="inputIPAccess"class="input-group mb-2">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">IP ROV:</div>
-                        </div>
-                        <input type="text" class="form-control" id="connection_address" placeholder="IP Access">
-                    </div>
-                    <button type="button" id="reconnectButton" class="btn btn-primary" data-bs-dismiss="modal" style="margin-left: 76%;">Reconnect</button>                  
-
-                    <br>
-                    <label for="inputIPCam" style="font-weight: bold;">Camara Video Connection</label>
-                    <div id="inputIPCam" class="input-group mb-2">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">IP Cam 1:</div>
-                        </div>
-                        <input type="text" class="form-control" id="address_camera1" placeholder="IP">
-                    </div>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">IP Cam 2:</div>
-                        </div>
-                        <input type="text" class="form-control" id="address_camera2" placeholder="IP">
-                    </div>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">IP Cam 3:</div>
-                        </div>
-                        <input type="text" class="form-control" id="address_camera3" placeholder="IP">
-                    </div>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">IP Cam 4:</div>
-                        </div>
-                        <input type="text" class="form-control" id="address_camera4" placeholder="IP">
-                    </div>
-
-                    <button type="button" id="reconnectButtonCam" class="btn btn-primary" data-bs-dismiss="modal" style="margin-left: 76%;">Reconnect</button>                  
-
-                    <br>
-                    <label for="PIDRoll" style="font-weight: bold;">Roll PID</label>
-
-                    <div class="row">
-                        <div class="col">
-                            <div id= "PIDRoll" class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">P</div>
-                                </div>
-                                <input type="number" class="form-control" id="roll_p" placeholder="Proportional">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">I</div>
-                                </div>
-                                <input type="number" class="form-control" id="roll_i" placeholder="Integral">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">D</div>
-                                </div>
-                                <input type="number" class="form-control" id="roll_d" placeholder="Derivative">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <label for="PIDPitch" style="font-weight: bold;">Pitch PID</label>
-                    <div class="row">
-                        <div class="col">
-                            <div id= "PIDPitch" class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">P</div>
-                                </div>
-                                <input type="number" class="form-control" id="pitch_p" placeholder="Proportional">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">I</div>
-                                </div>
-                                <input type="number" class="form-control" id="pitch_i" placeholder="Integral">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">D</div>
-                                </div>
-                                <input type="number" class="form-control" id="pitch_d" placeholder="Derivative">
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                    <label for="PIDYaw" style="font-weight: bold;">Yaw PID</label>
-                    <div class="row">
-                        <div class="col">
-                            <div id= "PIDYaw" class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">P</div>
-                                </div>
-                                <input type="number" class="form-control" id="yaw_p" placeholder="Proportional">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">I</div>
-                                </div>
-                                <input type="number" class="form-control" id="yaw_i" placeholder="Integral">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">D</div>
-                                </div>
-                                <input type="number" class="form-control" id="yaw_d" placeholder="Derivative">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    
-                    <label for="PIDThrottle" style="font-weight: bold;">Throttle PID</label>
-                    <div class="row">
-                        <div class="col">
-                            <div id= "PIDThrottle" class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">P</div>
-                                </div>
-                                <input type="number" class="form-control" id="throttle_p" placeholder="Proportional">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">I</div>
-                                </div>
-                                <input type="number" class="form-control" id="throttle_i" placeholder="Integral">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">D</div>
-                                </div>
-                                <input type="number" class="form-control" id="throttle_d" placeholder="Derivative">
-                            </div>
-                        </div>
-                    </div>
-                   
-                
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+            <div class="task_three" data-view-active="false">
+                <h1>TASK 3</h1>
             </div>
-        </div>
-    </div>
 
-
-     <!-- Modal AI1-->
-     <div class="modal fade" id="modalAI1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-        <div class="modal-dialog modal-xl modal-dialog-scrollable" >
-            <div class="modal-content" >
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ArP AI 1 Config</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" >
-
-                    <div class="container">
-                        <div class="row">
-                          <div class="col-4">
-                            <canvas id="camera_IA1"  width="320" height="240"  style="width: 100%; border-style: solid; " ></canvas>
-                            <canvas id="result_IA1"  width="320" height="240"  style="width: 100%; border-style: solid;" ></canvas>
-                          </div>
-                          <div class="col">
-                            <div>
-                                <p>Adjust Values</p>
-                                <span class="input-group-text" id="basic-addon1"><div id="first_slider_low_text">H:0</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="180" value="0" class="slider" id="first_slider_low">
-                                </span>
-                                <span class="input-group-text" id="basic-addon1"><div id="first_slider_high_text">H:180</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="180" value="180" class="slider" id="first_slider_high">
-                                </span>
-                                <span class="input-group-text" id="basic-addon1"><div id="second_slider_low_text">S:0</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="255" value="0" class="slider" id="second_slider_low">
-                                </span>
-                                <span class="input-group-text" id="basic-addon1"><div id="second_slider_high_text">S:255</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="255" value="255" class="slider" id="second_slider_high">
-                                </span>
-                                <span class="input-group-text" id="basic-addon1"><div id="third_slider_low_text">V:0</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="255" value="0" class="slider" id="third_slider_low">
-                                </span>
-                                <span class="input-group-text" id="basic-addon1"><div id="third_slider_high_text">V:255</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="255" value="255" class="slider" id="third_slider_high">
-                                </span>
-                            </div>
-                            <div>
-                                <p>Adjust Size Target</p>
-                                <span class="input-group-text" id="basic-addon1"><div id="size_slider_min_text">S:0</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="30000" value="0" class="slider" id="size_slider_min">
-                                </span>
-                                <span class="input-group-text" id="basic-addon1"><div id="size_slider_max_text">S:30000</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="30000" value="30000" class="slider" id="size_slider_max">
-                                </span>
-                            </div>
-                            <div>
-                                <p>Adjust Percentage of white in target</p>
-                                <span class="input-group-text" id="basic-addon1"><div id="percentage_slider_min_text">P:0</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="100" value="0" class="slider" id="percentage_slider_min">
-                                </span>
-                                <span class="input-group-text" id="basic-addon1"><div id="percentage_slider_max_text">P:180</div>
-                                    <input style="position: absolute; right: 5%; max-width: 55%;" type="range"  min="0" max="100" value="100" class="slider" id="percentage_slider_max">
-                                </span>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button id="close_AI1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+            <div class="task_four" data-view-active="false">
+                <h1>TASK 4</h1>
             </div>
-        </div>
-    </div>
+
+            <div class="rov">
+                <canvas id="ROV3D"></canvas>
+            </div>
+
+        </section>
+    </aside>
+
+    <!---------------------------------------SCRIPTS--------------------------------------->
+    <!--------Frontend-------->
+    <script type="text/javascript" src="js/nav_details.js"></script>
+    <script type="text/javascript" src="js/sketch.js"></script>
+    <!--------JS utils-------->
+    <script type="text/javascript" src="js/Control/Functionality.js"></script>
+     <!-------Libraries------->
+    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
 
 
-    
-</body>
-<footer>
-    
+
     <!-- <script src="three/build/three.js"></script> -->
 
     <!-- <script type="module" src="three/build/three.module.js"> </script> -->
@@ -346,5 +146,7 @@
     -->
     <script type="module" src="js/Interface/Cameras.js"></script>
     <script type="module" src="js/Interface/ROVModel.js"></script>
-</footer>
+
+</body>
+
 </html>

@@ -1,0 +1,32 @@
+.leftside {
+    height: 100vh;
+    width: 10rem;
+    display: flex;
+    background-color: red;
+    justify-content: center;
+}
+
+.leftside__panel {
+    margin: $margin;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: calc(10rem - $margin*2);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.indicator {
+    margin: 0.5rem 0;
+    height: auto;
+    li {
+        margin-bottom: 1rem;
+    }
+    li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.view {
+    margin: 0.5rem 0;
+}

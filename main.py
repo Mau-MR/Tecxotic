@@ -1,7 +1,8 @@
 from flask import Flask, send_file, request
 from routes.CamServer import camServer
-from routes.Biomass import biomass
-from routes.FishLength import fishLength
+# Sensors
+from core.sensors.IMU import read_IMU
+# from core.sensors.preassure_sensor import read_altitude
 
 import websockets
 import asyncio
@@ -11,7 +12,7 @@ import json
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
-from GripperManager import openGripper,closeGripper, clearPort, stopMotor, runMotor
+from GripperManager import openGripper, closeGripper, clearPort, stopMotor, runMotor
 
 
 #Photomosaic utilities----------
@@ -28,8 +29,6 @@ photosDir = mainDir + "\photos" #windows
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
-app.register_blueprint(biomass)
-app.register_blueprint(fishLength)
 
 indicator_pixhawk = False
 master = None
@@ -59,10 +58,6 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, age
         master = ConnectDisconnectPixhawk(connect_pixhawk)
         indicator_pixhawk = False
     # print(f"roll:{roll} pitch:{pitch} yaw:{yaw} throttle:{throttle} pixhawk:{connect_pixhawk}")
-
-
-def CameraControl():
-    pass
 
 
 client = set()
@@ -132,7 +127,7 @@ def floatgrid():
     x = int(json_dict["grid_x"])
     y = int(json_dict["grid_y"])
     Floatgrid.main(speed, angle, time,x,y)
-    return send_file('floatgrid.jpg', mimetype='image/jpg') 
+    return send_file('floatgrid.jpg', mimetype='image/jpg')
 
 
 
@@ -140,12 +135,12 @@ if __name__ == '__main__':
     try:
         print("Running...")
         # Running the server that delivers video and the task, each request runs on diferent thread
-        Thread(target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
+        Thread(
+            target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
         # Running the websocket server that manage the manual control of the ROV
         start_server = websockets.serve(echo, '0.0.0.0', 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
-        app.run(debug = True, host='0.0.0.0', port="3000") 
     except KeyboardInterrupt:
         clearPort()
         for f in os.listdir(photosDir):
