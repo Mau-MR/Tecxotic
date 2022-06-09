@@ -364,7 +364,7 @@ div[data-view-active=false] {
 
 .task__wrapper {
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -373,6 +373,7 @@ div[data-view-active=false] {
   width: 100%;
 }
 .task__wrapper p {
+  margin-top: 1rem;
   text-align: center;
   font-size: 2rem;
   grid-column: 1/3;
