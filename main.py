@@ -1,5 +1,4 @@
-from flask import Flask
-# Video server
+from flask import Flask, send_file, request
 from routes.CamServer import camServer
 # Sensors
 from core.sensors.IMU import read_IMU
@@ -14,6 +13,19 @@ from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
 from GripperManager import openGripper, closeGripper, clearPort, stopMotor, runMotor
+
+
+#Photomosaic utilities----------
+import os
+import Photomosaic
+import Floatgrid
+import cv2
+currPhoto = 0
+cap = cv2.VideoCapture(0)
+mainDir = os.getcwd()
+photosDir = mainDir + "\photos" #windows
+#photosDir = mainDir + "/photos" #macos
+#--------------
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
@@ -56,6 +68,7 @@ async def echo(websocket, path):
     client.add(websocket)
     try:
         async for commands in websocket:
+            # print (commands)
             commands = json.loads(commands)
             Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'],
                     commands['connect_pixhawk'], commands['arm_disarm'], commands['agent1'], commands['agent2'],
@@ -68,7 +81,6 @@ async def echo(websocket, path):
                 "message_received": True,
                 "connection_pixhawk": indicator_pixhawk,
                 "target_square": target_square,
-                "IMU": read_IMU()
             }
             send = str(json.dumps(send))
             await websocket.send(bytearray(send, 'utf-8'))
@@ -81,14 +93,47 @@ async def echo(websocket, path):
         clearPort()
 
 
-app.config['CORS_HEADERS'] = 'Content-Type'
-name_space = '/tecxotic'  # espacio de nombres
-client_query = []
+@app.route('/photomosaic_takePhoto')#Take photo one by one
+def photomosaic_photo():
+    global currPhoto
+    currPhoto +=1
+    if currPhoto > 8:
+        currPhoto = 1
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
+    os.chdir(photosDir)
+    Photomosaic.takePhoto(currPhoto, cap)
+    os.chdir(mainDir)
+    return send_file("photos\photo" + str(currPhoto) + ".jpg", mimetype='image/jpg')
+
+
+@app.route('/photomosaic_changePhoto',methods=['POST'])#take and change a photo with the number of the photo
+def photomosaic_change():
+    json_dict = request.get_json()
+    currentPhoto = json_dict["currentPhoto"]
+    os.chdir(photosDir)
+    Photomosaic.takePhoto(currentPhoto, cap)
+    os.chdir(mainDir)
+    return send_file("photos\photo" + str(currentPhoto) + ".jpg", mimetype='image/jpg')
+
+
+
+@app.route('/floatgrid',methods = ['POST'])#Task 3.1
+def floatgrid():
+    json_dict = request.get_json()
+    speed = float(json_dict["grid_speed"])
+    angle =  float(json_dict["grid_angle"])
+    time =  float(json_dict["grid_time"])
+    x = int(json_dict["grid_x"])
+    y = int(json_dict["grid_y"])
+    Floatgrid.main(speed, angle, time,x,y)
+    return send_file('floatgrid.jpg', mimetype='image/jpg')
+
+
 
 if __name__ == '__main__':
     try:
         print("Running...")
-        calibrateIMU()
         # Running the server that delivers video and the task, each request runs on diferent thread
         Thread(
             target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
@@ -98,5 +143,9 @@ if __name__ == '__main__':
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:
         clearPort()
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
     except Exception as e:
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
         print(e)
