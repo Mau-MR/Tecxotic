@@ -372,6 +372,12 @@ div[data-view-active=false] {
 .task__wrapper button {
   width: 100%;
 }
+.task__wrapper p {
+  text-align: center;
+  font-size: 2rem;
+  grid-column: 1/3;
+  grid-row: 3;
+}
 
 body {
   display: flex;
