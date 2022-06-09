@@ -54,64 +54,67 @@
 
     <!-- Cameras -->
     <main class="camera">
-<<<<<<< HEAD
         <!--<img src="http://localhost:8080/video1" id="caradelmau">-->
-        <div class="camera__container">
-            <canvas class="camera__one"></canvas>
-            <canvas class="camera__two"></canvas>
+        <div class="camera__container gradient-border">
+            <img class="camera__one"></img>
+            <img class="camera__two"></img>
         </div>
-=======
-        <!-- Cameras -->
-        <!-- <img src="https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg" id="caradelmau"> -->
-        <canvas class="camera__one">
-
-        </canvas>
-        <canvas class="camera__two">
-
-        </canvas>
->>>>>>> 03b8f40bdfca58144d98e8c0c92ccce647173613
     </main>
 
     <aside class="rightside">
         <!--Right side-->
         <section class="rightside__task glass">
             <!--Board nav-->
-            <li class="nav-tab active" data-view-name="task_one">
+            <li class="nav-tab active" data-view-name="nav-one">
                 <i class="fa-solid fa-fish-fins"></i>
             </li>
-            <li class="nav-tab" data-view-name="task_two">
+            <li class="nav-tab" data-view-name="nav-two">
                 <i class="fa-solid fa-image"></i>
             </li>
-            <li class="nav-tab" data-view-name="task_three">
+            <li class="nav-tab" data-view-name="nav-three">
                 <i class="fa-solid fa-sliders" ></i>
             </li>
-            <li class="nav-tab" data-view-name="task_four">
+            <li class="nav-tab" data-view-name="nav-four">
                 <i class="fa-solid fa-pen-ruler"></i>
             </li>
         </section>
 
         <section class="rightside__detail glass">
             <!--Board details-->
-            <div class="task_one" data-view-active="true"  id="prueba">
-                <button id = "screenshot">Take Photo</button>
-                <button id = "calculate">Calculate</button>
-                <button id = "reset">Reset</button>
-                <button id = "correct">Save Measurement</button>
-                <p id="measurement-text">Waiting for measurement...</p>
+
+            <!--Task 1-Biomass-->
+            <div class="task nav-one" data-view-active="true">
+                <h1 class="task__title">Biomass</h1>
+                <div class="task-one--capture gradient-border" id="prueba"></div>
+                <div class="task__wrapper">
+                    <button id = "screenshot" class="task__button"><span>Take Photo</span></button> 
+                    <button id = "calculate" class="task__button"><span>Calculate</span></button>
+                    <button id = "reset" class="task__button"><span>Reset</span></button>
+                    <button id = "correct" class="task__button"><span>Save Measurement</span></button>
+                    <p id="measurement-text">Waiting for measurement...</p>
+                </div> 
             </div>
 
-            <div class="task_two" data-view-active="false">
-                <h1>TASK 2</h1>
+            <!--Task 2-Photomosaic-->
+            <div class="task nav-two" data-view-active="false">
+                <h1 class="task__title">Photomosaic</h1>
+                  
             </div>
 
-            <div class="task_three" data-view-active="false">
-                <h1>TASK 3</h1>
+            <!--Task 3-Biomass-->
+            <div class="task nav-three" data-view-active="false">
+                <h1 class="task__title">Photomosaic</h1>
+               
             </div>
 
-            <div class="task_four" data-view-active="false">
-                <h1>TASK 4</h1>
+            <!--Task 4-Biomass-->
+            <div class="task nav-four" data-view-active="false">
+                <h1 class="task__title">Photomosaic</h1>
+        
+               
             </div>
 
+            <!--Rov 3D-->
             <div class="rov">
                 <canvas id="ROV3D"></canvas>
             </div>

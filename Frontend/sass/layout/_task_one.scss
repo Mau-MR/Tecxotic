@@ -1,0 +1,22 @@
+.task-one--capture {
+    height: 29.5rem;
+    width: 47rem;
+    background-color: red;
+}
+.task__wrapper {
+    width: 100%;
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    button {
+        width: 100%;
+    }
+    p {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 2rem;
+        grid-column: 1 / 3;
+        grid-row: 3;
+    }
+}
