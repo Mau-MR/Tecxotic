@@ -368,6 +368,7 @@ div[data-view-active=false] {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
+
 .task__wrapper button {
   width: 100%;
 }
