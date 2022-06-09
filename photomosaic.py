@@ -14,11 +14,8 @@ import shutil
     
 cap = cv2.VideoCapture(0,  cv2.CAP_DSHOW) #camera number
 
-#directory = r"C:\Users\anton\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Universidad TEC21\TECXOTIC\Software\Photomosaic\photos"
-#mainDirectory = r"C:\Users\anton\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Universidad TEC21\TECXOTIC\Software\Photomosaic"
 
 directory = r"\photos"
-#mainDirectory = "../photos/"
 backwards = r".."
 
 ext = "jpg"
