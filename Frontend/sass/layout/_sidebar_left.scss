@@ -1,0 +1,36 @@
+$leftsideWidth: 10rem;
+$leftsidePanelWidht: calc(10rem - $margin*2);
+.leftside {
+    height: 100vh;
+    width: $leftsideWidth;
+    display: flex;
+    justify-content: center;
+}
+
+.leftside__panel {
+    margin: $margin;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: calc(10rem - $margin*2);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.indicator {
+    height: auto;
+
+    li:first-child {
+        margin-top: calc(($leftsidePanelWidht - 4rem) /2);
+    }
+    li {
+        margin-bottom: 1rem;
+    }
+    li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.view {
+    margin: calc(($leftsidePanelWidht - 4rem) /2) 0;
+}

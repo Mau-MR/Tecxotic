@@ -1,6 +1,10 @@
-from flask import Flask
+from flask import Flask, send_file, request
 from routes.CamServer import camServer
-from routes.Biomass import biomass
+from routes.floatGrid import floatGrid
+from routes.photomosaic import photomos
+# Sensors
+from core.sensors.IMU import read_IMU
+# from core.sensors.preassure_sensor import read_altitude
 
 import websockets
 import asyncio
@@ -10,11 +14,18 @@ import json
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
-from GripperManager import openGripper,closeGripper, clearPort, stopMotor, runMotor
+from GripperManager import openGripper, closeGripper, clearPort, stopMotor, runMotor
+import os
+
+mainDir = os.getcwd()
+photosDir = mainDir + "\photos" #windows
+
 
 app = Flask(__name__)
 app.register_blueprint(camServer)
-app.register_blueprint(biomass)
+app.register_blueprint(photomos)
+app.register_blueprint(floatGrid)
+
 
 indicator_pixhawk = False
 master = None
@@ -44,10 +55,6 @@ def Control(roll, pitch, yaw, throttle, connect_pixhawk, arm_disarm, agent1, age
         master = ConnectDisconnectPixhawk(connect_pixhawk)
         indicator_pixhawk = False
     # print(f"roll:{roll} pitch:{pitch} yaw:{yaw} throttle:{throttle} pixhawk:{connect_pixhawk}")
-
-
-def CameraControl():
-    pass
 
 
 client = set()
@@ -83,27 +90,21 @@ async def echo(websocket, path):
         clearPort()
 
 
-app.config['CORS_HEADERS'] = 'Content-Type'
-name_space = '/tecxotic'  # espacio de nombres
-client_query = []
-
-
-@app.route('/photomosaic')
-def photomosaicfunc():
-    photomosaic.main()
-    return 'Done!'
-
-
 if __name__ == '__main__':
     try:
         print("Running...")
         # Running the server that delivers video and the task, each request runs on diferent thread
-        Thread(target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
+        Thread(
+            target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
         # Running the websocket server that manage the manual control of the ROV
         start_server = websockets.serve(echo, '0.0.0.0', 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:
         clearPort()
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
     except Exception as e:
+        for f in os.listdir(photosDir):
+            os.remove(os.path.join(photosDir, f))
         print(e)
