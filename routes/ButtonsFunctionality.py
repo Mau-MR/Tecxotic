@@ -14,5 +14,6 @@ buttons_functionality = Blueprint('buttons_functionality', __name__)
 def send_actions():
     json = request.get_json()
     print('json_respone: ', int(json["actions"]))
+
     # send(json.actions)
-    return int(json["actions"])
+    return "funciono"

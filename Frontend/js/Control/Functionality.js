@@ -24,22 +24,20 @@ document.addEventListener('keypress', (event) => {
     // letters is a hashmap that return the index of the element pressed if is in the list
     // these numbers can be then programmed to perfom different actions (these actions need to be programmed in back/arduino)
     let number = letters.indexOf(name)
-    let commands = { // commands is the data that is going to be send to backend with the corresponding index (actions to perform)
-        'action': number
-    }
-     console.log(commands)
     if (number >= 0) {
         // fetch('http://192.168.2.2:8000/actuators',{
         fetch('http://127.0.0.1:8080/actuators',{
+            headers: {
+                'Content-Type': 'application/json'
+                },
             method: 'POST',
-            body: commands
+            body: JSON.stringify({actions: number})
         }).then(res => {
             console.log(res)
         }).catch( err => {
             console.log(err)
         })
     }
-
   }, false);
 
 let powerLimit = document.getElementById("powerLimitSlider").value // Get the value from slider
