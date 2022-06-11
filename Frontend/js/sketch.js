@@ -12,11 +12,10 @@ const REFERENCIA = 9;
 let pixel_2_cm_ratio;
 let longitud_calculada;
 
-
 function setup() {
-    img = createCapture(VIDEO);
+    img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
     img.hide();
-    myCanvas = createCanvas(470, 295);
+    myCanvas = createCanvas(470, 275);
     myCanvas.parent("prueba");
     myCanvas.position(0,0);
     
@@ -53,7 +52,7 @@ document.getElementById("biomass").addEventListener("click",biomasa);
 function reiniciar() {
     points = [];
     document.getElementById("measurement-text").innerHTML = "Waiting for measurement...";
-    img = createCapture(VIDEO);
+    img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
     img.hide();
     calculado = false;
     promedio = null;
@@ -104,6 +103,7 @@ function biomasa(){
     }   
 
     N = float(N);
+    N = N/1000;
     a = float(a);
     b = float(b);
     l = float(l);
