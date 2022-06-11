@@ -28,14 +28,17 @@ document.addEventListener('keypress', (event) => {
         'action': number
     }
      console.log(commands)
-    fetch('192.168.2.2:8000/actuators',{
-        method: 'POST',
-        body: commands
-    }).then(res => {
-        console.log(res)
-    }).catch( err => {
-        console.log(err)
-    })
+    if (number >= 0) {
+        // fetch('http://192.168.2.2:8000/actuators',{
+        fetch('http://127.0.0.1:8080/actuators',{
+            method: 'POST',
+            body: commands
+        }).then(res => {
+            console.log(res)
+        }).catch( err => {
+            console.log(err)
+        })
+    }
 
   }, false);
 

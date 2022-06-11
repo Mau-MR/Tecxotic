@@ -15,6 +15,6 @@ function ControllerLoop(){
         ControlFunctionality()
         controller.ResetPressedButtons()
     }catch (e){
-        console.log(e)
+        // console.log(e)
     }
 }

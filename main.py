@@ -3,6 +3,7 @@ from flask_cors import CORS
 from routes.CamServer import camServer
 from routes.floatGrid import floatGrid
 from routes.photomosaic import photomos
+from routes.ButtonsFunctionality import buttons_functionality
 # Sensors
 # from core.sensors.IMU import read_IMU
 # from core.sensors.preassure_sensor import read_altitude
@@ -26,6 +27,7 @@ CORS(app)
 app.register_blueprint(camServer)
 app.register_blueprint(photomos)
 app.register_blueprint(floatGrid)
+app.register_blueprint(buttons_functionality)
 
 
 indicator_pixhawk = False
