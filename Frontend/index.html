@@ -54,8 +54,9 @@
 
     <!-- Cameras -->
     <main class="camera">
-        <!--<img src="http://localhost:8080/video1" id="caradelmau">-->
         <div class="camera__container gradient-border">
+            <img src="http://localhost:8080/video1" id="caradelmau">
+            <img src="http://localhost:8080/video2" id="cara2">
         </div>
     </main>
 
@@ -108,7 +109,10 @@
             <!--Task 2-Photomosaic-->
             <div class="task nav-two" data-view-active="false">
                 <h1 class="task__title">Photomosaic</h1>
-                  
+                <button class="task__button" id="fotoBtn"><span>
+                    Foto
+                </span></button>
+                <img id="fotoGrid"/>
             </div>
 
             <!--Task 3-Biomass-->
@@ -159,6 +163,7 @@
     -->
     <script type="module" src="js/Interface/Cameras.js"></script>
     <script type="module" src="js/Interface/ROVModel.js"></script>
+    <script type="module" src="js/photomosaic.js"></script>
 
 </body>
 

@@ -11,7 +11,7 @@ photosDir = mainDir + "\photos" #windows
 #photosDir = mainDir + "/photos" #macos
 #--------------
 
-photomos = Blueprint('camServer', __name__)
+photomos = Blueprint('photomos', __name__)
 
 @photomos.route('/photomosaicPhoto')#Take photo one by one
 def photomosaic_photo():
