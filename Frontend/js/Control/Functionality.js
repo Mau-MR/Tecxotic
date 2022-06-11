@@ -1,5 +1,6 @@
 import {commands_instance} from "../Connection/Message.js";
 import {controller} from "./Control.js";
+import {webRequest} from '../Connection/Requests.js'
 
 let RANGE=1000, NEUTRAL = 0
 let THROTTLE_RANGE=500, NEUTRAL_THROTTLE = 500
@@ -14,7 +15,7 @@ const calculatePotency = (joystick) =>{
    return parseInt((joystick * RANGE) + NEUTRAL)
 }
 //EventListener to detect pressed keys to control tools
-document.addEventListener('keypress', (event) => {
+document.addEventListener('keypress', async (event) => {
     var name = event.key;
 
     //                0   1   2   3   4
@@ -24,19 +25,13 @@ document.addEventListener('keypress', (event) => {
     // letters is a hashmap that return the index of the element pressed if is in the list
     // these numbers can be then programmed to perfom different actions (these actions need to be programmed in back/arduino)
     let number = letters.indexOf(name)
+    let body = {
+        actions: number
+    }
+    let url= 'http://192.168.2.2:8000'
     if (number >= 0) {
-        // fetch('http://192.168.2.2:8000/actuators',{
-        fetch('http://127.0.0.1:8080/actuators',{
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            method: 'POST',
-            body: JSON.stringify({actions: number})
-        }).then(res => {
-            console.log(res)
-        }).catch( err => {
-            console.log(err)
-        })
+        let response =await webRequest('POST',url,body)
+        // console.log('Response from flask server', response)
     }
   }, false);
 
