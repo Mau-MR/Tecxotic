@@ -1,12 +1,13 @@
-@import 'abstracts/variables',
+@import 'abstracts/variables',  // Abstracts
 'abstracts/rem-factor',
 'abstracts/glass.scss',
 'abstracts/gradient-border';
-@import 'base/normalize';
-@import 'components/buttons',
+@import 'base/normalize';       // Base
+@import 'components/buttons',   //Componenets
 'components/icon',
-'components/slider';
-@import 'layout/cameras',
+'components/slider',
+'components/toggle';
+@import 'layout/cameras',       // Layout
 'layout/rov',
 'layout/sidebar_left',
 'layout/sidebar_right',
@@ -15,4 +16,4 @@
 'layout/task_two',
 'layout/task_tree',
 'layout/task_four';
-@import 'pages/controller';
+@import 'pages/controller';     // Pages

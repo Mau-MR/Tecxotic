@@ -12,22 +12,23 @@ const REFERENCIA = 9;
 let pixel_2_cm_ratio;
 let longitud_calculada;
 
+
 function setup() {
-    img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
-    img.hide();
-    myCanvas = createCanvas(470, 275);
+
+    myCanvas = createCanvas(470, 295);
     myCanvas.parent("prueba");
     myCanvas.position(0,0);
-    
-    image(img, 470, 275);
-    //image(img, 0,0, 470, 275);
+    img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
+    //img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2022/05/9781133565871-1.jpg"); 
+   
+    img.hide();
+    image(img, 0, 0, 470, 275);
 
     calculado = false;
 }
 
 
 function draw() {
-
     image(img, 0, 0, width, height);
     if (points.length % 2 == 0 && points.length >= 2) {
         for (let i = 0; i < points.length; i = i + 2) {

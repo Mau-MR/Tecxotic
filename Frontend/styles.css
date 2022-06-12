@@ -212,6 +212,62 @@ li i {
   cursor: pointer;
 }
 
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabs {
+  border: solid 0.3rem aliceblue;
+  display: flex;
+  position: relative;
+  color: aliceblue;
+  border-radius: 0.5rem;
+}
+.tabs * {
+  z-index: 2;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.4rem;
+  width: 23.2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s ease-in;
+}
+
+input[type=radio]:checked + label {
+  color: rgba(0, 0, 0, 0.877);
+}
+
+input[id=radio-1]:checked ~ .glider {
+  transform: translateX(0);
+}
+
+input[id=radio-2]:checked ~ .glider {
+  transform: translateX(100%);
+}
+
+.glider {
+  position: absolute;
+  display: flex;
+  height: 3.4rem;
+  width: 23.3rem;
+  background-color: aliceblue;
+  z-index: 1;
+  transition: 0.25s ease-out;
+}
+
 .camera {
   height: 100vh;
   width: 100vw;
@@ -341,7 +397,7 @@ div[data-view-active=false] {
   display: flex;
   flex-direction: column;
   width: 47rem;
-  height: 70vh;
+  height: 60vh;
   color: aliceblue;
 }
 
@@ -372,12 +428,16 @@ div[data-view-active=false] {
 .task__wrapper button {
   width: 100%;
 }
+.task__wrapper .toggle-container {
+  grid-column: 1/3;
+  grid-row: 1;
+}
 .task__wrapper p {
   margin-top: 1rem;
   text-align: center;
   font-size: 2rem;
   grid-column: 1/3;
-  grid-row: 3;
+  grid-row: 4;
 }
 
 body {
@@ -385,9 +445,9 @@ body {
   justify-content: space-between;
   background: #1A2980;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #26D0CE, #1A2980);
+  background: -webkit-linear-gradient(to top, #3ffffc, #3b58ff);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #26D0CE, #1A2980);
+  background: linear-gradient(to top, #59fffc, #4662ff);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;

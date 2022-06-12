@@ -12,11 +12,16 @@
     button {
         width: 100%;
     }
+    .toggle-container {
+        grid-column: 1 / 3;
+        grid-row: 1;
+
+    }
     p {
         margin-top: 1rem;
         text-align: center;
         font-size: 2rem;
         grid-column: 1 / 3;
-        grid-row: 3;
+        grid-row: 4;
     }
 }
