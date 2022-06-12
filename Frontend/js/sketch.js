@@ -12,16 +12,19 @@ const REFERENCIA = 9;
 let pixel_2_cm_ratio;
 let longitud_calculada;
 
-
 function setup() {
 
     myCanvas = createCanvas(470, 295);
     myCanvas.parent("prueba");
     myCanvas.position(0,0);
-    img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
-    //img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2022/05/9781133565871-1.jpg"); 
-   
+
+    if(camera == 1) { // camera comes from toggle_task_one.js
+        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
+    } else if (camera == 2) {
+        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2022/05/9781133565871-1.jpg");  
+    }
     img.hide();
+
     image(img, 0, 0, 470, 275);
 
     calculado = false;
@@ -54,7 +57,11 @@ document.getElementById("biomass").addEventListener("click",biomasa);
 function reiniciar() {
     points = [];
     document.getElementById("measurement-text").innerHTML = "Waiting for measurement...";
-    img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
+    if(camera == 1) { // camera comes from toggle_task_one.js
+        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
+    } else if (camera == 2) {
+        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2022/05/9781133565871-1.jpg");  
+    }
     img.hide();
     calculado = false;
     promedio = null;

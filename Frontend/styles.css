@@ -219,7 +219,7 @@ li i {
 }
 
 .tabs {
-  border: solid 0.3rem aliceblue;
+  border: solid 0.2rem aliceblue;
   display: flex;
   position: relative;
   color: aliceblue;
@@ -237,8 +237,8 @@ input[type=radio] {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 3.4rem;
-  width: 23.2rem;
+  height: 3.6rem;
+  width: 23.3rem;
   font-size: 1.8rem;
   font-weight: 500;
   border-radius: 0.5rem;
@@ -261,7 +261,7 @@ input[id=radio-2]:checked ~ .glider {
 .glider {
   position: absolute;
   display: flex;
-  height: 3.4rem;
+  height: 3.6rem;
   width: 23.3rem;
   background-color: aliceblue;
   z-index: 1;
@@ -270,10 +270,11 @@ input[id=radio-2]:checked ~ .glider {
 
 .camera {
   height: 100vh;
-  width: 100vw;
+  width: 60vw;
   margin: auto;
   display: flex;
   justify-content: center;
+  background-color: red;
 }
 
 .camera__container {
@@ -385,7 +386,6 @@ input[id=radio-2]:checked ~ .glider {
   margin: 0.8rem;
   border-radius: 0.5rem;
   padding: 1.5rem;
-  padding-bottom: 0;
   width: 50rem;
 }
 
@@ -397,7 +397,7 @@ div[data-view-active=false] {
   display: flex;
   flex-direction: column;
   width: 47rem;
-  height: 60vh;
+  height: calc(100vh - 1.6rem - 3rem);
   color: aliceblue;
 }
 
@@ -433,11 +433,51 @@ div[data-view-active=false] {
   grid-row: 1;
 }
 .task__wrapper p {
-  margin-top: 1rem;
   text-align: center;
   font-size: 2rem;
   grid-column: 1/3;
-  grid-row: 4;
+  grid-row: 9;
+}
+.task__wrapper #measurement-text {
+  margin-top: 2rem;
+}
+.task__wrapper .task-input-label {
+  grid-column: 1/3;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  height: 4rem;
+  color: rgba(0, 0, 0, 0.877);
+}
+.task__wrapper .task-input-label .label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 4rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: solid 0.2rem aliceblue;
+  border-radius: 0.5rem;
+  color: aliceblue;
+}
+.task__wrapper .task-input-label input, .task__wrapper .task-input-label input:focus {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  height: 4rem;
+  width: 100%;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.877);
+}
+.task__wrapper .biomass-button {
+  grid-column: 1/3;
+}
+.task__wrapper .biomass_text {
+  grid-column: 1/3;
+  grid-row: 10;
 }
 
 body {
