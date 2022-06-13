@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-------Libraries------->
-    <script src="https://kit.fontawesome.com/d076dfc548.js" crossorigin="anonymous"></script> <!--Font Awesome credential-->
     <script type="text/javascript" src="js/libraries/p5.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> <!-- Importing jQuery library -->
+    <script type="text/javascript" src="js/libraries/jquery.min.js"></script> <!-- Importing jQuery library -->
     <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->  
     <script type="text/javascript" src="js/libraries/three.min.js"></script>  
 
     <!---------------------------Styles--------------------------->
     <link rel="stylesheet" href="css/styles.css"> <!--CSS mapped-->
+    <link rel="stylesheet" href="ico/fontawesome-free-6.1.1-web/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/flightindicators.min.css"/> <!-- Flight Indicators library styles -->
 
     <title>TecXotic</title>
@@ -51,6 +51,8 @@
             
             <div class="view">
                 <li>
+                    <span id="attitudeIndicator"></span>
+
                     
                 </li>
             </div>
@@ -165,7 +167,7 @@
             <div class="task nav-five" data-view-active="false">
                 <h1 class="task__title">Navigation</h1>
                 <canvas class="rov" id="ROV3D"></canvas>
-                <span id="attitude"></span>
+                <span id="attitudeNavigation"></span>
             </div>
 
         </section>
