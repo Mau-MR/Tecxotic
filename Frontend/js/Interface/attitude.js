@@ -1,7 +1,9 @@
-var first_attitude = $.flightIndicator('#first_attitude', 'attitude', {size:350, roll:0, pitch:0, showBox : true});
+var first_attitude = $.flightIndicator('#attitude', 'attitude', {size:350, roll:10, pitch:0, showBox : true});
+
 // Update at 20Hz
 var increment = 0;
 setInterval(function() {
+   
     // Airspeed update
     airspeed.setAirSpeed(80+80*Math.sin(increment/10));
 

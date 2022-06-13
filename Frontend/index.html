@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-------Libraries------->
+    <script src="https://kit.fontawesome.com/d076dfc548.js" crossorigin="anonymous"></script> <!--Font Awesome credential-->
+    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> <!-- Importing jQuery library -->
+    <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->  
+    <script type="text/javascript" src="js/libraries/three.min.js"></script>  
+
     <!---------------------------Styles--------------------------->
-    <!--Font Awesome credential-->
-    <script src="https://kit.fontawesome.com/d076dfc548.js" crossorigin="anonymous"></script>
-    <!--CSS mapped-->
-    <link rel="stylesheet" href="css/styles.css">
-      <!-- Flight Indicators library styles -->
-    <link rel="stylesheet" type="text/css" href="css/flightindicators.min.css" />
+    <link rel="stylesheet" href="css/styles.css"> <!--CSS mapped-->
+    <link rel="stylesheet" type="text/css" href="css/flightindicators.min.css"/> <!-- Flight Indicators library styles -->
 
     <title>TecXotic</title>
-    <!-- add icon link -->
-    <link rel="icon" href="ico/tecxotic-logo.ico" image/x-icon">
+    <link rel="icon" href="ico/tecxotic-logo.ico" image/x-icon"> <!-- add icon link -->
 </head>
 
 <body>
@@ -49,7 +51,7 @@
             
             <div class="view">
                 <li>
-                    <span id="first_attitude"></span>
+                    
                 </li>
             </div>
 
@@ -163,13 +165,13 @@
             <div class="task nav-five" data-view-active="false">
                 <h1 class="task__title">Navigation</h1>
                 <canvas class="rov" id="ROV3D"></canvas>
+                <span id="attitude"></span>
             </div>
 
         </section>
     </aside>
 
     <!---------------------------------------SCRIPTS--------------------------------------->
-    
     <!--------Frontend-------->
     <script type="text/javascript" src="js/Interface/nav_details.js"></script>
     <script type="text/javascript" src="js/Interface/sketch.js"></script>
@@ -181,11 +183,6 @@
     <script type="text/javascript" src="js/Control/Functionality.js"></script>
     <script type="module" src="js/Connection/Connection.js"></script>
     <script type="module" src="js/Control/Control.js"></script>
-    
-     <!-------Libraries------->
-    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> <!-- Importing jQuery library -->
-    <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->    
 </body>
 
 </html>

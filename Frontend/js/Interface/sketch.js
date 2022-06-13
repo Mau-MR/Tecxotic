@@ -6,7 +6,6 @@ var biomass;
 var calculado;
 var promedio;
 
-
 const REFERENCIA = 9;
 
 let pixel_2_cm_ratio;
