@@ -7,8 +7,22 @@ var mousePosition;
 var offset = [0,0];
 var isDown = false;
 
+
+var minWidth = "36rem";
+var minHeight = "24rem";
+
+var normalHeight = (camera__container.offsetHeight-10)/2;
+var normalWidth = (normalHeight * 16) /9;
+
 camera__line.style.position = "absolute";
-camera__line.style.top = camera__one.offsetHeight + "px"; // default en la mitad
+
+// Set default values to start 
+camera__one.style.width =  normalWidth + "px";
+camera__one.style.height = normalHeight +"px";
+camera__two.style.width =  normalWidth + "px";
+camera__two.style.height = normalHeight +"px";
+camera__line.style.top = camera__one.offsetTop + camera__one.offsetHeight + "px"; // default en la mitad
+
 
 camera__line.addEventListener('mousedown', function(e) {
     isDown = true;
