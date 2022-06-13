@@ -274,7 +274,6 @@ input[id=radio-2]:checked ~ .glider {
   margin: auto;
   display: flex;
   justify-content: center;
-  background-color: red;
 }
 
 .camera__container {
@@ -292,15 +291,27 @@ input[id=radio-2]:checked ~ .glider {
   background-color: blueviolet;
   width: 105rem;
   height: 70rem;
-  margin: 1rem;
+  margin: 0;
+  margin-bottom: 1rem;
 }
 
 .camera__two {
   background-color: blueviolet;
   width: 36rem;
   height: 24rem;
-  margin: 1rem;
-  margin-top: 0;
+  margin: 0;
+}
+
+.middle_line {
+  background: linear-gradient(60deg, #ffdfbf, hsl(9deg, 100%, 90%), #ffc7d7, #f9daff, #b9d0ff, #d8faff, #b2fff5, #beffce);
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+  width: 100%;
+  height: 1rem;
+  cursor: pointer;
+}
+.middle_line .middle_line:hover {
+  cursor: pointer;
 }
 
 .rov {

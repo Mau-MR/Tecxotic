@@ -51,7 +51,7 @@
             
             <div class="view">
                 <li>
-                    <span id="attitudeIndicator"></span>
+                    Aqui puede ir algo
 
                     
                 </li>
@@ -64,9 +64,10 @@
     <!-- Cameras -->
     <main class="camera">
         <!--<img src="http://localhost:8080/video1" id="caradelmau">-->
-        <div class="camera__container gradient-border">
-            <img class="camera__one item"></img>
-            <img class="camera__two"></img>
+        <div class="camera__container gradient-border" id="camera__container">
+            <img src="" class="camera__one" id="camera__one">
+            <div class="middle_line" id="camera__line"></div>
+            <img src="" class="camera__two" id="camera__two">
         </div>
     </main>
 
@@ -75,27 +76,34 @@
         <section class="rightside__task glass">
             <!--Board nav-->
             <li class="nav-tab active" data-view-name="nav-one">
-                <i class="fa-solid fa-fish-fins"></i>
+                <i class="fa-solid fa-location-arrow"></i>
             </li>
             <li class="nav-tab" data-view-name="nav-two">
-                <i class="fa-solid fa-image"></i>
+                <i class="fa-solid fa-fish-fins"></i>
             </li>
             <li class="nav-tab" data-view-name="nav-three">
-                <i class="fa-solid fa-sliders" ></i>
+                <i class="fa-solid fa-image"></i>
             </li>
             <li class="nav-tab" data-view-name="nav-four">
-                <i class="fa-solid fa-pen-ruler"></i>
+                <i class="fa-solid fa-sliders" ></i>
             </li>
             <li class="nav-tab" data-view-name="nav-five">
-                <i class="fa-solid fa-location-arrow"></i>
+                <i class="fa-solid fa-pen-ruler"></i>
             </li>
         </section>
 
         <section class="rightside__detail glass">
             <!--Board details-->
 
+             <!--Navigation-->
+             <div class="task nav-one" data-view-active="true">
+                <h1 class="task__title">Navigation</h1>
+                <canvas class="rov" id="ROV3D"></canvas>
+                <span id="attitudeNavigation"></span>
+            </div>
+
             <!--Task 1-Biomass-->
-            <div class="task nav-one" data-view-active="true">
+            <div class="task nav-two" data-view-active="false">
                 <h1 class="task__title">Biomass</h1>
                 <div class="task-one--capture gradient-border" id="prueba"></div>
                 <div class="task__wrapper">
@@ -141,7 +149,7 @@
             </div>
 
             <!--Task 2-Photomosaic-->
-            <div class="task nav-two" data-view-active="false">
+            <div class="task nav-three" data-view-active="false">
                 <h1 class="task__title">Photomosaic</h1>
 
                 <!---------------------------------------->
@@ -151,23 +159,16 @@
             </div>
 
             <!--Task 3-Filters-->
-            <div class="task nav-three" data-view-active="false">
+            <div class="task nav-four" data-view-active="false">
                 <h1 class="task__title">Filters</h1>
                
             </div>
 
             <!--Task 4-Wreck-->
-            <div class="task nav-four" data-view-active="false">
+            <div class="task nav-five" data-view-active="false">
                 <h1 class="task__title">Wreck</h1>
         
                
-            </div>
-
-            <!--Navigation-->
-            <div class="task nav-five" data-view-active="false">
-                <h1 class="task__title">Navigation</h1>
-                <canvas class="rov" id="ROV3D"></canvas>
-                <span id="attitudeNavigation"></span>
             </div>
 
         </section>
@@ -179,7 +180,9 @@
     <script type="text/javascript" src="js/Interface/sketch.js"></script>
     <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
     <script type="text/javascript" src="js/Interface/attitude.js"></script>
+    <script type="text/javascript" src="js/Interface/cameras_stretch.js"></script>
     <script type="module" src="js/Interface/ROVModel.js"></script>
+
 
     <!--------JS utils-------->
     <script type="text/javascript" src="js/Control/Functionality.js"></script>
