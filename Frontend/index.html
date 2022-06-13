@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!---------------------------Styles--------------------------->
     <!--Font Awesome credential-->
     <script src="https://kit.fontawesome.com/d076dfc548.js" crossorigin="anonymous"></script>
     <!--CSS mapped-->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+      <!-- Flight Indicators library styles -->
+    <link rel="stylesheet" type="text/css" href="css/flightindicators.min.css" />
+
     <title>TecXotic</title>
     <!-- add icon link -->
     <link rel="icon" href="ico/tecxotic-logo.ico" image/x-icon">
@@ -44,7 +49,7 @@
             
             <div class="view">
                 <li>
-                    <i class="fa-solid fa-photo-film"></i>
+                    <span id="first_attitude"></span>
                 </li>
             </div>
 
@@ -164,34 +169,23 @@
     </aside>
 
     <!---------------------------------------SCRIPTS--------------------------------------->
+    
     <!--------Frontend-------->
-    <script type="text/javascript" src="js/nav_details.js"></script>
-    <script type="text/javascript" src="js/sketch.js"></script>
-    <script type="text/javascript" src="js/toggle_task_one.js"></script>
-    <!--------JS utils-------->
-    <script type="text/javascript" src="js/Control/Functionality.js"></script>
-     <!-------Libraries------->
-    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
-
-
-
-    <!-- <script src="three/build/three.js"></script> -->
-
-    <!-- <script type="module" src="three/build/three.module.js"> </script> -->
-    <!-- <script type="module" src="three/examples/jsm/loaders/MTLLoader.js"></script> -->
-    <!-- <script type="module" src="three/examples/jsm/loaders/OBJLoader.js"></script> -->
-    <!-- <script type="module">
-        import * as THREE from "three/assets/build/three.module.js";
-    </script> -->
-
-    <script type="module" src="js/Connection/Connection.js"></script>
-    <script type="module" src="js/Control/Control.js"></script>
-    <!--
-    <script type="module" src="js/Interface.js"></script>
-    -->
-    <script type="module" src="js/Interface/Cameras.js"></script>
+    <script type="text/javascript" src="js/Interface/nav_details.js"></script>
+    <script type="text/javascript" src="js/Interface/sketch.js"></script>
+    <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
+    <script type="text/javascript" src="js/Interface/attitude.js"></script>
     <script type="module" src="js/Interface/ROVModel.js"></script>
 
+    <!--------JS utils-------->
+    <script type="text/javascript" src="js/Control/Functionality.js"></script>
+    <script type="module" src="js/Connection/Connection.js"></script>
+    <script type="module" src="js/Control/Control.js"></script>
+    
+     <!-------Libraries------->
+    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> <!-- Importing jQuery library -->
+    <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->    
 </body>
 
 </html>
