@@ -1,6 +1,6 @@
 import * as THREE from "../three.module.js";
-import { MTLLoader } from '../MTLLoader.js';
-import { OBJLoader } from '../OBJLoader.js';
+import { MTLLoader } from '../libraries/MTLLoader.js';
+import { OBJLoader } from '../libraries/OBJLoader.js';
 import {commands_instance} from '../Connection/Message.js'
 
 const scene = new THREE.Scene()
