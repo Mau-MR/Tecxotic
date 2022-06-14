@@ -101,31 +101,8 @@ function PixhawkFunctionality(){
 }
 
 
-function openGriper(){
-    const {cross} = controller.buttons
-    commands_instance.openGripper = cross;
-}
-
-function  closeGripper(){
-    const {circle} = controller.buttons
-    commands_instance.closeGripper = circle;
-}
-
-function runMotor(){
-    const {square} = controller.buttons
-    commands_instance.runMotor = square;
-}
-
-function stopMotor(){
-    const {triangle} = controller.buttons
-    commands_instance.stopMotor = triangle;
-}
 
 export function ControlFunctionality(){
     JoystickFunctionality()
     PixhawkFunctionality()
-    closeGripper()
-    openGriper()
-    runMotor()
-    stopMotor()
 }

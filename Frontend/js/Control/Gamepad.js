@@ -27,32 +27,3 @@ export function getGamepadState() {
 function isPressed({button: {pressed}}) {
     return !!pressed;
 }
-
-
-/*
-class ToggleButton{
-    constructor(){
-        this.toggleOn = false
-        this.togglePressed = false
-    }
-    UpdateToggle(button)
-    {
-        if(button){
-            if(!(this.togglePressed)){
-                this.toggleOn = !(this.toggleOn);
-                this.togglePressed = true;
-            }
-        }else{
-            this.togglePressed = false;
-        }
-        if(this.toggleOn){
-            return true
-        }else{
-            return false
-        }
-    }
-}
-const connect_pixhawk_instruction = new ToggleButton()
-const arm_disarm_instruction = new ToggleButton()
-
-*/

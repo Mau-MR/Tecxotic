@@ -11,11 +11,6 @@ class ControllerValues{
         this.agent1 = false
         this.agent2 = false
         this.agent3 = false
-
-        this.openGripper = false
-        this.closeGripper = false
-        this.runMotor = false
-        this.stopMotor = false
     }
 }
 export const commands_instance = new ControllerValues();
