@@ -68,7 +68,7 @@ async def echo(websocket, path):
     client.add(websocket)
     try:
         async for commands in websocket:
-            # print (commands)
+            print(commands)
             commands = json.loads(commands)
             Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'],
                     commands['connect_pixhawk'], commands['arm_disarm'], commands['agent1'], commands['agent2'],

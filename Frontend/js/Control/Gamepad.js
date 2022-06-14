@@ -9,10 +9,10 @@ export function getGamepadState() {
     const gamepad = gamepads[0];
 
     if (!gamepad) {
-        controller_status.style.backgroundColor = "#FF0000"
+        controller_status.style.color = "#FF0000"
         throw("Not gamepad")
     }
-    controller_status.style.backgroundColor = "#00FF00"
+    controller_status.style.color = "#00FF00"
     const pressedButtons = gamepad.buttons.map((button, id) => ({id, button})).filter(isPressed);
     const movedJoystick = gamepad.axes
 

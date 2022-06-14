@@ -17,8 +17,8 @@ instantiateWebSocket()
 let rov_status = document.getElementById("rov_status");
 let pixhawk_status = document.getElementById("pixhawk_status");
 
-rov_status.addEventListener("click", () => {
-    instantiateWebSocket(address_input.value)
+rov_status.addEventListener("click", async () => {
+    await instantiateWebSocket()
 });
 
 var received_message_from_ROV
