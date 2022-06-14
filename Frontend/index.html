@@ -5,13 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Font Awesome credential-->
-    <script src="https://kit.fontawesome.com/d076dfc548.js" crossorigin="anonymous"></script>
-    <!--CSS mapped-->
-    <link rel="stylesheet" href="styles.css">
+
+    <!-------Libraries------->
+    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
+    <script type="text/javascript" src="js/libraries/jquery.min.js"></script> <!-- Importing jQuery library -->
+    <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->
+    <script type="text/javascript" src="js/libraries/three.min.js"></script>
+
+    <!---------------------------Styles--------------------------->
+    <link rel="stylesheet" href="css/styles.css"> <!--CSS mapped-->
+    <link rel="stylesheet" href="ico/fontawesome-free-6.1.1-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/flightindicators.min.css"/> <!-- Flight Indicators library styles -->
+
     <title>TecXotic</title>
-    <!-- add icon link -->
-    <link rel="icon" href="ico/tecxotic-logo.ico" image/x-icon">
+    <link rel="icon" href="ico/tecxotic-logo.ico" image/x-icon"> <!-- add icon link -->
 </head>
 
 <body>
@@ -44,7 +51,9 @@
             
             <div class="view">
                 <li>
-                    <i class="fa-solid fa-photo-film"></i>
+                    Aqui puede ir algo
+
+
                 </li>
             </div>
 
@@ -54,9 +63,11 @@
 
     <!-- Cameras -->
     <main class="camera">
-        <div class="camera__container gradient-border">
-            <img src="http://localhost:8080/video1" id="caradelmau">
-            <img src="http://localhost:8080/video2" id="cara2">
+        <!--<img src="http://localhost:8080/video1" id="caradelmau">-->
+        <div class="camera__container gradient-border" id="camera__container">
+            <img src="http://localhost:8080/video1" class="camera__one" id="camera__one" alt="Camera One">
+            <div class="middle_line" id="camera__line"></div>
+            <img src="http://localhost:8080/video2" class="camera__two" id="camera__two" alt="Camera Two">
         </div>
     </main>
 
@@ -65,15 +76,18 @@
         <section class="rightside__task glass">
             <!--Board nav-->
             <li class="nav-tab active" data-view-name="nav-one">
-                <i class="fa-solid fa-fish-fins"></i>
+                <i class="fa-solid fa-location-arrow"></i>
             </li>
             <li class="nav-tab" data-view-name="nav-two">
-                <i class="fa-solid fa-image"></i>
+                <i class="fa-solid fa-fish-fins"></i>
             </li>
             <li class="nav-tab" data-view-name="nav-three">
-                <i class="fa-solid fa-sliders" ></i>
+                <i class="fa-solid fa-image"></i>
             </li>
             <li class="nav-tab" data-view-name="nav-four">
+                <i class="fa-solid fa-sliders" ></i>
+            </li>
+            <li class="nav-tab" data-view-name="nav-five">
                 <i class="fa-solid fa-pen-ruler"></i>
             </li>
         </section>
@@ -81,29 +95,58 @@
         <section class="rightside__detail glass">
             <!--Board details-->
 
+             <!--Navigation-->
+             <div class="task nav-one" data-view-active="true">
+                <h1 class="task__title">Navigation</h1>
+                <canvas class="rov" id="ROV3D"></canvas>
+                <span id="attitudeNavigation"></span>
+                <p id="mytext"></p>
+            </div>
+
             <!--Task 1-Biomass-->
-            <div class="task nav-one" data-view-active="true">
+            <div class="task nav-two" data-view-active="false">
                 <h1 class="task__title">Biomass</h1>
                 <div class="task-one--capture gradient-border" id="prueba"></div>
                 <div class="task__wrapper">
-                    <button id = "screenshot" class="task__button"><span>Take Photo</span></button> 
+
+                    <div class="toggle-container">
+                        <div class="tabs">
+                            <input type="radio" id="radio-1" name="tabs" checked/>
+                            <label class="tab" for="radio-1">Camera 1</label>
+                            <input type="radio" id="radio-2" name="tabs" />
+                            <label class="tab" for="radio-2">Camera 2</label>
+                            <span class="glider"></span>
+                        </div>
+                    </div>
+
+                    <button id = "screenshot" class="task__button"><span>Take Photo</span></button>
                     <button id = "calculate" class="task__button"><span>Calculate</span></button>
                     <button id = "reset" class="task__button"><span>Reset</span></button>
                     <button id = "correct" class="task__button"><span>Save Measurement</span></button>
+                    <div class="task-input-label">
+                        <div class="label"><p>N:</p></div>
+                        <input type="number" id="n-data" placeholder="Number of fish in pen">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>a:</p></div>
+                        <input type="number" id="a-data" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>b:</p></div>
+                        <input type="number" id="b-data" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Size mean:</p></div>
+                        <input type="number" id="l-data" placeholder="cm">
+                    </div>
+                    <button id = "biomass" class="task__button biomass-button"><span>Calculate Biomass</span></button>
                     <p id="measurement-text">Waiting for measurement...</p>
-                    <label>N:</label>
-                    <input type="text" id="n-data">
-                    <label>a:</label>
-                    <input type="text" id="a-data">
-                    <label>b:</label>
-                    <input type="text" id="b-data">
-                    <label>Size mean:</label>
-                    <input type="text" id="l-data">
-                    <button id = "biomass" class="task__button"><span>Calculate Biomass</span></button>
+                    <div class = "biomass_text">
+                        <p class = "biomass" id="length-mean">Calculated length mean: </p>
+                    </div>
                 </div>
-                <div class = "biomass_text">
-                    <p class = "biomass" id="length-mean">Calculated length mean: </p>
-                </div> 
+
+
             </div>
 
             <!--Task 2-Photomosaic-->
@@ -118,19 +161,24 @@
             <!--Task 3-Biomass-->
             <div class="task nav-three" data-view-active="false">
                 <h1 class="task__title">Photomosaic</h1>
-               
+
+                <!---------------------------------------->
+
+
+                <!---------------------------------------->
             </div>
 
-            <!--Task 4-WreckMeasurement-->
+            <!--Task 3-Filters-->
             <div class="task nav-four" data-view-active="false">
-                <h1 class="task__title">Wreck</h1>
-        
+                <h1 class="task__title">Filters</h1>
                
             </div>
 
-            <!--Rov 3D-->
-            <div class="rov">
-                <canvas id="ROV3D"></canvas>
+            <!--Task 4-Wreck-->
+            <div class="task nav-five" data-view-active="false">
+                <h1 class="task__title">Wreck</h1>
+
+
             </div>
 
         </section>
@@ -138,8 +186,14 @@
 
     <!---------------------------------------SCRIPTS--------------------------------------->
     <!--------Frontend-------->
-    <script type="text/javascript" src="js/nav_details.js"></script>
-    <script type="text/javascript" src="js/sketch.js"></script>
+    <script type="text/javascript" src="js/Interface/nav_details.js"></script>
+    <script type="text/javascript" src="js/Interface/sketch.js"></script>
+    <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
+    <script type="text/javascript" src="js/Interface/attitude.js"></script>
+    <script type="text/javascript" src="js/Interface/cameras_stretch.js"></script>
+    <script type="module" src="js/Interface/ROVModel.js"></script>
+
+
     <!--------JS utils-------->
     <script type="module" src="js/Control/Functionality.js"></script>
      <!-------Libraries------->
