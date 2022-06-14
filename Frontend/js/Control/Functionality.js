@@ -35,14 +35,16 @@ document.addEventListener('keypress', async (event) => {
     }
   }, false);
 
-let powerLimit = document.getElementById("powerLimitSlider").value // Get the value from slider
-document.getElementById('powerLimitSlider_value').innerHTML = powerLimit; // Put the value in screen 
-powerLimit /= 100 
+let limitSlider = document.getElementById("powerLimitSlider")
+let powerTag = document.getElementById('powerLimitSlider_value');
 
 function JoystickFunctionality(){
 
     let safeZone = 0.1;
     let {lx, ly, rx, ry} = controller.joystick
+    let powerLimit = limitSlider.value;
+    powerTag.innerHTML = powerLimit
+    powerLimit /= 100
 
     lx *= powerLimit
     ly *= powerLimit
@@ -60,6 +62,7 @@ function JoystickFunctionality(){
     commands_instance.roll = (lx > safeZone || lx < -safeZone) ? calculatePotency(lx) : NEUTRAL
     commands_instance.pitch = ( ry > safeZone || ry < -safeZone) ? calculatePotency(-ry) : NEUTRAL
     commands_instance.yaw = ( rx > safeZone || rx < -safeZone) ? calculatePotency(rx) : NEUTRAL
+    console.log(commands_instance);
 }
 
 function PixhawkFunctionality(){
