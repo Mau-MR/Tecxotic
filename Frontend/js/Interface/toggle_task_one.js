@@ -1,6 +1,7 @@
+import {reiniciar} from './sketch.js'
 let radio_1 = document.getElementById('radio-1');
 let radio_2 = document.getElementById('radio-2');
-let camera = 1; // camera default
+export let camera = 1; // camera default
 
 radio_1.addEventListener("click",radio);
 radio_2.addEventListener("click",radio);

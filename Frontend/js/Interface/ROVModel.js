@@ -1,4 +1,4 @@
-import * as THREE from "../three.module.js";
+import * as THREE from "../libraries/three.min.js";
 import { MTLLoader } from '../libraries/MTLLoader.js';
 import { OBJLoader } from '../libraries/OBJLoader.js';
 import {commands_instance} from '../Connection/Message.js'

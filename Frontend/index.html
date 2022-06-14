@@ -63,11 +63,10 @@
 
     <!-- Cameras -->
     <main class="camera">
-        <!--<img src="http://localhost:8080/video1" id="caradelmau">-->
         <div class="camera__container gradient-border" id="camera__container">
-            <img src="http://localhost:8080/video1" class="camera__one" id="camera__one" alt="Camera One">
+            <img src="http://192.168.2.2:8080/video1" class="camera__one" id="camera__one" alt="Camera One">
             <div class="middle_line" id="camera__line"></div>
-            <img src="http://localhost:8080/video2" class="camera__two" id="camera__two" alt="Camera Two">
+            <img src="http://192.168.2.2:8080/video2" class="camera__two" id="camera__two" alt="Camera Two">
         </div>
     </main>
 
@@ -186,39 +185,28 @@
 
     <!---------------------------------------SCRIPTS--------------------------------------->
     <!--------Frontend-------->
-    <script type="text/javascript" src="js/Interface/nav_details.js"></script>
-    <script type="text/javascript" src="js/Interface/sketch.js"></script>
-    <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
-    <script type="text/javascript" src="js/Interface/attitude.js"></script>
-    <script type="text/javascript" src="js/Interface/cameras_stretch.js"></script>
-    <script type="module" src="js/Interface/ROVModel.js"></script>
+    <script type="module" src="js/Interface/nav_details.js"></script>
+    <script type="module" src="js/Interface/sketch.js"></script>
+    <script type="module" src="js/Interface/toggle_task_one.js"></script>
+    <script type="module" src="js/Interface/attitude.js"></script>
+    <script type="module" src="js/Interface/cameras_stretch.js"></script>
 
 
     <!--------JS utils-------->
     <script type="module" src="js/Control/Functionality.js"></script>
      <!-------Libraries------->
-    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
+    <script type="module" src="js/libraries/p5.min.js"></script>
 
 
 
-    <!-- <script src="three/build/three.js"></script> -->
-
-    <!-- <script type="module" src="three/build/three.module.js"> </script> -->
-    <!-- <script type="module" src="three/examples/jsm/loaders/MTLLoader.js"></script> -->
-    <!-- <script type="module" src="three/examples/jsm/loaders/OBJLoader.js"></script> -->
-    <!-- <script type="module">
-        import * as THREE from "three/assets/build/three.module.js";
-    </script> -->
 
     <script type="module" src="js/Connection/Connection.js"></script>
     <script type="module" src="js/Control/Control.js"></script>
     <!--
-    <script type="module" src="js/Interface.js"></script>
-    -->
-    <script type="module" src="js/Interface/Cameras.js"></script>
     <script type="module" src="js/Interface/ROVModel.js"></script>
+    <script type="module" src="js/Interface/ROVModel.js"></script>
+    -->
     <script type="module" src="js/photomosaic.js"></script>
-
 </body>
 
 </html>
