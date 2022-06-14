@@ -95,7 +95,7 @@ if __name__ == '__main__':
         Thread(
             target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
         # Running the websocket server that manage the manual control of the ROV
-        # start_server = websockets.serve(echo, '0.0.0.0', 55000)
+        start_server = websockets.serve(echo, '0.0.0.0', 55000)
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:

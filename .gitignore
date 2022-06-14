@@ -1,5 +1,5 @@
 .env
 .venv
-.photos
+photos/**
 .vscode
 .idea
