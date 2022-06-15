@@ -1,5 +1,6 @@
 import cv2
-from flask import Response, Blueprint
+from flask import Response, Blueprint, request
+from ColorFilter import processImage
 camServer = Blueprint('camServer', __name__)
 
 cap = cv2.VideoCapture(0)
@@ -25,15 +26,25 @@ def generate(capture):
                    bytearray(encodedImage) + b'\r\n')
 
 
-
+processImg = False
+usefilter = False
+@camServer.route("/filterImg", methods=['POST'])
+def filterImg():
+    json = request.get_json()
+    global processImg, usefilter
+    processImg = json["process"] 
+    usefilter = json["filter"] 
 @camServer.route("/video1")
 def video1():
+    if processImg: 
+        return Response(processImage(cap, usefilter), mimetype="multipart/x-mixed-replace; boundary=frame")
     return Response(generate(cap),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 @camServer.route("/video2")
 def video2():
     return Response(generate(cap2),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
+
 
 
 def release_video():
