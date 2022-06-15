@@ -1,5 +1,9 @@
-points = [];
-measurements = [];
+import {flask_address} from "../Constants.js"
+import {camera} from "./toggle_task_one.js";
+import {createCanvas} from '../libraries/p5.min'
+
+let points = [];
+let measurements = [];
 var img;
 var myCanvas;
 var biomass;
@@ -18,9 +22,11 @@ function setup() {
     myCanvas.position(0,0);
 
     if(camera == 1) { // camera comes from toggle_task_one.js
-        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
+        img = createImg(flask_address+'/video1'); //Aquí va el url de las cámaras
+        console.log(flask_address+'/video1')
     } else if (camera == 2) {
-        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2022/05/9781133565871-1.jpg");  
+        img = createImg(flask_address+'/video2');
+        console.log(flask_address+'/video2')
     }
     img.hide();
 
@@ -30,7 +36,7 @@ function setup() {
 }
 
 
-function draw() {
+export function draw() {
     image(img, 0, 0, width, height);
     if (points.length % 2 == 0 && points.length >= 2) {
         for (let i = 0; i < points.length; i = i + 2) {
@@ -53,13 +59,13 @@ document.getElementById("calculate").addEventListener("click",calcula);
 document.getElementById("correct").addEventListener("click",guarda);
 document.getElementById("biomass").addEventListener("click",biomasa);
 
-function reiniciar() {
+export function reiniciar() {
     points = [];
     document.getElementById("measurement-text").innerHTML = "Waiting for measurement...";
     if(camera == 1) { // camera comes from toggle_task_one.js
-        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2020/09/7461359311477.jpg"); //Aquí va el url de las cámaras
+        img = createImg(flask_address+'/video1'); //Aquí va el url de las cámaras
     } else if (camera == 2) {
-        img = createImg("https://libreria.utp.ac.pa/wp-content/uploads/2022/05/9781133565871-1.jpg");  
+        img = createImg(flask_address+'video2');
     }
     img.hide();
     calculado = false;
@@ -67,11 +73,11 @@ function reiniciar() {
 }
 
 
-function screenshot(){
+export function screenshot(){
     img = myCanvas.get();
 }
 
-function guarda(){
+export function guarda(){
     if(longitud_calculada != 0 && calculado == true){
     append(measurements, longitud_calculada);
     document.getElementById("measurement-text").innerHTML = "Measurement has been saved correctly.";

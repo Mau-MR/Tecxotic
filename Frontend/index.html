@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-------Libraries------->
-    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
+    <script type="module" src="js/libraries/p5.min.js"></script>
     <script type="text/javascript" src="js/libraries/jquery.min.js"></script> <!-- Importing jQuery library -->
-    <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->  
-    <script type="text/javascript" src="js/libraries/three.min.js"></script>  
+    <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->
 
     <!---------------------------Styles--------------------------->
     <link rel="stylesheet" href="css/styles.css"> <!--CSS mapped-->
@@ -31,10 +30,10 @@
                     <i class="fa-solid fa-wifi" id="rov_status"></i>
                 </li>
                 <li>
-                    <i class="fa-solid fa-microchip" id="control_status"></i>
+                    <i class="fa-solid fa-microchip" id="pixhawk_status"></i>
                 </li>
                 <li>
-                    <i class="fa-solid fa-gamepad" id="pixhawk_status"></i>
+                    <i class="fa-solid fa-gamepad" id="controller_status"></i>
                 </li>
                 <li>
                     <i class="fa-solid fa-flag-checkered" id="arm_disarm_status"></i>
@@ -53,7 +52,7 @@
                 <li>
                     Aqui puede ir algo
 
-                    
+
                 </li>
             </div>
 
@@ -63,11 +62,10 @@
 
     <!-- Cameras -->
     <main class="camera">
-        <!--<img src="http://localhost:8080/video1" id="caradelmau">-->
         <div class="camera__container gradient-border" id="camera__container">
-            <img src="" class="camera__one" id="camera__one" alt="Camera One">
+            <img src="http://192.168.2.2:8080/video1" class="camera__one" id="camera__one" alt="Camera One">
             <div class="middle_line" id="camera__line"></div>
-            <img src="" class="camera__two" id="camera__two" alt="Camera Two">
+            <img src="http://192.168.2.2:8080/video2" class="camera__two" id="camera__two" alt="Camera Two">
         </div>
     </main>
 
@@ -119,7 +117,7 @@
                         </div>
                     </div>
 
-                    <button id = "screenshot" class="task__button"><span>Take Photo</span></button> 
+                    <button id = "screenshot" class="task__button"><span>Take Photo</span></button>
                     <button id = "calculate" class="task__button"><span>Calculate</span></button>
                     <button id = "reset" class="task__button"><span>Reset</span></button>
                     <button id = "correct" class="task__button"><span>Save Measurement</span></button>
@@ -143,19 +141,28 @@
                     <p id="measurement-text">Waiting for measurement...</p>
                     <div class = "biomass_text">
                         <p class = "biomass" id="length-mean">Calculated length mean: </p>
-                    </div> 
+                    </div>
                 </div>
-                
-                
+
+
             </div>
 
             <!--Task 2-Photomosaic-->
+            <div class="task nav-two" data-view-active="false">
+                <h1 class="task__title">Photomosaic</h1>
+                <button class="task__button" id="fotoBtn"><span>
+                    Foto
+                </span></button>
+                <img id="fotoGrid"/>
+            </div>
+
+            <!--Task 3-Biomass-->
             <div class="task nav-three" data-view-active="false">
                 <h1 class="task__title">Photomosaic</h1>
 
                 <!---------------------------------------->
-                
-                
+
+
                 <!---------------------------------------->
             </div>
 
@@ -168,8 +175,8 @@
             <!--Task 4-Wreck-->
             <div class="task nav-five" data-view-active="false">
                 <h1 class="task__title">Wreck</h1>
-        
-               
+
+
             </div>
 
         </section>
@@ -177,18 +184,20 @@
 
     <!---------------------------------------SCRIPTS--------------------------------------->
     <!--------Frontend-------->
-    <script type="text/javascript" src="js/Interface/nav_details.js"></script>
-    <script type="text/javascript" src="js/Interface/sketch.js"></script>
-    <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
-    <script type="text/javascript" src="js/Interface/attitude.js"></script>
-    <script type="text/javascript" src="js/Interface/cameras_stretch.js"></script>
-    <script type="module" src="js/Interface/ROVModel.js"></script>
-
-
-    <!--------JS utils-------->
-    <script type="text/javascript" src="js/Control/Functionality.js"></script>
+    <script type="module" src="js/Interface/nav_details.js"></script>
+    <script type="module" src="js/Interface/sketch.js"></script>
+    <script type="module" src="js/Interface/toggle_task_one.js"></script>
+    <script type="module" src="js/Interface/attitude.js"></script>
+    <script type="module" src="js/Interface/cameras_stretch.js"></script>
+    <script type="module" src="js/photomosaic.js"></script>
+    <!--------Control-------->
     <script type="module" src="js/Connection/Connection.js"></script>
     <script type="module" src="js/Control/Control.js"></script>
+     <!-------Libraries------->
+    <!--
+    <script type="module" src="js/Interface/ROVModel.js"></script>
+    <script type="module" src="js/Interface/ROVModel.js"></script>
+    -->
 </body>
 
 </html>

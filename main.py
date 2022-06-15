@@ -1,9 +1,11 @@
 from flask import Flask, send_file, request
+from flask_cors import CORS
 from routes.CamServer import camServer
 from routes.floatGrid import floatGrid
 from routes.photomosaic import photomos
+from routes.ButtonsFunctionality import buttons_functionality
 # Sensors
-from core.sensors.IMU import read_IMU
+# from core.sensors.IMU import read_IMU
 # from core.sensors.preassure_sensor import read_altitude
 
 import websockets
@@ -14,7 +16,6 @@ import json
 from ConnectionPixhawk import *
 from ManualControl import *
 import Agent1Manager
-from GripperManager import openGripper, closeGripper, clearPort, stopMotor, runMotor
 import os
 
 mainDir = os.getcwd()
@@ -22,9 +23,11 @@ photosDir = mainDir + "\photos" #windows
 
 
 app = Flask(__name__)
+CORS(app)
 app.register_blueprint(camServer)
 app.register_blueprint(photomos)
 app.register_blueprint(floatGrid)
+app.register_blueprint(buttons_functionality)
 
 
 indicator_pixhawk = False
@@ -65,15 +68,11 @@ async def echo(websocket, path):
     client.add(websocket)
     try:
         async for commands in websocket:
-            # print (commands)
+            print(commands)
             commands = json.loads(commands)
             Control(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'],
                     commands['connect_pixhawk'], commands['arm_disarm'], commands['agent1'], commands['agent2'],
                     commands['agent3'])
-            openGripper(commands['openGripper'])
-            closeGripper(commands['closeGripper'])
-            runMotor(commands['runMotor'])
-            stopMotor(commands['stopMotor'])
             send = {
                 "message_received": True,
                 "connection_pixhawk": indicator_pixhawk,
@@ -87,7 +86,6 @@ async def echo(websocket, path):
         print("ERROR in main.py: " + str(e))
     finally:
         client.remove(websocket)
-        clearPort()
 
 
 if __name__ == '__main__':
@@ -101,10 +99,11 @@ if __name__ == '__main__':
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:
-        clearPort()
         for f in os.listdir(photosDir):
             os.remove(os.path.join(photosDir, f))
+        pass
     except Exception as e:
         for f in os.listdir(photosDir):
             os.remove(os.path.join(photosDir, f))
         print(e)
+        pass

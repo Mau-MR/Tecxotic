@@ -1,5 +1,6 @@
 import {commands_instance} from "../Connection/Message.js";
 import {controller} from "./Control.js";
+import {webRequest} from '../Connection/Requests.js'
 
 let RANGE=1000, NEUTRAL = 0
 let THROTTLE_RANGE=500, NEUTRAL_THROTTLE = 500
@@ -13,20 +14,37 @@ arm_disarm_status.style.color= "#FF0000"
 const calculatePotency = (joystick) =>{
    return parseInt((joystick * RANGE) + NEUTRAL)
 }
+//EventListener to detect pressed keys to control tools
+document.addEventListener('keypress', async (event) => {
+    var name = event.key;
 
-let powerLimit = document.getElementById("powerLimitSlider").value // Get the value from slider
-document.getElementById('powerLimitSlider_value').innerHTML = powerLimit; // Put the value in screen 
-powerLimit /= 100 
+    //                0   1   2   3   4
+    const letters = ['y','u','i','o','p',
+    //                5   6   7   8   9
+                     'h','j','k','l',';'] 
+    // letters is a hashmap that return the index of the element pressed if is in the list
+    // these numbers can be then programmed to perfom different actions (these actions need to be programmed in back/arduino)
+    let number = letters.indexOf(name)
+    let body = {
+        actions: number
+    }
+    let url= 'http://192.168.2.2:8000'
+    if (number >= 0) {
+        let response =await webRequest('POST',url,body)
+        // console.log('Response from flask server', response)
+    }
+  }, false);
+
+let limitSlider = document.getElementById("powerLimitSlider")
+let powerTag = document.getElementById('powerLimitSlider_value');
 
 function JoystickFunctionality(){
 
-    // commands_instance.connect_pixhawk = connect_pixhawk_instruction.UpdateToggle(PS4Controller.share)
-    // commands_instance.arm_disarm = arm_disarm_instruction.UpdateToggle(PS4Controller.options)
-
-    //############################################ROLL PITCH YAW THROTTLE MOVEMENT#####################################
-    //prevents the movement of the joystick
     let safeZone = 0.1;
-    const {lx, ly, rx, ry} = controller.joystick
+    let {lx, ly, rx, ry} = controller.joystick
+    let powerLimit = limitSlider.value;
+    powerTag.innerHTML = powerLimit
+    powerLimit /= 100
 
     lx *= powerLimit
     ly *= powerLimit
@@ -44,6 +62,7 @@ function JoystickFunctionality(){
     commands_instance.roll = (lx > safeZone || lx < -safeZone) ? calculatePotency(lx) : NEUTRAL
     commands_instance.pitch = ( ry > safeZone || ry < -safeZone) ? calculatePotency(-ry) : NEUTRAL
     commands_instance.yaw = ( rx > safeZone || rx < -safeZone) ? calculatePotency(rx) : NEUTRAL
+    console.log(commands_instance);
 }
 
 function PixhawkFunctionality(){
@@ -80,31 +99,8 @@ function PixhawkFunctionality(){
 }
 
 
-function openGriper(){
-    const {cross} = controller.buttons
-    commands_instance.openGripper = cross;
-}
-
-function  closeGripper(){
-    const {circle} = controller.buttons
-    commands_instance.closeGripper = circle;
-}
-
-function runMotor(){
-    const {square} = controller.buttons
-    commands_instance.runMotor = square;
-}
-
-function stopMotor(){
-    const {triangle} = controller.buttons
-    commands_instance.stopMotor = triangle;
-}
 
 export function ControlFunctionality(){
     JoystickFunctionality()
     PixhawkFunctionality()
-    closeGripper()
-    openGriper()
-    runMotor()
-    stopMotor()
 }
