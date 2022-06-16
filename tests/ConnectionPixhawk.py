@@ -1,4 +1,5 @@
 import sys
+import time
 
 from pymavlink import mavutil
 
@@ -8,12 +9,13 @@ class Pixhawk:
     def __init__(self, direction='COM7'):
         self.px_conn = mavutil.mavlink_connection(direction)
         self.px_conn.wait_heartbeat()
-        self.arm_disarm()
+        self.boot_time = time.time()
+        self.arm()
+        self.change_mode('STABILIZE')
         print(self.get_msg('SYS_STATUS'))
-        px.change_mode('STABILIZE')
 
     def get_msg(self, command):
-        msg = self.px_conn.recv_match(type=command, blocking=True)
+        msg = self.px_conn.recv_match(type=command, blocking=True, timeout=1)
         if not msg:
             return
         if msg.get_type() == "BAD_DATA":
@@ -21,15 +23,16 @@ class Pixhawk:
             return;
         return msg.to_dict()
 
-    def arm_disarm(self):
-        if self.px_conn.motors_armed():
-            self.px_conn.arducopter_disarm()
-            self.px_conn.motors_disarmed_wait()
-            print("Motors disarmed successfully")
-        else:
-            self.px_conn.arducopter_arm()
-            self.px_conn.motors_armed_wait()
-            print("Motors armed successfully")
+    def arm(self):
+        self.px_conn.arducopter_arm()
+        self.px_conn.motors_armed_wait()
+        print("Motors armed successfully")
+
+    def disarm(self):
+        self.px_conn.arducopter_disarm()
+        self.px_conn.motors_disarmed_wait()
+        print("Motors disarmed successfully")
+
 
     def change_mode(self, mode):
         current_mode = self.px_conn.flightmode
@@ -48,25 +51,31 @@ class Pixhawk:
             print('Waiting to change mode')
         print("Got mode:", mode)
 
+    def drive_manual(self, roll, pitch, yaw, throttle, buttons = 0):
+        self.px_conn.mav.manual_control_send(
+            self.px_conn.target_system,
+            pitch,  # -1000 to 1000
+            roll,  # -1000 to 1000
+            throttle,  # 0 to 1000  ==  500 means neutral throttle
+            yaw,  # -1000 to 1000
+            buttons
+        )
 
-    # Print all the received packages from the pix
-    def test_msg_reception(self):
-        while True:
-            try:
-                print(self.px_conn.recv_match().to_dict())
-            except:
-                pass
+    def rc_verification(self):
+        #TODO
+        rc = self.get_msg('RC_CHANNELS')
+
+
+
 
 
 def test_imu(px):
     while True:
         dict = px.get_msg('AHRS2')
         print(dict['roll'], dict['pitch'], dict['yaw'])
-def test_arm_disarm(px):
-     px.arm_disarm()
-     px.arm_disarm()
 
 
 
 if __name__ == "__main__":
     px = Pixhawk()
+    test_imu(px)
