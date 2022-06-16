@@ -1,6 +1,7 @@
 import {commands_instance} from "../Connection/Message.js";
 import {controller} from "./Control.js";
 import {webRequest} from '../Connection/Requests.js'
+import{flask_address} from "../Constants";
 
 let RANGE=1000, NEUTRAL = 0
 let THROTTLE_RANGE=500, NEUTRAL_THROTTLE = 500
@@ -28,9 +29,8 @@ document.addEventListener('keypress', async (event) => {
     let body = {
         actions: number
     }
-    let url= 'http://192.168.2.2:8000'
     if (number >= 0) {
-        let response =await webRequest('POST',url,body)
+        let response =await webRequest('POST',flask_address+'/actuators',body)
         // console.log('Response from flask server', response)
     }
   }, false);
