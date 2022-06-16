@@ -10,12 +10,12 @@ except Exception as e:
 
 
 def send(message):
-    arduino.write(bytes(message, 'UTF-8'))
+    arduino.write(bytes(message, 'utf-8'))
 
 @buttons_functionality.route('/actuators', methods=['POST'])
 def send_actions():
     json = request.get_json()
-    print('json_respone: ', int(json["actions"]))
+    print('json_respone: ', str(json["actions"]))
 
-    send(int(json["actions"]))
+    send(str(json["actions"]))
     return ""
