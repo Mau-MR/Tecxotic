@@ -3,10 +3,8 @@ import asyncio
 import json
 from tests.ConnectionPixhawk import Pixhawk
 
-px = Pixhawk('COM7')  # TODO: ADD LATER
+px = Pixhawk('/dev/serial/by-id/usb-ArduPilot_Pixhawk1_2D0025001351383131383231-if00')
 client = set()
-
-
 async def echo(websocket, path):
     client.add(websocket)
     try:
@@ -14,7 +12,7 @@ async def echo(websocket, path):
             print(commands)
             commands = json.loads(commands)
             px.drive_manual(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'],0)
-            imuVal = px.get_msg('')
+            imuVal = px.get_msg('AHRS2')
             imu = {
                 "roll": imuVal['roll'],
                 "yaw": imuVal['yaw'],

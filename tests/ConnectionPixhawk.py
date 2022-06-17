@@ -6,11 +6,11 @@ from pymavlink import mavutil
 
 # class pixhawk to handle ROV movement and communication
 class Pixhawk:
-    def __init__(self, direction='COM7'):
+    def __init__(self, direction='COM3'):
         self.px_conn = mavutil.mavlink_connection(direction)
         self.px_conn.wait_heartbeat()
         self.boot_time = time.time()
-        self.arm()
+        self.disarm()
         self.change_mode('STABILIZE')
         print(self.get_msg('SYS_STATUS'))
 
