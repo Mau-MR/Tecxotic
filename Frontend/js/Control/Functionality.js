@@ -1,7 +1,7 @@
 import {commands_instance} from "../Connection/Message.js";
 import {controller} from "./Control.js";
 import {webRequest} from '../Connection/Requests.js'
-import{flask_address} from "../Constants";
+import{flask_address} from "../Constants.js";
 
 let RANGE=1000, NEUTRAL = 0
 let THROTTLE_RANGE=500, NEUTRAL_THROTTLE = 500
