@@ -3,7 +3,7 @@ import asyncio
 import json
 from tests.ConnectionPixhawk import Pixhawk
 
-px = Pixhawk('/dev/serial/by-id/usb-ArduPilot_Pixhawk1_2D0025001351383131383231-if00')
+px = Pixhawk('/dev/serial/by-id/usb-ArduPilot_Pixhawk1_380020000A51353338353732-if00 ')
 client = set()
 async def echo(websocket, path):
     client.add(websocket)

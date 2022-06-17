@@ -17,5 +17,5 @@ def send_actions():
     json = request.get_json()
     print('json_respone: ', int(json["actions"]))
 
-    send(int(json["actions"]))
+    send(str(json["actions"]))
     return ""

@@ -66,9 +66,6 @@ class Pixhawk:
         rc = self.get_msg('RC_CHANNELS')
 
 
-
-
-
 def test_imu(px):
     while True:
         dict = px.get_msg('AHRS2')
