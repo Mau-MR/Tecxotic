@@ -29,10 +29,10 @@ class Pixhawk:
     def get_msg(self, command, timeout = 0.1):
         msg = self.px_conn.recv_match(type=command, blocking=True, timeout=timeout)
         if not msg:
-            return
+            return Exception('Not received command response:', command)
         if msg.get_type() == "BAD_DATA":
             print('Error receiving %s' % command)
-            return
+            return Exception('Bad data getting:', command)
         return msg.to_dict()
 
     def arm(self):

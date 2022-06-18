@@ -8,6 +8,8 @@ px = Pixhawk(direction='COM7')
 def handle_motors_arming(cmd):
     if cmd != px.get_pix_info()['is_armed']:
         px.arm_disarm()
+
+
 def handle_pix_mode(mode):
     if mode != px.get_pix_info()['mode']:
         px.change_mode(mode)
@@ -19,10 +21,11 @@ async def echo(websocket, path):
     client.add(websocket)
     try:
         async for commands in websocket:
-            print(commands)
             commands = json.loads(commands)
-            px.drive_manual(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'],0)
-            imuVal = px.get_msg('AHRS2')
+            px.drive_manual(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], 0)
+            print(commands['arm_disarm'])
+            # handle_motors_arming(commands["arm_disarm"])
+            imuVal = px.get_msg('AHRS2', timeout=0.5)
             imu = {
                 "roll": imuVal['roll'],
                 "yaw": imuVal['yaw'],
