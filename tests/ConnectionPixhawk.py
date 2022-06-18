@@ -6,8 +6,12 @@ from pymavlink import mavutil
 
 # class pixhawk to handle ROV movement and communication
 class Pixhawk:
-    def __init__(self, direction='COM3'):
-        self.px_conn = mavutil.mavlink_connection(direction)
+    def __init__(self, direction='COM3', mode='MANUAL'):
+        try:
+            self.px_conn = mavutil.mavlink_connection(direction)
+        except Exception as e:
+            print("Error in ConnectionPixhawk.py:", "Could not connect to:", direction)
+            sys.exit(1)
         self.px_conn.wait_heartbeat()
         self.boot_time = time.time()
         self.is_armed = False
