@@ -23,8 +23,8 @@ async def echo(websocket, path):
         async for commands in websocket:
             commands = json.loads(commands)
             px.drive_manual(commands['roll'], commands['pitch'], commands['yaw'], commands['throttle'], 0)
-            print(commands['arm_disarm'])
-            # handle_motors_arming(commands["arm_disarm"])
+            handle_pix_mode(commands['mode'])
+            handle_motors_arming(commands["arm_disarm"])
             imuVal = px.get_msg('AHRS2', timeout=0.5)
             imu = {
                 "roll": imuVal['roll'],

@@ -70,6 +70,7 @@ class Pixhawk:
             mode_id
         )
         # TODO: HANDLE THE VERIFICATION OF THE MODE
+        self.mode = mode
         print("Got mode:", mode)
 
     def drive_manual(self, roll, pitch, yaw, throttle, buttons = 0):
