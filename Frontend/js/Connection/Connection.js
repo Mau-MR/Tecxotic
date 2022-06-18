@@ -27,8 +27,11 @@ let webSocketConnection = (web_socket) => {
     console.log("Connection stablished...")
     web_socket.send(JSON.stringify(commands_instance));
     rov_status.style.color = "#00FF00"
-  }; 
-
+  };
+var attitude = $.flightIndicator('#attitudeNavigation', 'attitude',{size:400, roll:0, pitch:0, showBox : true});
+const radiansToDegrees = (radian) =>{
+   return radian * (180 / Math.PI);
+}
   web_socket.onmessage = (event) => {
     if (event.data instanceof Blob) {
       const reader = new FileReader();
@@ -36,7 +39,9 @@ let webSocketConnection = (web_socket) => {
           received_message_from_ROV = JSON.parse(reader.result)
           try{
             pixhawkStatus(received_message_from_ROV["connection_pixhawk"])
-            // console.log(received_message_from_ROV)  //PRINTS RECEIVED MESSAGES
+              const {roll, pitch} = received_message_from_ROV.imu
+              attitude.setRoll(radiansToDegrees(roll)); // Sets the roll to 30 degrees
+              attitude.setPitch(radiansToDegrees(pitch))
           }
           catch(error){
           }

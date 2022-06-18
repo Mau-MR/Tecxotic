@@ -6,11 +6,6 @@ import{flask_address} from "../Constants.js";
 let RANGE=1000, NEUTRAL = 0
 let THROTTLE_RANGE=500, NEUTRAL_THROTTLE = 500
 
-let pixhawk_on = false, pixhawk_pressed = false;
-let arm_disarm_on, arm_disarm_pressed;
-
-let arm_disarm_status = document.getElementById("arm_disarm_status")
-arm_disarm_status.style.color= "#FF0000"
 
 const calculatePotency = (joystick) =>{
    return parseInt((joystick * RANGE) + NEUTRAL)
@@ -65,21 +60,14 @@ function JoystickFunctionality(){
     console.log(commands_instance);
 }
 
+let pixhawk_on = false, pixhawk_pressed = false;
+let arm_disarm_on, arm_disarm_pressed;
+let arm_disarm_status = document.getElementById("arm_disarm_status")
+arm_disarm_status.style.color= "#FF0000"
+//##################################### ARM AND DISARM MOTORS ####################################
 function PixhawkFunctionality(){
-
-    const {share, options} = controller.buttons
-
-    //##################################### PIXHAWK CONNECT AND DISCONNECT ####################################
-    if(share){
-        if(!pixhawk_pressed){
-            pixhawk_on = !pixhawk_on;
-            pixhawk_pressed = true;
-        }
-    }else{
-        pixhawk_pressed = false;
-    }
+    const {options} = controller.buttons
     commands_instance.connect_pixhawk = pixhawk_on;
-    //##################################### ARM AND DISARM MOTORS ####################################
 
     if(options){
         if(!arm_disarm_pressed){
@@ -97,8 +85,6 @@ function PixhawkFunctionality(){
         arm_disarm_status.style.color = "#FF0000"
     }
 }
-
-
 
 export function ControlFunctionality(){
     JoystickFunctionality()
