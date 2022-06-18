@@ -495,7 +495,6 @@ div[data-view-active=false] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: red;
   flex-direction: column;
   width: 47rem;
   height: calc(100vh - 1.6rem - 3rem);
