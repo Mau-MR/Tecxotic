@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-------Libraries------->
-    <script type="module" src="js/libraries/p5.min.js"></script>
+    <script type="text/javascript" src="js/libraries/p5.min.js"></script>
     <script type="text/javascript" src="js/libraries/jquery.min.js"></script> <!-- Importing jQuery library -->
     <script src="js/libraries/jquery.flightindicators.min.js"></script> <!-- Importing the FlightIndicators library -->
 
@@ -63,9 +63,9 @@
     <!-- Cameras -->
     <main class="camera">
         <div class="camera__container gradient-border" id="camera__container">
-            <img src="http://192.168.2.2:8080/video1" class="camera__one" id="camera__one" alt="Camera One">
+            <canvas src="" class="camera__one" id="camera__one" alt="Camera One"></canvas>
             <div class="middle_line" id="camera__line"></div>
-            <img src="http://192.168.2.2:8080/video2" class="camera__two" id="camera__two" alt="Camera Two">
+            <canvas src="" class="camera__two" id="camera__two" alt="Camera Two"></canvas>
         </div>
     </main>
 
@@ -96,9 +96,10 @@
              <!--Navigation-->
              <div class="task nav-one" data-view-active="true">
                 <h1 class="task__title">Navigation</h1>
-                <canvas class="rov" id="ROV3D"></canvas>
-                <span id="attitudeNavigation"></span>
-                <p id="mytext"></p>
+                <div class="navigation">
+                    <canvas class="rov" id="ROV3D"></canvas>
+                   <span id="attitudeNavigation"></span>
+                </div>
             </div>
 
             <!--Task 1-Biomass-->
@@ -175,29 +176,22 @@
             <!--Task 4-Wreck-->
             <div class="task nav-five" data-view-active="false">
                 <h1 class="task__title">Wreck</h1>
-
-
             </div>
-
         </section>
     </aside>
 
     <!---------------------------------------SCRIPTS--------------------------------------->
     <!--------Frontend-------->
     <script type="module" src="js/Interface/nav_details.js"></script>
-    <script type="module" src="js/Interface/sketch.js"></script>
-    <script type="module" src="js/Interface/toggle_task_one.js"></script>
+    <script type="text/javascript" src="js/Interface/sketch.js"></script>
+    <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
     <script type="module" src="js/Interface/attitude.js"></script>
     <script type="module" src="js/Interface/cameras_stretch.js"></script>
     <script type="module" src="js/photomosaic.js"></script>
+    <script type="module" src="js/Interface/cameras_canvas.js"></script>    
     <!--------Control-------->
     <script type="module" src="js/Connection/Connection.js"></script>
     <script type="module" src="js/Control/Control.js"></script>
-     <!-------Libraries------->
-    <!--
-    <script type="module" src="js/Interface/ROVModel.js"></script>
-    <script type="module" src="js/Interface/ROVModel.js"></script>
-    -->
 </body>
 
 </html>
