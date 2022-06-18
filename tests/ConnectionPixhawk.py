@@ -10,28 +10,46 @@ class Pixhawk:
         self.px_conn = mavutil.mavlink_connection(direction)
         self.px_conn.wait_heartbeat()
         self.boot_time = time.time()
+        self.is_armed = False
+        self.mode = mode
         self.disarm()
-        self.change_mode('STABILIZE')
+        self.change_mode(mode)
         print(self.get_msg('SYS_STATUS'))
 
-    def get_msg(self, command):
-        msg = self.px_conn.recv_match(type=command, blocking=True, timeout=1)
+    def get_pix_info(self):
+        return {
+            "is_armed":  self.is_armed,
+            "mode": self.mode
+        }
+
+    def get_msg(self, command, timeout = 0.1):
+        msg = self.px_conn.recv_match(type=command, blocking=True, timeout=timeout)
         if not msg:
             return
         if msg.get_type() == "BAD_DATA":
             print('Error receiving %s' % command)
-            return;
+            return
         return msg.to_dict()
 
     def arm(self):
+        print("Arming motors")
         self.px_conn.arducopter_arm()
         self.px_conn.motors_armed_wait()
+        self.is_armed = True
         print("Motors armed successfully")
 
     def disarm(self):
+        print("Disarming motors")
         self.px_conn.arducopter_disarm()
         self.px_conn.motors_disarmed_wait()
+        self.is_armed = False
         print("Motors disarmed successfully")
+
+    def arm_disarm(self):
+        if self.px_conn.motors_armed():
+            self.disarm()
+        else:
+            self.arm()
 
 
     def change_mode(self, mode):
@@ -47,8 +65,7 @@ class Pixhawk:
             mavutil.mavlink.MAV_MODE_FLAG_CUSTOM_MODE_ENABLED,
             mode_id
         )
-        while self.px_conn.flightmode != mode:
-            print('Waiting to change mode')
+        # TODO: HANDLE THE VERIFICATION OF THE MODE
         print("Got mode:", mode)
 
     def drive_manual(self, roll, pitch, yaw, throttle, buttons = 0):
@@ -66,13 +83,7 @@ class Pixhawk:
         rc = self.get_msg('RC_CHANNELS')
 
 
-def test_imu(px):
-    while True:
-        dict = px.get_msg('AHRS2')
-        print(dict['roll'], dict['pitch'], dict['yaw'])
-
 
 
 if __name__ == "__main__":
     px = Pixhawk()
-    test_imu(px)
