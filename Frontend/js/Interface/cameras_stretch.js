@@ -62,10 +62,6 @@ function moveLine() {
   if(camera__container.offsetWidth > getWidth(heightTwo) && camera__container.offsetWidth > getWidth(heightOne)) {
 
     camera__line.style.top  = (mousePosition.y + offset[1]) + 'px';
-    //camera__line.style.top = camera__one.offsetTop + camera__one.offsetHeight + "px"; // default en la mitad
-
-
-    mytext.innerText = camera__container.offsetWidth + " ... " + getWidth(heightTwo);
 
     camera__one.style.height = heightOne + "px";
     camera__one.style.width = getWidth(heightOne) + "px";
