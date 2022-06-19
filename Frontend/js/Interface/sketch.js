@@ -121,7 +121,7 @@ function biomasa(){
     document.getElementById("measurement-text").innerHTML = "Calculated Biomass = "  + str(biomass.toFixed(4));
 }
 
-function getGridMeasurment() {
+async function getGridMeasurment() {
     let requestData = {
         grid_speed: document.getElementById("grid_speed").value,
         grid_angle: document.getElementById("grid_angle").value,
@@ -129,9 +129,9 @@ function getGridMeasurment() {
         grid_x: document.getElementById("grid_x").value,
         grid_y: document.getElementById("grid_x").value
     }
-    let response =await webRequest('POST',flask_address+'/floatgrid',requestData)
+    let res =await webRequest('POST',flask_address+'/floatgrid',requestData)
     console.log(requestData, response)
-    document.getElementById("grid-answer").innerHTML = "Calculated position = "  + str(response);
+    document.getElementById("grid-answer").innerHTML = "Calculated position = "  + str(res);
 
 
 
