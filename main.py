@@ -4,7 +4,6 @@ from threading import Thread
 # Flask routes
 from routes.CamServer import camServer, cap1, cap2
 from routes.floatGrid import floatGrid
-from routes.photomosaic import photomos
 from routes.ButtonsFunctionality import buttons_functionality
 #from core.Server import run as websocket_server
 
@@ -13,7 +12,6 @@ from routes.ButtonsFunctionality import buttons_functionality
 app = Flask(__name__)
 CORS(app)
 app.register_blueprint(camServer)
-app.register_blueprint(photomos)
 app.register_blueprint(floatGrid)
 app.register_blueprint(buttons_functionality)
 

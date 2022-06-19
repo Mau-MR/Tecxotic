@@ -1,5 +1,5 @@
-from flask import Flask, send_file, request, Blueprint
-import Floatgrid
+from flask import send_file, request, Blueprint
+from routes.utils import Floatgrid
 
 floatGrid = Blueprint('floatGrid', __name__)
 
@@ -11,5 +11,5 @@ def floatgrid():
     time =  float(json_dict["grid_time"])
     x = int(json_dict["grid_x"])
     y = int(json_dict["grid_y"])
-    Floatgrid.main(speed, angle, time,x,y)
+    Floatgrid.main(speed, angle, time, x, y)
     return send_file('floatgrid.jpg', mimetype='image/jpg')

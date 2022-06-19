@@ -1,6 +1,5 @@
 
 document.getElementById('fotoBtn').addEventListener("click",async function () {
-    console.log("Clciekckdkdd")
     const body = {
         grid_speed: 0.143,
         grid_angle: 103,
