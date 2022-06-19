@@ -6,25 +6,22 @@ var biomass;
 var calculado;
 var promedio;
 
+var images = [];
+
 const REFERENCIA = 9;
 
 let pixel_2_cm_ratio;
+let imgIndex = 0;
 let longitud_calculada;
-let flask_address = 'http://192.168.2.2:8080'
+
 function setup() {
 
-    myCanvas = createCanvas(470, 295);
+    myCanvas = createCanvas(1280, 720);
     myCanvas.parent("prueba");
-    myCanvas.position(0,0);
+    myCanvas.position(0,500);
 
-    if(camera == 1) { // camera comes from toggle_task_one.js
-        img = createImg(flask_address+'/video1'); //Aquí va el url de las cámaras
-    } else if (camera == 2) {
-        img = createImg(flask_address+'/video2'); //Aquí va el url de las cámaras
-    }
+    img = createImg("https://www.goya.com/media/7912/birria-tacos.jpg?quality=80");
     img.hide();
-
-    image(img, 0, 0, 470, 275);
 
     calculado = false;
 }
@@ -34,33 +31,44 @@ function draw() {
     image(img, 0, 0, width, height);
     if (points.length % 2 == 0 && points.length >= 2) {
         for (let i = 0; i < points.length; i = i + 2) {
-            strokeWeight(6);
+            strokeWeight(10);
             stroke(255,0,0);
             point(points[i], points[i + 1]);
         }
     }
     if (points.length % 2 == 0 && points.length >= 4) {
         for (let i = 0; i < points.length; i = i + 4) {
-            strokeWeight(3);
+            strokeWeight(5);
             stroke(0);
             line(points[i], points[i + 1], points[i + 2], points[i + 3]);
         }
     }
 }
+
 document.getElementById("screenshot").addEventListener("click",screenshot);
 document.getElementById("reset").addEventListener("click",reiniciar);
 document.getElementById("calculate").addEventListener("click",calcula);
 document.getElementById("correct").addEventListener("click",guarda);
 document.getElementById("biomass").addEventListener("click",biomasa);
 
+//document.getElementById("prev").addEventListener("click",siguiente);
+//document.getElementById("next").addEventListener("click",previa);
+
+function siguiente(){
+    imgIndex += 1;
+    img = images[imgIndex];
+    
+}
+
+function previa(){
+    imgIndex += 1;
+    img = images[imgIndex];
+}
+
 function reiniciar() {
     points = [];
     document.getElementById("measurement-text").innerHTML = "Waiting for measurement...";
-    if(camera == 1) { // camera comes from toggle_task_one.js
-        img = createImg(flask_address+'/video1'); //Aquí va el url de las cámaras
-    } else if (camera == 2) {
-        img = createImg(flask_address+'/video2'); //Aquí va el url de las cámaras
-    }
+    img = createImg("https://mexico.didiglobal.com/wp-content/uploads/sites/5/2022/02/tacos-de-carnitas.jpg.jpg");
     img.hide();
     calculado = false;
     promedio = null;
@@ -68,7 +76,11 @@ function reiniciar() {
 
 
 function screenshot(){
-    img = myCanvas.get();
+    //img = myCanvas.get();
+    append(images, myCanvas.get());
+
+    img = images[imgIndex];
+    imgIndex ++;
 }
 
 function guarda(){
@@ -118,4 +130,3 @@ function biomasa(){
     biomass = N*a*(Math.pow(l,b))
     document.getElementById("measurement-text").innerHTML = "Calculated Biomass = "  + str(biomass.toFixed(4));
 }
-

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sketch</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="./js/libraries/p5.min.js"></script>
+</head>
+
+<body>
+
+    <h1 class="task__title">Biomass</h1>
+    <div>
+        <button id = "screenshot"><span>Take Photo</span></button>
+        <button id = "calculate"><span>Calculate</span></button>
+        <button id = "reset"><span>Reset</span></button>
+        <button id = "correct"><span>Save Measurement</span></button>
+        <div class="label"><p>N:</p></div>
+        <input type="number" id="n-data" placeholder="Number of fish in pen">
+        <div class="label"><p>a:</p></div>
+        <input type="number" id="a-data" placeholder="Number provided">
+        <div class="label"><p>b:</p></div>
+        <input type="number" id="b-data" placeholder="Number provided">
+        <div class="label"><p>Size mean:</p></div>
+        <input type="number" id="l-data" placeholder="Size mean">
+        <button id = "biomass"><span>Calculate Biomass</span></button>
+        <p id="measurement-text">Waiting for measurement...</p>
+    </div>
+    <div id="prueba">
+        
+    </div>
+
+    <!-- 
+    <button id = "prev"><span>Previo</span></button>
+    <button id = "next"><span>Siguiente</span></button>
+
+    -->
+    <script src="./js/Interface/sketch.js"></script>
+</body>
+
+</html>
