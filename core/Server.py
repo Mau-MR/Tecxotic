@@ -1,9 +1,9 @@
 import websockets
 import asyncio
 import json
-from tests.ConnectionPixhawk import Pixhawk
-# px = Pixhawk(direction='/dev/serial/by-id/usb-ArduPilot_Pixhawk1_380020000A51353338353732-if00')
-px = Pixhawk(direction='COM7')
+from core.ConnectionPixhawk import Pixhawk
+px = Pixhawk(direction='/dev/serial/by-id/usb-ArduPilot_Pixhawk1_380020000A51353338353732-if00')
+# px = Pixhawk(direction='COM7')
 
 def handle_motors_arming(cmd):
     if cmd != px.get_pix_info()['is_armed']:
