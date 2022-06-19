@@ -6,8 +6,8 @@ class ControllerValues{
         this.pitch = 0
         this.yaw = 0
         this.arm_disarm = true
-        // this.mode = 'STABILIZE'
         this.mode = 'MANUAL'
+        // this.mode = 'MANUAL'
 
     }
 }

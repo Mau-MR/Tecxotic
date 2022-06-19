@@ -30,7 +30,7 @@
                     <i class="fa-solid fa-wifi" id="rov_status"></i>
                 </li>
                 <li>
-                    <i class="fa-solid fa-microchip" id="pixhawk_status"></i>
+                    <i class="fa-solid fa-microchip" id="mode_status"></i>
                 </li>
                 <li>
                     <i class="fa-solid fa-gamepad" id="controller_status"></i>
@@ -63,9 +63,9 @@
     <!-- Cameras -->
     <main class="camera">
         <div class="camera__container gradient-border" id="camera__container">
-            <canvas src="" class="camera__one" id="camera__one" alt="Camera One"></canvas>
+            <img src="http://192.168.2.2:8080/video1" class="camera__one" id="camera__one" alt="Camera One"></img>
             <div class="middle_line" id="camera__line"></div>
-            <canvas src="" class="camera__two" id="camera__two" alt="Camera Two"></canvas>
+            <img src="http://192.168.2.2:8080/video2" class="camera__two" id="camera__two" alt="Camera Two"></img>
         </div>
     </main>
 
@@ -79,15 +79,22 @@
             <li class="nav-tab" data-view-name="nav-two">
                 <i class="fa-solid fa-fish-fins"></i>
             </li>
-            <li class="nav-tab" data-view-name="nav-three">
+            <li class="nav-tab" data-view-name="nav-seven">
                 <i class="fa-solid fa-image"></i>
             </li>
+            <!-- <li class="nav-tab" data-view-name="nav-three">
+                <i class="fa-solid fa-image"></i>
+            </li> -->
             <li class="nav-tab" data-view-name="nav-four">
                 <i class="fa-solid fa-sliders" ></i>
             </li>
             <li class="nav-tab" data-view-name="nav-five">
                 <i class="fa-solid fa-pen-ruler"></i>
             </li>
+            <li class="nav-tab" data-view-name="nav-six">
+                <i class="fa-solid fa-border-none"></i>
+            </li>
+
         </section>
 
         <section class="rightside__detail glass">
@@ -109,12 +116,13 @@
             </div>
 
             <!--Task 2-Photomosaic-->
-            <div class="task nav-two" data-view-active="false">
+            <div class="task nav-seven" data-view-active="false">
                 <h1 class="task__title">Photomosaic</h1>
-                <button class="task__button" id="fotoBtn"><span>
-                    Foto
-                </span></button>
-                <img id="fotoGrid"/>
+                <div class="task__wrapper">
+                    <div class = "biomass_text">
+
+                    </div>
+                </div>
             </div>
 
             <!--Task 3-Biomass-->
@@ -137,18 +145,51 @@
             <div class="task nav-five" data-view-active="false">
                 <h1 class="task__title">Wreck</h1>
             </div>
+
+            <!-- float grid-->
+            <div class="task nav-six" data-view-active="false">
+                <h1 class="task__title">Float Grid</h1>
+                <div class="task__wrapper">
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid Speed:</p></div>
+                        <input type="number" id="grid_speed" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid Angle:</p></div>
+                        <input type="number" id="grid_angle" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid time:</p></div>
+                        <input type="number" id="grid_time" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid x:</p></div>
+                        <input type="number" id="grid_x" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid y:</p></div>
+                        <input type="number" id="grid_y" placeholder="Number provided">
+                    </div>
+                    <button id = "float_grid_button" class="task__button biomass-button"><span>Calculate</span></button>
+                    <p id="id_text">Waiting for position.</p>
+                    <div class = "biomass_text">
+                        <p class = "biomass" id="grid-answer">answer: </p>
+                    </div>
+                </div>
+            </div>
         </section>
     </aside>
 
     <!---------------------------------------SCRIPTS--------------------------------------->
     <!--------Frontend-------->
     <script type="module" src="js/Interface/nav_details.js"></script>
-    <script type="text/javascript" src="js/Interface/sketch.js"></script>
+    <script type="module" src="js/Interface/sketch.js"></script>
     <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
     <script type="module" src="js/Interface/attitude.js"></script>
     <script type="module" src="js/Interface/cameras_stretch.js"></script>
-    <script type="module" src="js/photomosaic.js"></script>
-    <script type="module" src="js/Interface/cameras_canvas.js"></script>    
+    <script type="module" src="js/Interface/photomosaic.js"></script>
+    <script type="module" src="js/Interface/floatGrid.js"></script>
+    <script type="module" src="js/Interface/cameras_canvas.js"></script>
     <!--------Control-------->
     <script type="module" src="js/Connection/Connection.js"></script>
     <script type="module" src="js/Control/Control.js"></script>

@@ -1,23 +1,17 @@
 from flask import Flask
 from flask_cors import CORS
 from threading import Thread
-import os
 # Flask routes
-from routes.CamServer import camServer
+from routes.CamServer import camServer, cap1, cap2
 from routes.floatGrid import floatGrid
-from routes.photomosaic import photomos
 from routes.ButtonsFunctionality import buttons_functionality
-from core.Server import run as websocket_server
+#from core.Server import run as websocket_server
 
-
-mainDir = os.getcwd()
-photosDir = mainDir + "\photos" #windows
 
 
 app = Flask(__name__)
 CORS(app)
 app.register_blueprint(camServer)
-app.register_blueprint(photomos)
 app.register_blueprint(floatGrid)
 app.register_blueprint(buttons_functionality)
 
@@ -29,13 +23,11 @@ if __name__ == '__main__':
         Thread(
             target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
         # Running the websocket server that manage the manual control of the ROV
-        websocket_server()
+        #websocket_server()
     except KeyboardInterrupt:
-        for f in os.listdir(photosDir):
-            os.remove(os.path.join(photosDir, f))
         pass
     except Exception as e:
-        for f in os.listdir(photosDir):
-            os.remove(os.path.join(photosDir, f))
-        print(e)
+        print("Releasing video") #TODO: CHECK WHETHER THIS CODE IS TRULY EXECUTING
+        cap1.release()
+        cap2.release()
         pass
