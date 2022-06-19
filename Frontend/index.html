@@ -129,6 +129,8 @@
                     <button id = "calculate" class="task__button"><span>Calculate</span></button>
                     <button id = "reset" class="task__button"><span>Reset</span></button>
                     <button id = "correct" class="task__button"><span>Save Measurement</span></button>
+                    <button id = "photomosaic_button" class="task__button biomass-button"><span>Photomosaic</span></button>
+                    <button id = "photo_button" class="task__button biomass-button"><span>Take photo</span></button>
                     <div class="task-input-label">
                         <div class="label"><p>N:</p></div>
                         <input type="number" id="n-data" placeholder="Number of fish in pen">
@@ -159,7 +161,6 @@
             <div class="task nav-seven" data-view-active="false">
                 <h1 class="task__title">Photomosaic</h1>
                 <div class="task__wrapper">
-                    <button id = "photomosaic_button" class="task__button biomass-button"><span>Photomosaic</span></button>
                     <div class = "biomass_text">
                         
                     </div>
@@ -228,8 +229,9 @@
     <script type="text/javascript" src="js/Interface/toggle_task_one.js"></script>
     <script type="module" src="js/Interface/attitude.js"></script>
     <script type="module" src="js/Interface/cameras_stretch.js"></script>
-    <script type="module" src="js/photomosaic.js"></script>
-    <script type="module" src="js/Interface/cameras_canvas.js"></script>    
+    <script type="module" src="js/Interface/photomosaic.js"></script>
+    <script type="module" src="js/Interface/floatGrid.js"></script>
+    <script type="module" src="js/Interface/cameras_canvas.js"></script>
     <!--------Control-------->
     <script type="module" src="js/Connection/Connection.js"></script>
     <script type="module" src="js/Control/Control.js"></script>
