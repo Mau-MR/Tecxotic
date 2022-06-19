@@ -6,10 +6,8 @@ GRID_Y = 24
 GRID_X = 48
 HEIGHT = 600
 WIDTH = 1150
-#WINDOW_NAME = "task 3.1"
 base_image = np.zeros((HEIGHT,WIDTH,3), np.uint8)
 base_image.fill(255)
-#cv2.namedWindow(WINDOW_NAME)
 FLOAT_SPEED = 0
 FLOAT_ANGLE = 0
 FLOAT_TIME = 0
@@ -34,7 +32,6 @@ cv2.putText(base_image, 'S', (int(WIDTH/2),int(HEIGHT-30)), cv2.FONT_HERSHEY_SIM
 cv2.putText(base_image, 'W', (30,int(HEIGHT/2)), cv2.FONT_HERSHEY_SIMPLEX,  1, (0,0,0), 2, cv2.LINE_AA)
 cv2.line(base_image, ( 120,550 ), ( 320,550 ),  (0,0,255) , 2)
 cv2.putText(base_image, '20 km', ( 190 , int(HEIGHT-30) ), cv2.FONT_HERSHEY_SIMPLEX,  .5, (0,0,0), 2, cv2.LINE_AA)
-#cv2.imwrite("floatgrid.jpg", base_image)
 
 
 def getCollision(x_clicked,y_clicked):

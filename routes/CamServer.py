@@ -53,7 +53,7 @@ def photo():
 @camServer.route('/photomosaic', methods=['GET'])
 def photomosaic():
     if len(images) < 8:
-        return; # not enough images
+        return "Not enough photos taken"; # not enough images
     for index, val in enumerate(images): #
         images[index] = cv2.resize(val, (200,200))
     stack1=cv2.hconcat([images[0],images[1],images[2],images[3]])
