@@ -48,6 +48,7 @@ def main(speed, angle, time, x, y):
     global FLOAT_SPEED
     global FLOAT_ANGLE
     global FLOAT_TIME
+    global base_image
     FLOAT_SPEED = speed
     FLOAT_ANGLE = angle
     FLOAT_TIME = time

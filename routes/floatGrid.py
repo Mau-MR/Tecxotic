@@ -1,4 +1,4 @@
-from flask import send_file, request, Blueprint, Response
+from flask import request, Blueprint, Response
 from routes.utils import Floatgrid
 import cv2
 
@@ -19,6 +19,6 @@ def floatgrid():
         return;
     print("Successfully saved image")
     return Response(
-        (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n'),
+        encodedImage.tobytes(),
         status=200,
-        mimetype='multipart/x-mixed-replace; boundary=frame')
+        mimetype='img/jpeg')
