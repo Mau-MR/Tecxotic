@@ -66,6 +66,17 @@ def photomosaic():
         status=200,
         mimetype='img/jpeg')
 
+@camServer.route('/screenshot/<capture>', methods=['GET'])
+def screenshot(capture):
+    frame = cap1.get_frame()
+    if capture == 2:
+        _, frame = cap2.get_frame()
+    (flag, encodedImage) = cv2.imencode(".jpg", frame)
+    return Response(
+        encodedImage.tobytes(),
+        status=200,
+        mimetype='img/jpeg'
+    )
 """
 @camServer.route('/photomosaicChange',methods=['POST'])#take and change a photo with the number of the photo
 def photomosaic_change():
