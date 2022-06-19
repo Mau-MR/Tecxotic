@@ -88,6 +88,9 @@
             <li class="nav-tab" data-view-name="nav-five">
                 <i class="fa-solid fa-pen-ruler"></i>
             </li>
+            <li class="nav-tab" data-view-name="nav-six">
+                <i class="fa-solid fa-border-none"></i>
+            </li>
         </section>
 
         <section class="rightside__detail glass">
@@ -176,6 +179,38 @@
             <!--Task 4-Wreck-->
             <div class="task nav-five" data-view-active="false">
                 <h1 class="task__title">Wreck</h1>
+            </div>
+
+            <!-- float grid-->
+            <div class="task nav-six" data-view-active="false">
+                <h1 class="task__title">Float Grid</h1>
+                <div class="task__wrapper">
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid Speed:</p></div>
+                        <input type="number" id="grid_speed" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid Angle:</p></div>
+                        <input type="number" id="grid_angle" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid time:</p></div>
+                        <input type="number" id="grid_time" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid x:</p></div>
+                        <input type="number" id="grid_x" placeholder="Number provided">
+                    </div>
+                    <div class="task-input-label">
+                        <div class="label"><p>Grid y:</p></div>
+                        <input type="number" id="grid_y" placeholder="Number provided">
+                    </div>
+                    <button id = "float_grid_button" class="task__button biomass-button"><span>Calculate</span></button>
+                    <p id="id_text">Waiting for position.</p>
+                    <div class = "biomass_text">
+                        <p class = "biomass" id="grid-answer">answer: </p>
+                    </div>
+                </div>
             </div>
         </section>
     </aside>

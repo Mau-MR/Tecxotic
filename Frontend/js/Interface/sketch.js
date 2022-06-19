@@ -1,3 +1,4 @@
+import {webRequest} from '../Connection/Requests.js'
 let points = [];
 let measurements = [];
 var img;
@@ -52,6 +53,7 @@ document.getElementById("reset").addEventListener("click",reiniciar);
 document.getElementById("calculate").addEventListener("click",calcula);
 document.getElementById("correct").addEventListener("click",guarda);
 document.getElementById("biomass").addEventListener("click",biomasa);
+document.getElementById("float_grid_button").addEventListener("click", getGridMeasurment)
 
 function reiniciar() {
     points = [];
@@ -117,5 +119,21 @@ function biomasa(){
     l = float(l);
     biomass = N*a*(Math.pow(l,b))
     document.getElementById("measurement-text").innerHTML = "Calculated Biomass = "  + str(biomass.toFixed(4));
+}
+
+function getGridMeasurment() {
+    let requestData = {
+        grid_speed: document.getElementById("grid_speed").value,
+        grid_angle: document.getElementById("grid_angle").value,
+        grid_time: document.getElementById("grid_time").value,
+        grid_x: document.getElementById("grid_x").value,
+        grid_y: document.getElementById("grid_x").value
+    }
+    let response =await webRequest('POST',flask_address+'/floatgrid',requestData)
+    console.log(requestData, response)
+    document.getElementById("grid-answer").innerHTML = "Calculated position = "  + str(response);
+
+
+
 }
 
