@@ -14,6 +14,26 @@ let pixel_2_cm_ratio;
 let imgIndex = 0;
 let longitud_calculada;
 
+const flask_address = "http://localhost:8080"
+function blobToBase64(blob) {
+  return new Promise((resolve, _) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+}
+const fethImg = async (id) => {
+    const response = await fetch(flask_address+'/screenshot/'+id, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'GET',
+    })
+    const blob = await response.blob()
+    const base64 = await blobToBase64(blob)
+    return base64;
+}
+
 function setup() {
 
     myCanvas = createCanvas(1280, 720);
@@ -65,22 +85,24 @@ function previa(){
     img = images[imgIndex];
 }
 
-function reiniciar() {
+async function reiniciar() {
     points = [];
     document.getElementById("measurement-text").innerHTML = "Waiting for measurement...";
-    img = createImg("https://mexico.didiglobal.com/wp-content/uploads/sites/5/2022/02/tacos-de-carnitas.jpg.jpg");
-    img.hide();
+    const base64 = await fethImg("1");
+    img = createImg(base64);
+    img.hide()
     calculado = false;
     promedio = null;
 }
 
 
-function screenshot(){
+async function screenshot() {
     //img = myCanvas.get();
-    append(images, myCanvas.get());
-
-    img = images[imgIndex];
-    imgIndex ++;
+    const base64 = await fethImg("1");
+    append(images, base64);
+    img = createImg(base64);
+    img.hide()
+    imgIndex++;
 }
 
 function guarda(){

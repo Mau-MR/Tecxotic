@@ -68,7 +68,7 @@ def photomosaic():
 
 @camServer.route('/screenshot/<capture>', methods=['GET'])
 def screenshot(capture):
-    frame = cap1.get_frame()
+    _, frame = cap1.get_frame()
     if capture == 2:
         _, frame = cap2.get_frame()
     (flag, encodedImage) = cv2.imencode(".jpg", frame)
