@@ -54,6 +54,8 @@ document.getElementById("calculate").addEventListener("click",calcula);
 document.getElementById("correct").addEventListener("click",guarda);
 document.getElementById("biomass").addEventListener("click",biomasa);
 document.getElementById("float_grid_button").addEventListener("click", getGridMeasurment)
+document.getElementById("photomosaic_button").addEventListener("click", photomosaic)
+
 
 function reiniciar() {
     points = [];
@@ -129,11 +131,21 @@ async function getGridMeasurment() {
         grid_x: document.getElementById("grid_x").value,
         grid_y: document.getElementById("grid_x").value
     }
+
     let res =await webRequest('POST',flask_address+'/floatgrid',requestData)
     console.log(requestData, response)
     document.getElementById("grid-answer").innerHTML = "Calculated position = "  + str(res);
-
-
-
 }
 
+var URL_array = []
+async function photomosaic () {
+    let init = {
+        method: 'GET',
+        mode: 'cors'
+    };
+    let response = await fetch(flask_address+'/photomosaicPhoto', init)
+    let blob = await response.blob();
+    let url = window.URL.createObjectURL(blob);
+    URL_array.push(url)
+    return URL_array
+}
