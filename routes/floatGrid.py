@@ -1,5 +1,6 @@
-from flask import send_file, request, Blueprint
+from flask import send_file, request, Blueprint, Response
 from routes.utils import Floatgrid
+import cv2
 
 floatGrid = Blueprint('floatGrid', __name__)
 
@@ -11,5 +12,13 @@ def floatgrid():
     time =  float(json_dict["grid_time"])
     x = int(json_dict["grid_x"])
     y = int(json_dict["grid_y"])
-    Floatgrid.main(speed, angle, time, x, y)
-    return send_file('floatgrid.jpg', mimetype='image/jpg')
+    img = Floatgrid.main(speed, angle, time, x, y)
+    (flag, encodedImage) = cv2.imencode(".jpg", img)
+    if not flag:
+        print("Error converting the photo from taking picture")
+        return;
+    print("Successfully saved image")
+    return Response(
+        (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n'),
+        status=200,
+        mimetype='multipart/x-mixed-replace; boundary=frame')

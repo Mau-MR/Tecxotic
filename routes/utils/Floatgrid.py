@@ -74,6 +74,6 @@ def main(speed, angle, time, x, y):
     points = getCollision(end_x, end_y)
     cv2.rectangle(base_image, (points[0], points[1]), (points[2], points[3]), (0,0,255), -1)
     cv2.line(base_image, ( init_x , init_y ), (end_x, end_y ),  (255,0,0) , 2)
-    cv2.imwrite("../../floatgrid.jpg", base_image)
-    
+    return base_image
+
 #main(0.143, 103, 144,6,15)
