@@ -53,6 +53,9 @@ function draw() {
     img.hide();
 
     image(img, 0, 0, width, height);
+
+    document.getElementById("imageIndex").innerHTML = "Image " + str(imgIndex+1) + "/" +  str(images.length);
+
     if (points.length % 2 == 0 && points.length >= 2) {
         for (let i = 0; i < points.length; i = i + 2) {
             strokeWeight(10);
