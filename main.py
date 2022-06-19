@@ -11,7 +11,7 @@ from core.Server import run as websocket_server
 
 
 mainDir = os.getcwd()
-photosDir = mainDir + "\photos" #windows
+photosDir = mainDir + "/photos" #windows
 
 
 app = Flask(__name__)

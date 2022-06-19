@@ -57,36 +57,25 @@ function JoystickFunctionality(){
     commands_instance.roll = (lx > safeZone || lx < -safeZone) ? calculatePotency(lx) : NEUTRAL
     commands_instance.pitch = ( ry > safeZone || ry < -safeZone) ? calculatePotency(-ry) : NEUTRAL
     commands_instance.yaw = ( rx > safeZone || rx < -safeZone) ? calculatePotency(rx) : NEUTRAL
-    console.log(commands_instance);
 }
 
-let pixhawk_on = false, pixhawk_pressed = false;
-let arm_disarm_on, arm_disarm_pressed;
-let arm_disarm_status = document.getElementById("arm_disarm_status")
-arm_disarm_status.style.color= "#FF0000"
-//##################################### ARM AND DISARM MOTORS ####################################
+let prevOptions = false;
 function PixhawkFunctionality(){
     const {options} = controller.buttons
-    commands_instance.connect_pixhawk = pixhawk_on;
-
-    if(options){
-        if(!arm_disarm_pressed){
-            arm_disarm_on = !arm_disarm_on;
-            arm_disarm_pressed = true;
-        }
-    }else{
-        arm_disarm_pressed = false;
-    }
-    if(arm_disarm_on){
-        arm_disarm_status.style.color = "#00FF00"
-        commands_instance.arm_disarm = true
-    }else{
-        commands_instance.arm_disarm = false
-        arm_disarm_status.style.color = "#FF0000"
-    }
+    if(options && !prevOptions)
+        commands_instance.arm_disarm = !commands_instance.arm_disarm
+    prevOptions = options
+}
+let prevShare = false;
+export function ModeFunctionality(){
+   const {share} = controller.buttons
+    if(share && !prevShare)
+        commands_instance.mode = (commands_instance.mode === 'MANUAL')? 'STABILIZED': 'MANUAL'
+    prevShare = share
 }
 
 export function ControlFunctionality(){
     JoystickFunctionality()
     PixhawkFunctionality()
+    ModeFunctionality()
 }
