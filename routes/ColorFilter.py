@@ -5,7 +5,7 @@ hr1H = 12
 lr2H = 155
 lrS = 50
 lrV = 45
-def processImage(capture, normalFrame):
+def processFilter(capture, normalFrame):
     global hr1H, lr2H, lrS, lrV
     while True:
       ret, frame = capture.read()
