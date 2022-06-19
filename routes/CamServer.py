@@ -1,22 +1,14 @@
 import cv2
 from flask import Response, Blueprint
+from Capture import Capture
 camServer = Blueprint('camServer', __name__)
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-cap.set(cv2.CAP_PROP_FPS, 30)
-
-cap2 = cv2.VideoCapture(1)
-cap2.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-cap2.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
-cap2.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-cap2.set(cv2.CAP_PROP_FPS, 30)
+cap1 = Capture(0)
+cap2 = Capture(1)
 
 def generate(capture):
     while True:
-        ret, frame = capture.read()
+        ret, frame = capture.get_frame()
         if ret:
             (flag, encodedImage) = cv2.imencode(".jpg", frame)
             if not flag:
@@ -28,7 +20,7 @@ def generate(capture):
 
 @camServer.route("/video1")
 def video1():
-    return Response(generate(cap),
+    return Response(generate(cap1),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 @camServer.route("/video2")
 def video2():

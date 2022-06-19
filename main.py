@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from threading import Thread
-import os
 # Flask routes
-from routes.CamServer import camServer
+from routes.CamServer import camServer, cap1, cap2
 from routes.floatGrid import floatGrid
 from routes.photomosaic import photomos
 from routes.ButtonsFunctionality import buttons_functionality
@@ -30,7 +29,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         pass
     except Exception as e:
-        for f in os.listdir(photosDir):
-            os.remove(os.path.join(photosDir, f))
-        print(e)
+        print("Releasing video") #TODO: CHECK WHETHER THIS CODE IS TRULY EXECUTING
+        cap1.release()
+        cap2.release()
         pass
