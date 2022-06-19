@@ -44,11 +44,10 @@ def photo():
         print("Error converting the photo from taking picture")
         return;
     images.append(frame)
-    print("Successfully saved image")
     return Response(
-        (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n'),
+        encodedImage.tobytes(),
         status=200,
-        mimetype='multipart/x-mixed-replace; boundary=frame')
+        mimetype='img/jpeg')
 
 @camServer.route('/photomosaic', methods=['GET'])
 def photomosaic():
@@ -61,12 +60,11 @@ def photomosaic():
     stack3=cv2.vconcat([stack1,stack2])
     (flag, encodedImage) = cv2.imencode(".jpg", stack3)
     if not flag:
-        print("Error converting the photo from taking picture")
-        return;
+        return "Error converting the photo to jpg";
     return Response(
-        (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n'),
+        encodedImage.tobytes(),
         status=200,
-        mimetype='multipart/x-mixed-replace; boundary=frame')
+        mimetype='img/jpeg')
 
 """
 @camServer.route('/photomosaicChange',methods=['POST'])#take and change a photo with the number of the photo
