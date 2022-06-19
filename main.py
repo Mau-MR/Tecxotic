@@ -7,11 +7,8 @@ from routes.CamServer import camServer
 from routes.floatGrid import floatGrid
 from routes.photomosaic import photomos
 from routes.ButtonsFunctionality import buttons_functionality
-from core.Server import run as websocket_server
+#from core.Server import run as websocket_server
 
-
-mainDir = os.getcwd()
-photosDir = mainDir + "/photos" #windows
 
 
 app = Flask(__name__)
@@ -29,10 +26,8 @@ if __name__ == '__main__':
         Thread(
             target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False, threaded=True)).start()
         # Running the websocket server that manage the manual control of the ROV
-        websocket_server()
+        #websocket_server()
     except KeyboardInterrupt:
-        for f in os.listdir(photosDir):
-            os.remove(os.path.join(photosDir, f))
         pass
     except Exception as e:
         for f in os.listdir(photosDir):
