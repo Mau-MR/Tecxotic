@@ -14,7 +14,7 @@ let pixel_2_cm_ratio;
 let imgIndex = 0;
 let longitud_calculada;
 
-const flask_address = "http://localhost:8080"
+const flask_address = "http://192.168.2.2:8080"
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
@@ -38,12 +38,9 @@ function setup() {
 
     myCanvas = createCanvas(1280, 720);
     myCanvas.parent("prueba");
-    myCanvas.position(50,500);
+    myCanvas.position(450,20);
 
     calculado = false;
-    append(images,"https://foodandtravel.mx/wp-content/uploads/2017/02/Tacos-tradicionales.jpg");
-    append(images,"https://mexico.didiglobal.com/wp-content/uploads/sites/5/2022/02/tacos-de-carnitas.jpg.jpg");
-    append(images, "https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2021/11/cuantas-calorias-tienen-los-tacos.jpg");
 }
 
 
@@ -102,14 +99,9 @@ async function reiniciar() {
     calculado = false;
     promedio = null;
 }
-
-
 async function screenshot() {
     const base64 = await fethImg("1");
     append(images, base64);
-    img = createImg(base64);
-    img.hide()
-    imgIndex++;
 }
 
 function guarda(){
@@ -127,7 +119,7 @@ function guarda(){
 
 function calcula() {
     if (points.length % 2 == 0 && points.length >= 8) {
-        pixel_2_cm_ratio = Math.sqrt(Math.pow(points[2] - points[0], 2) + Math.pow(points[3] - points[1], 2)) / float(REFERENCIA);
+        pixel_2_cm_ratio = Math.sqrt(Math.pow(points[2] - points[0], 2) + Math.pow(points[3] - points[1], 2)) / float(document.getElementById("reference").value);
         longitud_calculada = Math.sqrt(Math.pow(points[6] - points[4], 2) + Math.pow(points[7] - points[5], 2)) / float(pixel_2_cm_ratio);
         document.getElementById("measurement-text").innerHTML = "Measurement: " + str(longitud_calculada.toFixed(4)) + " cm.";
         calculado = true;
@@ -145,7 +137,7 @@ function biomasa(){
     let N = document.getElementById("n-data").value;
     let a = document.getElementById("a-data").value;
     let b = document.getElementById("b-data").value;
-    
+
     let l = document.getElementById("l-data").value;
     if (l == "" && promedio != null){
         l = promedio;
