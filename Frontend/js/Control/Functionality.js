@@ -70,7 +70,7 @@ let prevShare = false;
 export function ModeFunctionality(){
    const {share} = controller.buttons
     if(share && !prevShare)
-        commands_instance.mode = (commands_instance.mode === 'MANUAL')? 'STABILIZED': 'MANUAL'
+        commands_instance.mode = (commands_instance.mode === 'MANUAL')? 'STABILIZE': 'MANUAL'
     prevShare = share
 }
 
