@@ -14,8 +14,8 @@
 
 <body>
 
-    <h1 class="task__title">Biomass</h1>
-    <div>
+    <h1 class="task__title" style="margin-left: 50px;">Biomass</h1>
+    <div id = "prueba" style="margin-left: 50px;">
         <button id = "screenshot"><span>Take Photo</span></button>
         <button id = "calculate"><span>Calculate</span></button>
         <button id = "reset"><span>Reset</span></button>
@@ -26,20 +26,15 @@
         <input type="number" id="a-data" placeholder="Number provided">
         <div class="label"><p>b:</p></div>
         <input type="number" id="b-data" placeholder="Number provided">
-        <div class="label"><p>Size mean:</p></div>
+        <div class="label" id="length-mean"><p>Size mean:</p></div>
         <input type="number" id="l-data" placeholder="Size mean">
         <button id = "biomass"><span>Calculate Biomass</span></button>
         <p id="measurement-text">Waiting for measurement...</p>
+        <button id = "prev"><span>Previo</span></button>
+        <button id = "next"><span>Siguiente</span></button>
+        <p id="imageIndex">Imagen 1/1</p>
     </div>
-    <div id="prueba">
-        
-    </div>
-
-    <!-- 
-    <button id = "prev"><span>Previo</span></button>
-    <button id = "next"><span>Siguiente</span></button>
-
-    -->
+    
     <script src="./js/Interface/sketch.js"></script>
 </body>
 

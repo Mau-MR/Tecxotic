@@ -38,16 +38,20 @@ function setup() {
 
     myCanvas = createCanvas(1280, 720);
     myCanvas.parent("prueba");
-    myCanvas.position(0,500);
-
-    img = createImg("https://www.goya.com/media/7912/birria-tacos.jpg?quality=80");
-    img.hide();
+    myCanvas.position(50,500);
 
     calculado = false;
+    append(images,"https://foodandtravel.mx/wp-content/uploads/2017/02/Tacos-tradicionales.jpg");
+    append(images,"https://mexico.didiglobal.com/wp-content/uploads/sites/5/2022/02/tacos-de-carnitas.jpg.jpg");
+    append(images, "https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2021/11/cuantas-calorias-tienen-los-tacos.jpg");
 }
 
 
 function draw() {
+    background(230);
+    img = createImg(images[imgIndex]);
+    img.hide();
+
     image(img, 0, 0, width, height);
     if (points.length % 2 == 0 && points.length >= 2) {
         for (let i = 0; i < points.length; i = i + 2) {
@@ -71,33 +75,33 @@ document.getElementById("calculate").addEventListener("click",calcula);
 document.getElementById("correct").addEventListener("click",guarda);
 document.getElementById("biomass").addEventListener("click",biomasa);
 
-//document.getElementById("prev").addEventListener("click",siguiente);
-//document.getElementById("next").addEventListener("click",previa);
+document.getElementById("prev").addEventListener("click",previa);
+document.getElementById("next").addEventListener("click",siguiente);
 
 function siguiente(){
-    imgIndex += 1;
-    img = images[imgIndex];
-    
+    if (imgIndex == images.length-1){
+        imgIndex = images.length-1;
+    } else {   
+        imgIndex += 1;
+    }
 }
 
 function previa(){
-    imgIndex += 1;
-    img = images[imgIndex];
+    if (imgIndex == 0){
+        imgIndex = 0;
+    } else {   
+        imgIndex -= 1;
+    }
 }
 
 async function reiniciar() {
     points = [];
-    document.getElementById("measurement-text").innerHTML = "Waiting for measurement...";
-    const base64 = await fethImg("1");
-    img = createImg(base64);
-    img.hide()
     calculado = false;
     promedio = null;
 }
 
 
 async function screenshot() {
-    //img = myCanvas.get();
     const base64 = await fethImg("1");
     append(images, base64);
     img = createImg(base64);
