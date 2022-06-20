@@ -2,6 +2,10 @@ import {flask_address} from "../Constants.js";
 import {requestWithBLOB} from "../Connection/Requests";
 
 
+var photoImages = [];
+append(photoImages, "https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg");
+var photoIndex = 0;
+
 export async function photomosaic () {
     console.log("photomosaic")
     const url = await requestWithBLOB('GET', flask_address+'/photomosaic')
@@ -23,5 +27,15 @@ export async function takePhoto(){
     a.click();
     a.remove();  //afterwards we remove the element again
 }
-document.getElementById("photomosaic_button").addEventListener("click", photomosaic)
-document.getElementById("photo_button").addEventListener("click", takePhoto)
+
+function createPhoto(){
+    console.log("Funcionando");
+    document.createElement("img");
+    img.src = photoImages[photoIndex];
+    document.body.appendChild(img);
+
+}
+
+document.getElementById("photomosaic").addEventListener("click", photomosaic)
+
+document.getElementById("take_photo").addEventListener("click", createPhoto)
