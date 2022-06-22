@@ -1,5 +1,5 @@
 import cv2
-from flask import Response, Blueprint, request
+from flask import Response, Blueprint, request, jsonify
 from Capture import Capture
 
 camServer = Blueprint('camServer', __name__)
@@ -76,6 +76,23 @@ def photomosaic():
         encodedImage.tobytes(),
         status=200,
         mimetype='img/jpeg')
+
+# Update the foto of the photomosiac array with a screenshot of the given number of capture at the index wanted
+@camServer.route('/photomosaic', methods=['DELETE'])
+def delete_photomosaic():
+    try:
+        del images[:]
+    except Exception as e:
+        response = {
+            "done": False,
+            "message": "Could not erase array"
+        }
+        return jsonify(response)
+    return jsonify(
+        {
+            "done": True
+        }
+    )
 
 
 # Update the foto of the photomosiac array with a screenshot of the given number of capture at the index wanted

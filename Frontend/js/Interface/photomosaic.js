@@ -19,6 +19,11 @@ const fethImg = async ({method, body}) => {
     const base64 = await blobToBase64(blob)
     return base64;
 }
+// on window load erase photomosaic array
+const deletePhotomosaic = async () =>{
+    await fethImg({method:'DELETE'})
+}
+deletePhotomosaic()
 
 var photoImages = [];
 async function createPhoto(){
