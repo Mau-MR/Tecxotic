@@ -5,7 +5,7 @@ var myCanvas;
 var biomass;
 var calculado;
 var promedio;
-
+var midiendo;
 var images = [];
 
 const REFERENCIA = 9;
@@ -22,6 +22,7 @@ function blobToBase64(blob) {
     reader.readAsDataURL(blob);
   });
 }
+
 const fethImg = async (id) => {
     const response = await fetch(flask_address+'/screenshot/'+id, {
         headers: {
@@ -39,12 +40,17 @@ function setup() {
     myCanvas.parent("prueba");
     myCanvas.position(450,20);
     calculado = false;
+    midiendo = false;
 }
 
 
 function draw() {
     background(230);
-    img = createImg(images[imgIndex]);
+    if (midiendo) {
+        img = createImg(images[imgIndex]);
+    } else {
+        img = createImg(flask_address);
+    }
     img.hide();
 
     image(img, 0, 0, width, height);
@@ -74,6 +80,15 @@ document.getElementById("correct").addEventListener("click",guarda);
 document.getElementById("biomass").addEventListener("click",biomasa);
 document.getElementById("prev").addEventListener("click",previa);
 document.getElementById("next").addEventListener("click",siguiente);
+document.getElementById("cameraSwitch").addEventListener("click",cambiarModo);
+
+function cambiarModo() {
+    if(midiendo){
+        midiendo = false;
+    } else {
+        midiendo = true;
+    }
+}
 
 function siguiente(){
     if (imgIndex == images.length-1){
