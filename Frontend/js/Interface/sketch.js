@@ -14,7 +14,7 @@ let pixel_2_cm_ratio;
 let imgIndex = 0;
 let longitud_calculada;
 
-const flask_address = "http://192.168.2.2:8080"
+const flask_address = "http://localhost:8080"
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
@@ -35,11 +35,9 @@ const fethImg = async (id) => {
 }
 
 function setup() {
-
     myCanvas = createCanvas(1280, 720);
     myCanvas.parent("prueba");
     myCanvas.position(450,20);
-
     calculado = false;
 }
 
@@ -74,7 +72,6 @@ document.getElementById("reset").addEventListener("click",reiniciar);
 document.getElementById("calculate").addEventListener("click",calcula);
 document.getElementById("correct").addEventListener("click",guarda);
 document.getElementById("biomass").addEventListener("click",biomasa);
-
 document.getElementById("prev").addEventListener("click",previa);
 document.getElementById("next").addEventListener("click",siguiente);
 
