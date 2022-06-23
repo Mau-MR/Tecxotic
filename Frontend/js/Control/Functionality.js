@@ -67,11 +67,15 @@ function PixhawkFunctionality(){
     prevOptions = options
 }
 let prevShare = false;
+let prevCross
 export function ModeFunctionality(){
-   const {share} = controller.buttons
+   const {share, cross} = controller.buttons
     if(share && !prevShare)
         commands_instance.mode = (commands_instance.mode === 'MANUAL')? 'STABILIZE': 'MANUAL'
+    if(cross && !prevCross)
+        commands_instance.mode = (commands_instance.mode === 'ACRO')? 'MANUAL': 'ACRO'
     prevShare = share
+    prevCross = cross
 }
 
 export function ControlFunctionality(){

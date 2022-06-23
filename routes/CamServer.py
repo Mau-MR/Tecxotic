@@ -1,10 +1,12 @@
 import cv2
-from flask import Response, Blueprint, request
+from flask import Response, Blueprint, request, jsonify
 from Capture import Capture
+
 camServer = Blueprint('camServer', __name__)
 
 cap1 = Capture(0)
 cap2 = Capture(1)
+
 
 def generate(capture):
     while True:
@@ -17,11 +19,12 @@ def generate(capture):
                    bytearray(encodedImage) + b'\r\n')
 
 
-
 @camServer.route("/video1")
 def video1():
     return Response(generate(cap1),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
+
+
 @camServer.route("/video2")
 def video2():
     return Response(generate(cap2),
@@ -34,30 +37,38 @@ def release_video():
     cap1.release()
 
 
-# Photomosaic logic
-images=[]
-@camServer.route('/photo', methods=['GET'])
+# Inserts new photo for the photomosaic
+images = []
+
+
+@camServer.route('/photomosaic', methods=['POST'])
 def photo():
-    _, frame = cap1.get_frame() #todo: handle posible error
+    body = request.json
+    capture = body['capture']
+    _, frame = cap1.get_frame()  # todo: handle posible error
+    if capture == 2:
+        _, frame = cap2.get_frame()
     (flag, encodedImage) = cv2.imencode(".jpg", frame)
     if not flag:
-        print("Error converting the photo from taking picture")
-        return;
+        return "Error decoding image taken"
+    # appeding the pic to the array of fotomosaic
     images.append(frame)
     return Response(
         encodedImage.tobytes(),
         status=200,
         mimetype='img/jpeg')
 
+
+# Generates the fotomosaic with the photos at the images array
 @camServer.route('/photomosaic', methods=['GET'])
 def photomosaic():
     if len(images) < 8:
-        return "Not enough photos taken"; # not enough images
-    for index, val in enumerate(images): #
-        images[index] = cv2.resize(val, (200,200))
-    stack1=cv2.hconcat([images[0],images[1],images[2],images[3]])
-    stack2=cv2.hconcat([images[4],images[5],images[6],images[7]])
-    stack3=cv2.vconcat([stack1,stack2])
+        return "Not enough photos taken";  # not enough images
+    for index, val in enumerate(images):  #
+        images[index] = cv2.resize(val, (200, 200))
+    stack1 = cv2.hconcat([images[0], images[1], images[2], images[3]])
+    stack2 = cv2.hconcat([images[4], images[5], images[6], images[7]])
+    stack3 = cv2.vconcat([stack1, stack2])
     (flag, encodedImage) = cv2.imencode(".jpg", stack3)
     if not flag:
         return "Error converting the photo to jpg";
@@ -66,6 +77,47 @@ def photomosaic():
         status=200,
         mimetype='img/jpeg')
 
+# Update the foto of the photomosiac array with a screenshot of the given number of capture at the index wanted
+@camServer.route('/photomosaic', methods=['DELETE'])
+def delete_photomosaic():
+    try:
+        del images[:]
+    except Exception as e:
+        response = {
+            "done": False,
+            "message": "Could not erase array"
+        }
+        return jsonify(response)
+    return jsonify(
+        {
+            "done": True
+        }
+    )
+
+
+# Update the foto of the photomosiac array with a screenshot of the given number of capture at the index wanted
+@camServer.route('/photomosaic', methods=['PUT'])
+def photomosaic_change():
+    body = request.json
+    _, frame = cap1.get_frame()
+    if body['capture'] == 2:
+        _, frame = cap2.get_frame()
+
+    try:
+        images[body['index']] = frame
+    except Exception as e:
+        return "Index out of range"
+
+    (flag, encodedImage) = cv2.imencode(".jpg", frame)
+    if not flag:
+        return "Error decoding image taken"
+    return Response(
+        encodedImage.tobytes(),
+        status=200,
+        mimetype='img/jpeg')
+
+
+# Returns screenshot for the measurements tasks
 @camServer.route('/screenshot/<capture>', methods=['GET'])
 def screenshot(capture):
     _, frame = cap1.get_frame()
@@ -77,13 +129,3 @@ def screenshot(capture):
         status=200,
         mimetype='img/jpeg'
     )
-"""
-@camServer.route('/photomosaicChange',methods=['POST'])#take and change a photo with the number of the photo
-def photomosaic_change():
-    json_dict = request.get_json()
-    currentPhoto = json_dict["currentPhoto"]
-    Photomosaic.takePhoto(currentPhoto, cap)
-    os.chdir(mainDir)
-    return send_file("photos\photo" + str(currentPhoto) + ".jpg", mimetype='image/jpg')
-
-"""

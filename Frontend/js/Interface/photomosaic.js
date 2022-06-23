@@ -1,12 +1,7 @@
 const flask_address = "http://192.168.2.2:8080"
 var photoImages = [];
 
-/*photoImages.push("https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg");
-photoImages.push("https://mexico.didiglobal.com/wp-content/uploads/sites/5/2022/02/tacos-de-carnitas.jpg.jpg");
-photoImages.push("https://www.travelreport.mx/mexico/tacos-tradicionales-de-mexico/attachment/tacos-tradicionales-de-mexico-pastor/");*/
 
-var photoIndex = 0;
-2
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
@@ -14,20 +9,30 @@ function blobToBase64(blob) {
     reader.readAsDataURL(blob);
   });
 }
-const fethImg = async (id) => {
-    const response = await fetch(flask_address+'/screenshot/'+id, {
+const fethImg = async ({method, body}) => {
+    const response = await fetch(flask_address+'/photomosaic', {
         headers: {
             'Content-Type': 'application/json'
         },
-        method: 'GET',
+        method,
+        body
     })
     const blob = await response.blob()
     const base64 = await blobToBase64(blob)
     return base64;
 }
+// on window load erase photomosaic array
+const deletePhotomosaic = async () =>{
+    await fethImg({method:'DELETE'})
+}
+deletePhotomosaic()
 
+var photoImages = [];
 async function createPhoto(){
-    const base64 = await fethImg("1");
+    const request = {method: "POST", body: JSON.stringify({
+            capture: 1 //change the capture if the photos taken are from another camera
+    })}
+    const base64 = await fethImg(request);
     photoImages.push(base64);
     let img = document.createElement('img');
     img.src = photoImages[photoIndex];
@@ -38,20 +43,27 @@ async function createPhoto(){
     photoIndex++;
 }
 
-function photomosaic(){
-
+async function photomosaic() {
+    const request = {method: "GET"}
+    const base64 = await fethImg(request)
+    document.getElementById('mosaic').src = base64;
 }
 
-async function replaceImg(indice){
-    const base64 = await fethImg("1");
-    document.getElementById("photomosaic/"+ indice.toString()).src = base64;
+async function replaceImg(index, capture){
+    const request = {
+        method: "PUT",
+        body: JSON.stringify({index, capture})
+    }
+    const base64 = await fethImg(request);
+    document.getElementById("photomosaic/"+ index.toString()).src = base64;
     //document.getElementById("photomosaic/"+ indice.toString()).src = "https://www.goya.com/media/7912/birria-tacos.jpg?quality=80";
 }
 
+var photoIndex = 0;
 document.body.addEventListener('click',function(e){
     for (let i = 0; i < photoIndex; i++){
         if(e.target.id == 'photomosaic/'+ i.toString()){
-            replaceImg(i);
+            replaceImg(i, 1);
        }
     }
  });
