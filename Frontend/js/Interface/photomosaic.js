@@ -1,4 +1,4 @@
-const flask_address = "http://localhost:8080"
+const flask_address = "http://192.168.2.2:8080"
 var photoImages = [];
 
 /*photoImages.push("https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg");
