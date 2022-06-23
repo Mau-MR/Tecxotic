@@ -14,7 +14,7 @@ let pixel_2_cm_ratio;
 let imgIndex = 0;
 let longitud_calculada;
 
-const flask_address = "http://localhost:8080"
+const flask_address = "http://192.168.2.2:8080"
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
