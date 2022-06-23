@@ -23,11 +23,12 @@ rov_status.addEventListener("click", async () => {
 const mode_status = document.getElementById("mode_status")
 mode_status.style.color = "#e5ee78"
 const setupMode = (mode) =>{
-    if(mode === 'MANUAL') {
+    if(mode === 'MANUAL')
         mode_status.style.color = "#525e78"
-        return;
-    }
-    mode_status.style.color = "#e5ee78"
+    if(mode === 'STABILIZE')
+        mode_status.style.color = "#e5ee78"
+    if(mode === 'ACRO')
+        mode_status.style.color = "#321123"
 }
 const arm_disarm_status = document.getElementById("arm_disarm_status")
 arm_disarm_status.style.color= "#FF0000"
