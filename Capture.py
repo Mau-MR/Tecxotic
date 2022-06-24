@@ -15,7 +15,6 @@ class Capture:
                 raise Exception('Could not get frame of capture', source)
         except Exception as e:
             print("Error in Capture.py: ", str(e))
-            sys.exit(0)
             return
         print("Sucessfully opened capture with id", source)
 

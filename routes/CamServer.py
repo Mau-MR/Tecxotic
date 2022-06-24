@@ -120,9 +120,8 @@ def photomosaic_change():
 # Returns screenshot for the measurements tasks
 @camServer.route('/screenshot/<capture>', methods=['GET'])
 def screenshot(capture):
+    #print('aaaaaa:',capture)
     _, frame = cap1.get_frame()
-    if capture == 2:
-        _, frame = cap2.get_frame()
     (flag, encodedImage) = cv2.imencode(".jpg", frame)
     return Response(
         encodedImage.tobytes(),
